@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconCircle } from "@tabler/icons-react";
+import { IconPoint } from "@tabler/icons-react";
 import { ScrollArea, UnstyledButton } from "@mantine/core";
 import { MenuItem } from "@/types";
 
@@ -19,7 +19,7 @@ export const Navigation = ({ menu, toggle }: Props) => {
         key={item.id}
         link={item.href}
         label={item.label}
-        icon={<IconCircle stroke={1.5} className="w-6" />}
+        icon={<IconPoint stroke={1.5} className="w-6" />}
         toggle={toggle}
       />
     ));
@@ -29,6 +29,10 @@ export const Navigation = ({ menu, toggle }: Props) => {
     <div className="w-full bg-zinc-50 px-4 pt-4 border-r border-zinc-100">
       <ScrollArea className="h-screen">
         <div className="mb-32">
+          <div className="flex flex-row items-center py-2">
+            <div className="font-semibold text-xl">Командный центр</div>
+          </div>
+
           <Menu />
         </div>
       </ScrollArea>

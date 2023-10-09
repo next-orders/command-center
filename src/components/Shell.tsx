@@ -22,20 +22,15 @@ export const Shell = ({ menu, children }: Props) => {
       navbar={{
         width: 300,
         breakpoint: "sm",
-        collapsed: { mobile: !isNavbarOpened, desktop: false },
+        collapsed: { mobile: !isNavbarOpened, desktop: !isNavbarOpened },
       }}
-      aside={{
-        width: 300,
-        breakpoint: "lg",
-        collapsed: { mobile: true, desktop: false },
-      }}
-      layout="default"
+      layout="alt"
     >
       <AppShell.Header withBorder={false}>
         <Header isNavbarOpened={isNavbarOpened} toggle={toggle} />
       </AppShell.Header>
 
-      <AppShell.Navbar withBorder={false}>
+      <AppShell.Navbar withBorder={false} className="mt-16 md:mt-0">
         <Navigation menu={menu} toggle={toggle} />
       </AppShell.Navbar>
 

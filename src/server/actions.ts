@@ -39,5 +39,15 @@ export const GetMenu = async (): Promise<MenuItem[]> => {
       label: "Главная",
       href: "/",
     },
+    {
+      id: "2",
+      label: "Категории",
+      href: "/category",
+    },
+    {
+      id: "3",
+      label: "Товары",
+      href: "/product",
+    },
   ];
 };

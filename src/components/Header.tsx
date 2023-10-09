@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Burger } from "@mantine/core";
+import { Avatar, Burger } from "@mantine/core";
 
 type Props = {
   isNavbarOpened: boolean;
@@ -8,21 +8,25 @@ type Props = {
 
 export const Header = ({ isNavbarOpened, toggle }: Props) => {
   return (
-    <div className="w-full h-full px-4 md:px-4 flex flex-row flex-nowrap justify-between content-center items-center border-b border-zinc-100">
-      <div className="mr-2 md:mr-0 flex justify-center items-center justify-items-center h-full hover:scale-110 transition duration-200">
+    <div className="w-full h-full px-4 md:px-6 flex flex-row flex-nowrap justify-between content-center items-center border-b border-zinc-100">
+      <div className="mr-2 flex justify-center items-center justify-items-center h-full hover:scale-110 transition duration-200">
         <Burger
           opened={isNavbarOpened}
           onClick={toggle}
           size="md"
           aria-label="Navigation"
-          hiddenFrom="sm"
         />
       </div>
-      <Link href="/" className="mr-auto">
-        <div className="flex flex-row items-center py-4">
-          <div className="font-semibold text-xl">Командный центр</div>
-        </div>
-      </Link>
+
+      <div className="flex flex-row gap-4 items-center">
+        <Link
+          href={"https://v1.next-orders.org"}
+          className="px-4 py-1 text-white font-semibold rounded-full bg-emerald-500 hover:bg-emerald-600"
+        >
+          Открыть веб-сайт
+        </Link>
+        <Avatar />
+      </div>
     </div>
   );
 };

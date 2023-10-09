@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: Props) {
       <head>
         <ColorSchemeScript />
       </head>
-      <body className="bg-zinc-100">
+      <body className="bg-white">
         <MantineProvider
           theme={{
             fontFamily: "inherit",
