@@ -1,3 +1,5 @@
+import React from "react";
+
 export type MenuItem = {
   id: string;
   label: string;
@@ -15,5 +17,5 @@ export type TableHead = {
 };
 
 export type TableRow = {
-  [key: string]: string;
+  [key: string]: string | React.ReactNode;
 };

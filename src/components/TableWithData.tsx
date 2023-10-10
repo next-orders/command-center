@@ -15,9 +15,9 @@ export const TableWithData = ({ data }: Props) => {
 
   const rows = data.data?.map((row, index) => (
     <tr key={index} className="border-b">
-      {data.columns.map((col) => {
+      {data.columns.map((col, index) => {
         return (
-          <td key={row[col.key]} className="px-2 py-2">
+          <td key={index} className="px-2 py-2">
             {row[col.key]}
           </td>
         );
