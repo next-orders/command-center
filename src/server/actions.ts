@@ -23,8 +23,8 @@ export const GetProductsInCategory = async (id: string) => {
   return products;
 };
 
-export const GetProductBySlug = async (slug: string) => {
-  const product = await api.getProductBySlug(slug);
+export const GetProductById = async (id: string) => {
+  const product = await api.getProductById(id);
   if (!product || product instanceof Error) {
     return null;
   }

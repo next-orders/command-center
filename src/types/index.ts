@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 
 export type MenuItem = {
   id: string;
@@ -17,5 +17,12 @@ export type TableHead = {
 };
 
 export type TableRow = {
-  [key: string]: string | React.ReactNode;
+  [key: string]: string | ReactNode;
+};
+
+export type MenuAction = {
+  id: string;
+  label: string;
+  url?: string;
+  icon: ReactNode;
 };

@@ -1,6 +1,16 @@
+import Image from "next/image";
+import {
+  IconDiamond,
+  IconEye,
+  IconEyeOff,
+  IconFileArrowRight,
+  IconTag,
+} from "@tabler/icons-react";
 import { GetCategories, GetProductsInCategory } from "@/server/actions";
-import { TableWithData } from "@/components/TableWithData";
-import { Category } from "@next-orders/api-sdk";
+import { Category, Product, ProductVariant } from "@next-orders/api-sdk";
+import { ActionsMenu } from "@/components/ActionsMenu";
+import { MenuAction } from "@/types";
+import React from "react";
 
 export default async function Page() {
   const categories = await GetCategories();
@@ -22,38 +32,116 @@ export default async function Page() {
 const CategoryBlock = async ({ category }: { category: Category }) => {
   const products = await GetProductsInCategory(category.id);
 
-  const tableColumns = [
-    { key: "id", label: "Id" },
-    { key: "name", label: "Название" },
-    { key: "slug", label: "URL" },
-    { key: "rating", label: "Рейтинг" },
-  ];
-  const tableData =
-    products?.map((product) => {
-      const Score = ({ score }: { score: number }) => {
-        const color = score > 70 ? "border-teal-500" : "border-amber-500";
-        return (
-          <div
-            className={`w-12 flex flex-row justify-center items-center border-2 rounded-full aspect-square ${color}`}
-          >
-            <div className="text-xl">{score}</div>
-          </div>
-        );
-      };
-
-      return {
-        id: product.id,
-        name: product.name,
-        slug: product.slug,
-        rating: <Score score={product.score} />,
-      };
-    }) || [];
+  const cards = products?.map((product) => (
+    <ProductCard key={product.id} product={product} />
+  ));
 
   return (
     <div key={category.id} className="mb-8">
-      <h2 className="mb-2 text-xl">{category.name}</h2>
+      <h2 className="mb-2 text-2xl font-semibold text-zinc-400">
+        {category.name}
+      </h2>
 
-      <TableWithData data={{ columns: tableColumns, data: tableData }} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {cards}
+      </div>
     </div>
   );
+};
+
+const ProductCard = ({ product }: { product: Product }) => {
+  const mainVariant = product.variants?.length
+    ? product.variants[0]
+    : undefined;
+
+  const media = mainVariant?.media?.length ? mainVariant.media[0] : undefined;
+
+  const actionsInMenu: MenuAction[] = [
+    {
+      id: "1",
+      label: "Открыть",
+      url: `/product/${product.id}`,
+      icon: <IconFileArrowRight stroke={1.5} className="text-zinc-500" />,
+    },
+    {
+      id: "2",
+      label: "Включить / Выкл",
+      icon: <IconEyeOff stroke={1.5} className="text-zinc-500" />,
+    },
+  ];
+
+  return (
+    <div className="px-2 py-2 bg-zinc-50 rounded-2xl">
+      <div className="mb-2 flex flex-row justify-between gap-2">
+        <div className="flex flex-row gap-2 items-center">
+          <Image
+            src={media?.url || ""}
+            alt={media?.alt || "Фото"}
+            width={60}
+            height={60}
+            unoptimized
+            className="rounded-xl"
+          />
+          <div>
+            <div className="text-lg line-clamp-2">{product.name}</div>
+            <div className="text-sm text-zinc-500">{product.slug}</div>
+          </div>
+        </div>
+
+        <ActionsMenu actions={actionsInMenu} />
+      </div>
+
+      <div className="flex flex-row flex-wrap gap-2">
+        <OnOffBlock isAvailable={product.isAvailableForPurchase} />
+        <ScoreBlock score={product.score} />
+        <VariantsBlock variants={product.variants} />
+      </div>
+    </div>
+  );
+};
+
+const OnOffBlock = ({ isAvailable }: { isAvailable: boolean }) => {
+  const color = isAvailable ? "text-teal-500" : "text-amber-500";
+  const text = isAvailable ? "ВКЛ" : "ВЫКЛ";
+
+  return (
+    <div className="w-fit max-w-full px-3 py-2 flex flex-row flex-wrap gap-2 items-center bg-white rounded-2xl">
+      <IconEye stroke={1.5} className={`w-5 h-5 ${color}`} />
+      <div>{text}</div>
+    </div>
+  );
+};
+
+const ScoreBlock = ({ score }: { score: number }) => {
+  const color = score > 70 ? "text-teal-500" : "text-amber-500";
+
+  return (
+    <div className="w-fit max-w-full px-3 py-2 flex flex-row flex-wrap gap-2 items-center bg-white rounded-2xl">
+      <IconDiamond stroke={1.5} className={`w-5 h-5 ${color}`} />
+      <div>{score}</div>
+    </div>
+  );
+};
+
+const VariantsBlock = ({
+  variants,
+}: {
+  variants: ProductVariant[] | undefined;
+}) => {
+  const show = variants?.map((variant) => {
+    return (
+      <div
+        key={variant.id}
+        className="w-fit max-w-full px-3 py-2 flex flex-row flex-wrap gap-2 items-center bg-white rounded-2xl"
+      >
+        <IconTag stroke={1.5} className="w-5 h-5 text-zinc-400" />
+        <div>
+          {variant.gross}
+          <span className="pl-1 text-sm">₽</span>
+        </div>
+      </div>
+    );
+  });
+
+  return <div className="flex flex-row flex-wrap gap-2">{show}</div>;
 };
