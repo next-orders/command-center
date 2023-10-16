@@ -30,7 +30,7 @@ export const Navigation = ({ menu, toggle }: Props) => {
       <ScrollArea className="h-screen">
         <div className="mb-32">
           <div className="flex flex-row items-center py-2">
-            <div className="font-semibold text-xl">Командный центр</div>
+            <div className="font-semibold text-xl">Command Center</div>
           </div>
 
           <Menu />

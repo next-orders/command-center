@@ -6,11 +6,10 @@ import {
   IconFileArrowRight,
   IconTag,
 } from "@tabler/icons-react";
-import { GetCategories, GetProductsInCategory } from "@/server/actions";
 import { Category, Product, ProductVariant } from "@next-orders/api-sdk";
-import { ActionsMenu } from "@/components/ActionsMenu";
 import { MenuAction } from "@/types";
-import React from "react";
+import { GetCategories, GetProductsInCategory } from "@/server/actions";
+import { ActionsMenu } from "@/components/ActionsMenu";
 import { CurrencySign } from "@/components/CurrencySign";
 
 export default async function Page() {
@@ -22,8 +21,8 @@ export default async function Page() {
 
   return (
     <div className="px-4 pb-10 mt-4 md:px-6 md:mt-6">
-      <h1 className="mb-2 text-3xl font-semibold">Товары</h1>
-      <div className="mb-8">Вы можете увидеть загруженные товары</div>
+      <h1 className="mb-2 text-3xl font-semibold">Products</h1>
+      <div className="mb-8">You can see the loaded products</div>
 
       {menu}
     </div>
@@ -77,7 +76,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <div className="flex flex-row gap-2 items-center">
           <Image
             src={media?.url || ""}
-            alt={media?.alt || "Фото"}
+            alt={media?.alt || "Photo"}
             width={60}
             height={60}
             unoptimized
