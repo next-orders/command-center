@@ -14,7 +14,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <div className="px-4 pb-10 mt-4 md:px-6 md:mt-6">
       <h1 className="mb-2 text-3xl font-semibold">{product.name}</h1>
-      <div className="mb-8">Вы можете увидеть товар</div>
+      <div className="mb-8">You can see the product</div>
     </div>
   );
 }

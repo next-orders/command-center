@@ -11,8 +11,8 @@ import "./globals.scss";
 const inter = Inter({ subsets: ["latin", "cyrillic", "cyrillic-ext"] });
 
 export const metadata: Metadata = {
-  title: "Командный центр",
-  description: "Управление всеми бизнес-сущностями",
+  title: "Command Center",
+  description: "Management of all business entities",
 };
 
 type Props = {
@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: Props) {
   const [menu] = await Promise.all([GetMenu()]);
 
   return (
-    <html lang="ru" className={inter.className}>
+    <html lang="en" className={inter.className}>
       <head>
         <ColorSchemeScript />
       </head>

@@ -11,6 +11,7 @@ import { Category, Product, ProductVariant } from "@next-orders/api-sdk";
 import { ActionsMenu } from "@/components/ActionsMenu";
 import { MenuAction } from "@/types";
 import React from "react";
+import { CurrencySign } from "@/components/CurrencySign";
 
 export default async function Page() {
   const categories = await GetCategories();
@@ -59,13 +60,13 @@ const ProductCard = ({ product }: { product: Product }) => {
   const actionsInMenu: MenuAction[] = [
     {
       id: "1",
-      label: "Открыть",
+      label: "Open",
       url: `/product/${product.id}`,
       icon: <IconFileArrowRight stroke={1.5} className="text-zinc-500" />,
     },
     {
       id: "2",
-      label: "Включить / Выкл",
+      label: "Enable / Disable",
       icon: <IconEyeOff stroke={1.5} className="text-zinc-500" />,
     },
   ];
@@ -102,7 +103,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
 const OnOffBlock = ({ isAvailable }: { isAvailable: boolean }) => {
   const color = isAvailable ? "text-teal-500" : "text-amber-500";
-  const text = isAvailable ? "ВКЛ" : "ВЫКЛ";
+  const text = isAvailable ? "ON" : "OFF";
 
   return (
     <div className="w-fit max-w-full px-3 py-2 flex flex-row flex-wrap gap-2 items-center bg-white rounded-2xl">
@@ -137,7 +138,9 @@ const VariantsBlock = ({
         <IconTag stroke={1.5} className="w-5 h-5 text-zinc-400" />
         <div>
           {variant.gross}
-          <span className="pl-1 text-sm">₽</span>
+          <span className="pl-1 text-sm">
+            <CurrencySign code={variant.currency} />
+          </span>
         </div>
       </div>
     );

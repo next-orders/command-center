@@ -23,7 +23,7 @@ export const Header = ({ isNavbarOpened, toggle }: Props) => {
           href={"https://v1.next-orders.org"}
           className="px-4 py-1 text-white font-semibold rounded-full bg-emerald-500 hover:bg-emerald-600"
         >
-          Открыть веб-сайт
+          Open website
         </Link>
         <Avatar />
       </div>

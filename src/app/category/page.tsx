@@ -6,7 +6,7 @@ export default async function Page() {
 
   const tableColumns = [
     { key: "id", label: "Id" },
-    { key: "name", label: "Название" },
+    { key: "name", label: "Name" },
     { key: "slug", label: "URL" },
   ];
   const tableData =
@@ -18,8 +18,8 @@ export default async function Page() {
 
   return (
     <div className="px-4 pb-10 mt-4 md:px-6 md:mt-6">
-      <h1 className="mb-2 text-3xl font-semibold">Категории товаров</h1>
-      <div>Вы можете увидеть загруженные категории</div>
+      <h1 className="mb-2 text-3xl font-semibold">Product categories</h1>
+      <div>You can see the loaded categories</div>
 
       <div className="mt-4">
         <TableWithData data={{ columns: tableColumns, data: tableData }} />
