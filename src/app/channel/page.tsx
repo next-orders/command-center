@@ -9,6 +9,7 @@ export default async function Page() {
     { key: "name", label: "Name" },
     { key: "currencyCode", label: "Currency" },
     { key: "domainId", label: "Domain Id" },
+    { key: "isActive", label: "Active" },
   ];
   const tableData =
     channels?.map((el) => ({
@@ -16,6 +17,7 @@ export default async function Page() {
       name: el.name,
       currencyCode: el.currencyCode,
       domainId: el.domainId,
+      isActive: el.isActive ? "true" : "false",
     })) || [];
 
   return (

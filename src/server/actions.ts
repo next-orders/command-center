@@ -3,10 +3,12 @@
 import { MainAPI } from "@next-orders/api-sdk";
 import { MenuItem } from "@/types";
 
-const api = new MainAPI(
-  process.env.API_URL || "no-api-url-env",
-  process.env.API_PRIVATE_TOKEN || "no-api-private-token-env",
-);
+const API_URL = process.env.API_URL || "no-api-url-env";
+const API_PRIVATE_TOKEN =
+  process.env.API_PRIVATE_TOKEN || "no-api-private-token-env";
+const SHOP_ID = process.env.SHOP_ID || "no-shop-id-env";
+
+const api = new MainAPI(API_URL, API_PRIVATE_TOKEN);
 
 const MAX_CACHE_SECONDS = 0; // no data cache
 
@@ -14,6 +16,20 @@ const nextConfig = {
   // Problem: on build time Next try to fetch API, which is not declared. Empty data on deploy, until revalidation.
   // Solution: set revalidate to 0
   revalidate: process.env.DATA_CACHE_DISABLED ? 0 : MAX_CACHE_SECONDS,
+};
+
+export const GetShop = async () => {
+  const shop = await api.getShop(SHOP_ID, {
+    next: {
+      ...nextConfig,
+      tags: ["all", "shop"],
+    },
+  });
+  if (!shop || shop instanceof Error) {
+    return null;
+  }
+
+  return shop;
 };
 
 export const GetChannels = async () => {
@@ -42,6 +58,20 @@ export const GetAllMedia = async () => {
   }
 
   return media;
+};
+
+export const GetAllDomains = async () => {
+  const domains = await api.getAllDomains({
+    next: {
+      ...nextConfig,
+      tags: ["all", "domains"],
+    },
+  });
+  if (!domains || domains instanceof Error) {
+    return null;
+  }
+
+  return domains;
 };
 
 export const GetCategories = async () => {
@@ -94,16 +124,21 @@ export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
     },
     {
       id: "3",
+      label: "Domains",
+      href: "/domain",
+    },
+    {
+      id: "4",
       label: "Channels",
       href: "/channel",
     },
     {
-      id: "4",
+      id: "5",
       label: "Categories",
       href: "/category",
     },
     {
-      id: "5",
+      id: "6",
       label: "Products",
       href: "/product",
     },
