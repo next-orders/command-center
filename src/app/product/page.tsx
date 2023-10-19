@@ -1,16 +1,18 @@
 import Image from "next/image";
 import {
+  IconCheese,
+  IconChefHat,
   IconDiamond,
   IconEye,
   IconEyeOff,
   IconFileArrowRight,
+  IconPaperBag,
   IconTag,
 } from "@tabler/icons-react";
 import { Category, Product, ProductVariant } from "@next-orders/api-sdk";
 import { MenuAction } from "@/types";
 import { GetCategories, GetProductsInCategory } from "@/server/actions";
 import { ActionsMenu } from "@/components/ActionsMenu";
-import { CurrencySign } from "@/components/CurrencySign";
 
 export default async function Page() {
   const categories = await GetCategories();
@@ -22,7 +24,7 @@ export default async function Page() {
   return (
     <div className="px-4 pb-10 mt-4 md:px-6 md:mt-6">
       <h1 className="mb-2 text-3xl font-semibold">Products</h1>
-      <div className="mb-8">You can see the loaded products</div>
+      <div className="mb-8">Can be a Production, Ready or Ingredient</div>
 
       {menu}
     </div>
@@ -75,8 +77,8 @@ const ProductCard = ({ product }: { product: Product }) => {
       <div className="mb-2 flex flex-row justify-between gap-2">
         <div className="flex flex-row gap-2 items-center">
           <Image
-            src={media?.url || ""}
-            alt={media?.alt || "Photo"}
+            src={media?.url || "/command-center/static/no-image.png"}
+            alt={media?.alt || "Empty alt"}
             width={60}
             height={60}
             unoptimized
@@ -92,6 +94,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       </div>
 
       <div className="flex flex-row flex-wrap gap-2">
+        <TypeBlock type={product.type} />
         <OnOffBlock isAvailable={product.isAvailableForPurchase} />
         <ScoreBlock score={product.score} />
         <VariantsBlock variants={product.variants} />
@@ -123,27 +126,47 @@ const ScoreBlock = ({ score }: { score: number }) => {
   );
 };
 
+const TypeBlock = ({ type }: { type: string }) => {
+  let label = null;
+  let icon = null;
+
+  if (type === "PRODUCTION") {
+    // This product needs to be prepared (ex. Pizza)
+    label = <div>Production</div>;
+    icon = <IconChefHat stroke={1.5} className="w-5 h-5 text-violet-500" />;
+  }
+  if (type === "READY") {
+    // This product is manufactured (ex. Soda)
+    label = <div>Ready</div>;
+    icon = <IconPaperBag stroke={1.5} className="w-5 h-5 text-blue-500" />;
+  }
+  if (type === "INGREDIENT") {
+    // This product is a part of other products (ex. Gouda cheese)
+    label = <div>Ingredient</div>;
+    icon = <IconCheese stroke={1.5} className="w-5 h-5 text-green-500" />;
+  }
+
+  return (
+    <div className="w-fit max-w-full px-3 py-2 flex flex-row flex-wrap gap-2 items-center bg-white rounded-2xl">
+      {icon}
+      {label}
+    </div>
+  );
+};
+
 const VariantsBlock = ({
   variants,
 }: {
   variants: ProductVariant[] | undefined;
 }) => {
-  const show = variants?.map((variant) => {
-    return (
-      <div
-        key={variant.id}
-        className="w-fit max-w-full px-3 py-2 flex flex-row flex-wrap gap-2 items-center bg-white rounded-2xl"
-      >
-        <IconTag stroke={1.5} className="w-5 h-5 text-zinc-400" />
-        <div>
-          {variant.gross}
-          <span className="pl-1 text-sm">
-            <CurrencySign code={variant.currency} />
-          </span>
-        </div>
-      </div>
-    );
-  });
+  const count = variants?.length;
 
-  return <div className="flex flex-row flex-wrap gap-2">{show}</div>;
+  return (
+    <div className="flex flex-row flex-wrap gap-2">
+      <div className="w-fit max-w-full px-3 py-2 flex flex-row flex-wrap gap-2 items-center bg-white rounded-2xl">
+        <IconTag stroke={1.5} className="w-5 h-5 text-zinc-400" />
+        <div>{count}</div>
+      </div>
+    </div>
+  );
 };
