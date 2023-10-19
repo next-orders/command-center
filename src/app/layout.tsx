@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Shell } from "@/components/Shell";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-import { GetMenu } from "@/server/actions";
+import { GetNavigationMenu } from "@/server/actions";
 
 import "@mantine/core/styles.layer.css";
 import "./globals.scss";
@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin", "cyrillic", "cyrillic-ext"] });
 
 export const metadata: Metadata = {
   title: "Command Center",
-  description: "Management of all business entities",
+  description: "Management of all business Entities",
 };
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const [menu] = await Promise.all([GetMenu()]);
+  const [menu] = await Promise.all([GetNavigationMenu()]);
 
   return (
     <html lang="en" className={inter.className}>
