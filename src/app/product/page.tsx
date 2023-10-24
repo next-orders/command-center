@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IconCheese, IconChefHat, IconPaperBag } from "@tabler/icons-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import Image from "next/image";
 
 export default async function Page() {
   const breadcrumbs = [
@@ -86,7 +87,15 @@ export default async function Page() {
         </Link>
       </div>
 
-      <div className="mt-20 text-center max-w-lg mx-auto">
+      <div className="mt-24 text-center max-w-xl mx-auto">
+        <Image
+          src={"/command-center/static/recipe-book.png"}
+          alt=""
+          unoptimized
+          width={64}
+          height={64}
+          className="mx-auto mb-4"
+        />
         <h2 className="mb-4 text-lg font-semibold">
           Ok, let&apos;s understand a little theory
         </h2>
@@ -96,7 +105,15 @@ export default async function Page() {
           come in three types: to be produced, finished goods, and ingredients.
         </p>
 
-        <h2 className="mt-10 mb-4 text-lg font-semibold">
+        <Image
+          src={"/command-center/static/recipe-list.png"}
+          alt=""
+          unoptimized
+          width={64}
+          height={64}
+          className="mx-auto mt-14 mb-4"
+        />
+        <h2 className="mb-4 text-lg font-semibold">
           Some questions you can have
         </h2>
 

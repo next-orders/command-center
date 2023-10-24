@@ -79,7 +79,7 @@ export const MediaCard = ({ media }: MediaCardProps) => {
             </div>
           </div>
 
-          <div className="mt-1 text-lg font-medium leading-tight">
+          <div className="mt-2 text-base font-medium leading-tight text-center">
             {media.alt}
           </div>
         </div>
