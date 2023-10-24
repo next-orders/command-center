@@ -21,15 +21,15 @@ export const Header = ({ isNavbarOpened, toggle }: Props) => {
       <div className="flex flex-row gap-4 items-center">
         <Link
           href={"https://v1.next-orders.org"}
-          className="px-4 py-1 text-white font-semibold rounded-xl bg-emerald-500 hover:bg-emerald-600 hover:scale-95 duration-200"
+          className="px-4 py-1 text-white font-medium rounded-xl bg-emerald-500 hover:bg-emerald-600 hover:scale-95 duration-200"
         >
           Open website
         </Link>
         <Avatar
           src={
-            "https://avatar.o5system.net/api/32d735e8-977d-4a19-ab8a-35c955c97a19.svg?gender=&emotion=7&size=140"
+            "https://avatar.o5system.net/api/32d735e8-977d-4a19-ab8a-35c955c97a19.svg?gender=male&emotion=7&size=140"
           }
-          size={40}
+          size={42}
         />
       </div>
     </div>
