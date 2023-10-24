@@ -88,6 +88,17 @@ export const GetCategories = async () => {
   return categories;
 };
 
+export const GetProducts = async () => {
+  const products = await api.getProducts({
+    next: { ...nextConfig, tags: ["all", `products`] },
+  });
+  if (!products || products instanceof Error) {
+    return null;
+  }
+
+  return products;
+};
+
 export const GetProductsInCategory = async (id: string) => {
   const products = await api.getProductsInCategory(id, {
     next: { ...nextConfig, tags: ["all", `category-products-${id}`] },

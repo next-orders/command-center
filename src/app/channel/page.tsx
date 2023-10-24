@@ -1,5 +1,6 @@
 import { GetChannels } from "@/server/actions";
 import { TableWithData } from "@/components/TableWithData";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export default async function Page() {
   const channels = await GetChannels();
@@ -20,14 +21,20 @@ export default async function Page() {
       isActive: el.isActive ? "true" : "false",
     })) || [];
 
+  const breadcrumbs = [
+    { title: "Home", href: "/" },
+    { title: "Channels", href: "#" },
+  ];
+
   return (
-    <div className="px-4 pb-10 mt-4 md:px-6 md:mt-6">
+    <>
+      <Breadcrumbs links={breadcrumbs} />
       <h1 className="mb-2 text-3xl font-semibold">Channels</h1>
       <div>You can see the loaded data</div>
 
       <div className="mt-4">
         <TableWithData data={{ columns: tableColumns, data: tableData }} />
       </div>
-    </div>
+    </>
   );
 }

@@ -27,10 +27,8 @@ export default async function Page({ params }: PageProps) {
   ));
 
   return (
-    <div className="px-4 pb-10 mt-4 md:px-6 md:mt-6">
-      <div className="mb-4 flex flex-row justify-between items-center">
-        <Breadcrumbs links={breadcrumbs} />
-      </div>
+    <>
+      <Breadcrumbs links={breadcrumbs} />
 
       <h1 className="mb-2 text-3xl font-semibold">Product page</h1>
       <div className="mb-8">Here you can edit product data</div>
@@ -57,7 +55,7 @@ export default async function Page({ params }: PageProps) {
       <pre className="mt-10 text-sm opacity-50 overflow-auto">
         {JSON.stringify(product, undefined, 2)}
       </pre>
-    </div>
+    </>
   );
 }
 
