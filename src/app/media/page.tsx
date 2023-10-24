@@ -1,6 +1,7 @@
 import { GetAllMedia } from "@/server/actions";
 import { MediaCard } from "@/components/MediaCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { IconPhotoPlus } from "@tabler/icons-react";
 
 export default async function Page() {
   const media = await GetAllMedia();
@@ -22,8 +23,8 @@ export default async function Page() {
           <h1 className="mb-2 text-3xl font-semibold">Media</h1>
           <div>You can see the loaded files</div>
         </div>
-        <div className="px-6 py-4 bg-zinc-100 rounded-xl cursor-pointer hover:bg-emerald-200 duration-200">
-          Load new
+        <div className="px-4 py-4 flex flex-row gap-2 font-medium bg-zinc-100 rounded-2xl cursor-pointer hover:scale-95 duration-200">
+          <IconPhotoPlus stroke={1.5} /> Load new file
         </div>
       </div>
 

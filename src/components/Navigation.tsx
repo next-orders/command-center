@@ -3,9 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconPoint } from "@tabler/icons-react";
 import { ScrollArea, UnstyledButton } from "@mantine/core";
 import { MenuItem } from "@/types";
+import { TablerIcon } from "@/components/TablerIcon";
 
 type Props = {
   menu: MenuItem[];
@@ -13,17 +13,15 @@ type Props = {
 };
 
 export const Navigation = ({ menu, toggle }: Props) => {
-  const Menu = () => {
-    return menu?.map((item) => (
-      <LinkButton
-        key={item.id}
-        link={item.href}
-        label={item.label}
-        icon={<IconPoint stroke={1.5} className="w-6" />}
-        toggle={toggle}
-      />
-    ));
-  };
+  const menuBlock = menu?.map((item) => (
+    <LinkButton
+      key={item.id}
+      link={item.href}
+      label={item.label}
+      icon={<TablerIcon icon={item.icon} />}
+      toggle={toggle}
+    />
+  ));
 
   return (
     <div className="w-full bg-zinc-50 px-4 pt-4 border-r border-zinc-100">
@@ -33,7 +31,7 @@ export const Navigation = ({ menu, toggle }: Props) => {
             <div className="font-semibold text-xl">Command Center</div>
           </div>
 
-          <Menu />
+          {menuBlock}
         </div>
       </ScrollArea>
     </div>

@@ -4,6 +4,7 @@ export type MenuItem = {
   id: string;
   label: string;
   href: string;
+  icon: string | null;
 };
 
 export type TableData = {

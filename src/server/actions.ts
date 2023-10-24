@@ -127,31 +127,31 @@ export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
       id: "1",
       label: "Home",
       href: "/",
+      icon: "IconDashboard",
     },
     {
       id: "2",
       label: "Media",
       href: "/media",
+      icon: "IconPhoto",
     },
     {
       id: "3",
       label: "Domains",
       href: "/domain",
+      icon: "IconWorldWww",
     },
     {
       id: "4",
       label: "Channels",
       href: "/channel",
+      icon: "IconBuildingStore",
     },
     {
       id: "5",
-      label: "Categories",
-      href: "/category",
-    },
-    {
-      id: "6",
       label: "Products",
       href: "/product",
+      icon: "IconCheese",
     },
   ];
 };
