@@ -72,9 +72,9 @@ export const ProductProductionCard = ({ product }: { product: Product }) => {
       closeDelay={400}
     >
       <Menu.Target>
-        <div className="px-2 py-2 bg-zinc-50 rounded-2xl cursor-pointer hover:scale-95 duration-200">
+        <div className="px-4 py-4 bg-zinc-50 rounded-2xl cursor-pointer hover:scale-95 duration-200">
           <div className="mb-2 flex flex-row justify-between gap-2">
-            <div className="flex flex-row gap-2 items-center">
+            <div className="flex flex-row gap-4 items-center">
               <Image
                 src={media?.url || "/command-center/static/no-image-zinc.png"}
                 alt={media?.alt || "Empty alt"}
@@ -84,7 +84,9 @@ export const ProductProductionCard = ({ product }: { product: Product }) => {
                 className="rounded-xl"
               />
               <div>
-                <div className="text-lg line-clamp-2">{product.name}</div>
+                <div className="text-lg font-medium line-clamp-2">
+                  {product.name}
+                </div>
                 <div className="text-sm text-zinc-500">
                   {product.description}
                 </div>

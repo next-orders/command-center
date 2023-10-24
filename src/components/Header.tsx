@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Avatar, Burger } from "@mantine/core";
+import { Avatar, Burger, Input } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
 
 type Props = {
   isNavbarOpened: boolean;
@@ -18,6 +19,13 @@ export const Header = ({ isNavbarOpened, toggle }: Props) => {
         />
       </div>
 
+      <div className="mr-auto">
+        <div className="flex flex-row gap-2 items-center">
+          <IconSearch stroke={1.5} />
+          <Input placeholder="Find anything" />
+        </div>
+      </div>
+
       <div className="flex flex-row gap-4 items-center">
         <Link
           href={"https://v1.next-orders.org"}
@@ -29,7 +37,7 @@ export const Header = ({ isNavbarOpened, toggle }: Props) => {
           src={
             "https://avatar.o5system.net/api/32d735e8-977d-4a19-ab8a-35c955c97a19.svg?gender=male&emotion=7&size=140"
           }
-          size={42}
+          className="w-12 h-12 cursor-pointer hover:scale-95 duration-200"
         />
       </div>
     </div>

@@ -35,7 +35,7 @@ export const Shell = ({ menu, children }: Props) => {
       </AppShell.Navbar>
 
       <AppShell.Main onClick={close}>
-        <div className="px-4 pb-10 mt-4 md:px-6 md:mt-6">{children}</div>
+        <div className="px-4 pb-10 mt-4 md:px-6">{children}</div>
         <Footer />
       </AppShell.Main>
     </AppShell>
