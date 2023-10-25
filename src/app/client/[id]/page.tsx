@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import Image from "next/image";
 import { LevelBadge } from "@/components/LevelBadge";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
+import { HoverDropdown } from "@/components/HoverDropdown";
 
 type PageProps = {
   params: { id: string };
@@ -39,12 +40,31 @@ export default async function Page({ params }: PageProps) {
             className="w-full aspect-square rounded-xl"
           />
           <div className="absolute top-5 left-0 right-0">
-            <LoyaltyProgress percent={client.level} />
+            <HoverDropdown
+              dropdown={
+                <div>
+                  This is the level of <b>Client Loyalty</b>. For each action he
+                  receives an increase. Every day the level decreases
+                  automatically – &quot;passive cooling&quot;.
+                </div>
+              }
+            >
+              <LoyaltyProgress percent={client.level} />
+            </HoverDropdown>
           </div>
           <div className="absolute top-1 right-1">
-            <div className="hover:scale-125 duration-200">
-              <LevelBadge level={client.level} size="lg" />
-            </div>
+            <HoverDropdown
+              dropdown={
+                <div>
+                  This is the <b>Client Level</b>. It takes into account all
+                  actions for all time.
+                </div>
+              }
+            >
+              <div className="hover:scale-125 duration-200">
+                <LevelBadge level={client.level} size="lg" />
+              </div>
+            </HoverDropdown>
           </div>
 
           <div className="mt-3 text-lg font-medium leading-tight text-center">
@@ -156,9 +176,18 @@ const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
 const TraitsBlock = () => {
   return (
     <div className="flex flex-row gap-2 justify-center">
-      <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
-        <ClientTraitBadge size="lg" variant="cautious" />
-      </div>
+      <HoverDropdown
+        dropdown={
+          <div>
+            Client have a <b>Cautious Trait</b>. Don&apos;t know what&apos;s on
+            the client&apos;s mind.
+          </div>
+        }
+      >
+        <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
+          <ClientTraitBadge size="lg" variant="cautious" />
+        </div>
+      </HoverDropdown>
       <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
         <ClientTraitBadge size="lg" variant={null} />
       </div>
