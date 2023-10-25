@@ -121,6 +121,114 @@ export const GetProductById = async (id: string) => {
   return product;
 };
 
+export const GetClients = async () => {
+  return [
+    {
+      id: "1",
+      firstName: "James",
+      level: 1,
+      avatar:
+        "https://avatar.o5system.net/api/3620b2a9-3efe-4f31-b4e8-5e3cfaac55b5.svg?gender=male&emotion=3&size=140",
+    },
+    {
+      id: "2",
+      firstName: "Juliet",
+      level: 12,
+      avatar:
+        "https://avatar.o5system.net/api/18859251-b3e0-4099-87e4-8e9397e54aef.svg?gender=female&emotion=9&size=140",
+    },
+    {
+      id: "3",
+      firstName: "Ferdinand",
+      level: 24,
+      avatar:
+        "https://avatar.o5system.net/api/7d8551f5-2fa9-4f99-ba00-617656f31144.svg?gender=male&emotion=8&size=140",
+    },
+    {
+      id: "4",
+      firstName: "Dale",
+      level: 38,
+      avatar:
+        "https://avatar.o5system.net/api/3db90139-4122-4e30-85a1-6c15e8ecca79.svg?gender=male&emotion=7&size=140",
+    },
+    {
+      id: "5",
+      firstName: "Stacia",
+      level: 41,
+      avatar:
+        "https://avatar.o5system.net/api/649dbdc7-5a5d-43be-9051-7bab6a8e3e7a.svg?gender=female&emotion=5&size=140",
+    },
+    {
+      id: "6",
+      firstName: "Marilyn",
+      level: 7,
+      avatar:
+        "https://avatar.o5system.net/api/ee3ac3ec-6d05-43cb-a847-bdc6134e36a8.svg?gender=female&emotion=6&size=140",
+    },
+    {
+      id: "7",
+      firstName: "Darwin",
+      level: 50,
+      avatar:
+        "https://avatar.o5system.net/api/3aaf80a3-3104-4888-980e-d83bf8363663.svg?gender=male&emotion=7&size=140",
+    },
+    {
+      id: "8",
+      firstName: "Bryanne",
+      level: 24,
+      avatar:
+        "https://avatar.o5system.net/api/dd90cef4-281d-4ec0-b101-1cf0ad8ab807.svg?gender=female&emotion=10&size=140",
+    },
+    {
+      id: "9",
+      firstName: "Lessie",
+      level: 15,
+      avatar:
+        "https://avatar.o5system.net/api/72f53a2e-7b44-4d7c-8e3f-fe88dfb19b59.svg?gender=female&emotion=9&size=140",
+    },
+    {
+      id: "10",
+      firstName: "Cortney",
+      level: 33,
+      avatar:
+        "https://avatar.o5system.net/api/4b209064-5a1b-4007-88f2-4a6640891c61.svg?gender=female&emotion=4&size=140",
+    },
+    {
+      id: "11",
+      firstName: "Damian",
+      level: 19,
+      avatar:
+        "https://avatar.o5system.net/api/58ecc81c-931f-48c7-9ae9-ec759f76ae91.svg?gender=male&emotion=1&size=140",
+    },
+    {
+      id: "12",
+      firstName: "Thornton",
+      level: 8,
+      avatar:
+        "https://avatar.o5system.net/api/a1b42269-0f9c-4f09-b7e9-4f3ccc41a8a8.svg?gender=male&emotion=5&size=140",
+    },
+    {
+      id: "13",
+      firstName: "Terrell",
+      level: 44,
+      avatar:
+        "https://avatar.o5system.net/api/bbb2dbb4-2e9b-44ff-bc51-c67f3b050036.svg?gender=male&emotion=6&size=140",
+    },
+    {
+      id: "14",
+      firstName: "Cathy",
+      level: 37,
+      avatar:
+        "https://avatar.o5system.net/api/3f2c02a6-d0c7-4824-9708-bcb655ac7c69.svg?gender=female&emotion=7&size=140",
+    },
+  ];
+};
+
+export const GetClientById = async (id: string) => {
+  const clients = await GetClients();
+  return clients.find((client) => client.id === id);
+};
+
 export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
   return [
     {
@@ -152,6 +260,12 @@ export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
       label: "Products",
       href: "/product",
       icon: "IconCheese",
+    },
+    {
+      id: "6",
+      label: "Clients",
+      href: "/client",
+      icon: "IconUsers",
     },
   ];
 };
