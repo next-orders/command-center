@@ -25,7 +25,7 @@ export const ClientCard = ({ client }: ClientCardProps) => {
             height={300}
             className="w-full aspect-square rounded-xl"
           />
-          <div className="absolute bottom-1 left-1 group-hover:scale-110 duration-200">
+          <div className="absolute top-1 right-1 group-hover:scale-110 duration-200">
             <LevelBadge level={client.level} size="md" />
           </div>
         </div>
