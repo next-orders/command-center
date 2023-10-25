@@ -1,4 +1,5 @@
 import {
+  IconBraces,
   IconCactus,
   IconGlassFull,
   IconHexagonFilled,
@@ -18,7 +19,8 @@ type ClientTraitBadgeProps = {
     | "well-fed"
     | "satisfied"
     | "picky"
-    | "cautious";
+    | "cautious"
+    | null;
 };
 
 export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
@@ -101,10 +103,19 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
     );
   }
 
+  if (variant === null) {
+    bg = "text-zinc-100";
+    icon = (
+      <IconBraces
+        className={`absolute bottom-2 left-1 text-white ${widthAndHeightIcon}`}
+      />
+    );
+  }
+
   return (
-    <div className={`relative cursor-default ${widthAndHeight}`}>
+    <div className={`relative ${widthAndHeight}`}>
       <IconHexagonFilled
-        className={`absolute bottom-0 left-0 drop-shadow-md ${bg} ${widthAndHeight}`}
+        className={`absolute bottom-0 left-0 ${bg} ${widthAndHeight}`}
       />
       {icon}
     </div>

@@ -25,13 +25,11 @@ export default async function Page({ params }: PageProps) {
     <>
       <Breadcrumbs links={breadcrumbs} />
 
-      <h1 className="mb-2 text-3xl font-semibold">
-        It&apos;s {client.firstName}
-      </h1>
-      <div className="mb-8">Some info about client</div>
+      <h1 className="mb-2 text-3xl font-semibold">Client page</h1>
+      <div className="mb-8">Get all data about this client</div>
 
       <div className="mb-4 mx-auto max-w-xs">
-        <div className="relative w-full bg-zinc-50 rounded-2xl h-auto p-3">
+        <div className="relative w-full bg-zinc-50 rounded-2xl h-auto px-3 py-3">
           <Image
             src={client.avatar}
             alt="Client"
@@ -40,10 +38,22 @@ export default async function Page({ params }: PageProps) {
             height={300}
             className="w-full aspect-square rounded-xl"
           />
-
-          <div className="mt-4 mb-2">
-            <MainProgress level={client.level} />
+          <div className="absolute top-5 left-0 right-0">
+            <LoyaltyProgress percent={client.level} />
           </div>
+          <div className="absolute top-1 right-1">
+            <div className="hover:scale-125 duration-200">
+              <LevelBadge level={client.level} size="lg" />
+            </div>
+          </div>
+
+          <div className="mt-3 text-lg font-medium leading-tight text-center">
+            It&apos;s {client.firstName} {client.lastName}
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <TraitsBlock />
         </div>
       </div>
 
@@ -124,24 +134,37 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-type MainProgressProps = {
-  level: number;
+type LoyaltyProgressProps = {
+  percent: number;
 };
 
-const MainProgress = ({ level }: MainProgressProps) => {
+const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
+  if (percent < 10) percent = 10;
+
   return (
-    <>
-      <div className="relative group">
-        <div className="w-full h-6 bg-orange-200 rounded-xl">
-          <div className="absolute bottom-0 left-0 w-[44%] h-6 bg-orange-400 rounded-xl"></div>
-          <div className="absolute bottom-0 right-0 w-fit h-6 px-2 cursor-default hidden group-hover:block bg-white rounded-xl border-2 border-orange-200 text-orange-600 text-sm text-center font-semibold">
-            114 XP to Lvl Up
-          </div>
-        </div>
-        <div className="absolute -bottom-3.5 -left-3">
-          <LevelBadge level={level} size="lg" />
-        </div>
+    <div className="w-full flex flex-row justify-center">
+      <div className="w-28 h-4 bg-zinc-50 rounded-xl drop-shadow-md hover:scale-125 duration-200">
+        <div
+          className={`absolute bottom-0 left-0 h-4 bg-indigo-500 rounded-xl`}
+          style={{ width: `${percent}%` }}
+        />
       </div>
-    </>
+    </div>
+  );
+};
+
+const TraitsBlock = () => {
+  return (
+    <div className="flex flex-row gap-2 justify-center">
+      <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
+        <ClientTraitBadge size="lg" variant="cautious" />
+      </div>
+      <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
+        <ClientTraitBadge size="lg" variant={null} />
+      </div>
+      <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
+        <ClientTraitBadge size="lg" variant={null} />
+      </div>
+    </div>
   );
 };

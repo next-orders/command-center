@@ -126,6 +126,7 @@ export const GetClients = async () => {
     {
       id: "1",
       firstName: "James",
+      lastName: "Franco",
       level: 1,
       avatar:
         "https://avatar.o5system.net/api/3620b2a9-3efe-4f31-b4e8-5e3cfaac55b5.svg?gender=male&emotion=3&size=140",
