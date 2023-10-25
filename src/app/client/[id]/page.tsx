@@ -29,7 +29,7 @@ export default async function Page({ params }: PageProps) {
       <h1 className="mb-2 text-3xl font-semibold">Client page</h1>
       <div className="mb-8">Get all data about this client</div>
 
-      <div className="mb-4 mx-auto max-w-xs">
+      <div className="mb-4 mx-auto max-w-xs group">
         <div className="relative w-full bg-zinc-50 rounded-2xl h-auto px-3 py-3">
           <Image
             src={client.avatar}
@@ -52,7 +52,7 @@ export default async function Page({ params }: PageProps) {
               <LoyaltyProgress percent={client.level} />
             </HoverDropdown>
           </div>
-          <div className="absolute top-1 right-1">
+          <div className="absolute top-1 right-1 group-hover:scale-105 duration-300">
             <HoverDropdown
               dropdown={
                 <div>
@@ -162,7 +162,7 @@ const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
   if (percent < 10) percent = 10;
 
   return (
-    <div className="w-full flex flex-row justify-center">
+    <div className="w-full flex flex-row justify-center group-hover:scale-105 duration-300">
       <div className="w-28 h-4 bg-zinc-50 rounded-xl drop-shadow-md hover:scale-125 duration-200">
         <div
           className={`absolute bottom-0 left-0 h-4 bg-indigo-500 rounded-xl`}
@@ -175,7 +175,7 @@ const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
 
 const TraitsBlock = () => {
   return (
-    <div className="flex flex-row gap-2 justify-center">
+    <div className="flex flex-row gap-2 justify-center group-hover:scale-105 duration-300">
       <HoverDropdown
         dropdown={
           <div>
