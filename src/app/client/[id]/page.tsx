@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { GetClientById } from "@/server/actions";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import Image from "next/image";
 import { LevelBadge } from "@/components/LevelBadge";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
 import { HoverDropdown } from "@/components/HoverDropdown";

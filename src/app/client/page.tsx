@@ -5,7 +5,7 @@ import { GetClients } from "@/server/actions";
 export default async function Page() {
   const clients = await GetClients();
 
-  const clientsBlock = clients.map((client) => (
+  const clientsBlock = clients?.map((client) => (
     <ClientCard key={client.id} client={client} />
   ));
 

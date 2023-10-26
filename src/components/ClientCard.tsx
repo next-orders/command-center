@@ -1,22 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LevelBadge } from "@/components/LevelBadge";
+import { Client } from "@next-orders/api-sdk";
 
 type ClientCardProps = {
-  client: {
-    id: string;
-    firstName: string;
-    lastName?: string;
-    avatarId: string;
-    level: number;
-    gender: string;
-    emotion: number;
-    loyalty: number;
-    traits: {
-      id: string;
-      type: string;
-    }[];
-  };
+  client: Client;
 };
 
 export const ClientCard = ({ client }: ClientCardProps) => {
