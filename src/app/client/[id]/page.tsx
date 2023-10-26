@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LevelBadge } from "@/components/LevelBadge";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
 import { HoverDropdown } from "@/components/HoverDropdown";
+import { getColorByClientLevel } from "@/lib/helpers";
 
 type PageProps = {
   params: { id: string };
@@ -16,7 +17,8 @@ export default async function Page({ params }: PageProps) {
     notFound();
   }
 
-  const clientAvatar = `https://v1.next-orders.org/api/avatar/${client.avatarId}?gender=${client.gender}&emotion=${client.emotion}&size=140`;
+  const avatarClothingColor = getColorByClientLevel(client.level);
+  const clientAvatar = `https://v1.next-orders.org/api/avatar/${client.avatarId}?gender=${client.gender}&emotion=${client.emotion}&clothing=${avatarClothingColor}&size=140`;
   const clientLoyaltyPercent = client.loyalty;
 
   const breadcrumbs = [

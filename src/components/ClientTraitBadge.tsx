@@ -9,19 +9,11 @@ import {
   IconSnowflake,
   IconSortDescending,
 } from "@tabler/icons-react";
+import { ClientTrait } from "@next-orders/api-sdk";
 
 type ClientTraitBadgeProps = {
   size: "sm" | "md" | "lg" | "xl";
-  type:
-    | "ORDERLY"
-    | "SPONTANEOUS"
-    | "COLD"
-    | "WELL-FED"
-    | "SATISFIED"
-    | "PICKY"
-    | "CAUTIOUS"
-    | "BLANK"
-    | string;
+  type: ClientTrait["type"];
 };
 
 export const ClientTraitBadge = ({ size, type }: ClientTraitBadgeProps) => {

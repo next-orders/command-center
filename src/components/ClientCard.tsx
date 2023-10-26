@@ -2,13 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { LevelBadge } from "@/components/LevelBadge";
 import { Client } from "@next-orders/api-sdk";
+import { getColorByClientLevel } from "@/lib/helpers";
 
 type ClientCardProps = {
   client: Client;
 };
 
 export const ClientCard = ({ client }: ClientCardProps) => {
-  const clientAvatar = `https://v1.next-orders.org/api/avatar/${client.avatarId}?gender=${client.gender}&emotion=${client.emotion}&size=140`;
+  const avatarClothingColor = getColorByClientLevel(client.level);
+  const clientAvatar = `https://v1.next-orders.org/api/avatar/${client.avatarId}?gender=${client.gender}&emotion=${client.emotion}&clothing=${avatarClothingColor}&size=140`;
 
   return (
     <Link href={`/client/${client.id}`}>
