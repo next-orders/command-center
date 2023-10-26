@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { LevelBadge } from "@/components/LevelBadge";
 import Link from "next/link";
+import { LevelBadge } from "@/components/LevelBadge";
 
 type ClientCardProps = {
   client: {
@@ -11,6 +11,11 @@ type ClientCardProps = {
     level: number;
     gender: string;
     emotion: number;
+    loyalty: number;
+    traits: {
+      id: string;
+      type: string;
+    }[];
   };
 };
 

@@ -17,6 +17,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   const clientAvatar = `https://v1.next-orders.org/api/avatar/${client.avatarId}?gender=${client.gender}&emotion=${client.emotion}&size=140`;
+  const clientLoyaltyPercent = client.loyalty;
 
   const breadcrumbs = [
     { title: "Home", href: "/" },
@@ -51,7 +52,7 @@ export default async function Page({ params }: PageProps) {
                 </div>
               }
             >
-              <LoyaltyProgress percent={client.level} />
+              <LoyaltyProgress percent={clientLoyaltyPercent} />
             </HoverDropdown>
           </div>
           <div className="absolute top-1 right-1 md:group-hover:scale-105 duration-300">
@@ -63,7 +64,7 @@ export default async function Page({ params }: PageProps) {
                 </div>
               }
             >
-              <div className="hover:scale-125 duration-200">
+              <div className="md:hover:scale-125 duration-200">
                 <LevelBadge level={client.level} size="lg" />
               </div>
             </HoverDropdown>
@@ -75,7 +76,7 @@ export default async function Page({ params }: PageProps) {
         </div>
 
         <div className="mt-4">
-          <TraitsBlock />
+          <TraitsBlock traits={client.traits} />
         </div>
       </div>
 
@@ -118,13 +119,13 @@ export default async function Page({ params }: PageProps) {
         </p>
 
         <div className="mt-4 flex flex-row gap-1 justify-center">
-          <ClientTraitBadge size="md" variant="orderly" />
-          <ClientTraitBadge size="md" variant="spontaneous" />
-          <ClientTraitBadge size="md" variant="cold" />
-          <ClientTraitBadge size="md" variant="well-fed" />
-          <ClientTraitBadge size="md" variant="satisfied" />
-          <ClientTraitBadge size="md" variant="picky" />
-          <ClientTraitBadge size="md" variant="cautious" />
+          <ClientTraitBadge size="md" type="ORDERLY" />
+          <ClientTraitBadge size="md" type="SPONTANEOUS" />
+          <ClientTraitBadge size="md" type="COLD" />
+          <ClientTraitBadge size="md" type="WELL-FED" />
+          <ClientTraitBadge size="md" type="SATISFIED" />
+          <ClientTraitBadge size="md" type="PICKY" />
+          <ClientTraitBadge size="md" type="CAUTIOUS" />
         </div>
 
         <ul className="mt-4 text-left leading-loose">
@@ -162,12 +163,13 @@ type LoyaltyProgressProps = {
 
 const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
   if (percent < 10) percent = 10;
+  if (percent > 100) percent = 100;
 
   return (
     <div className="relative w-full md:group-hover:scale-105 duration-300">
-      <div className="relative w-28 h-4 mx-auto bg-zinc-50 rounded-xl drop-shadow-md hover:scale-125 duration-200">
+      <div className="relative w-28 h-4 mx-auto bg-zinc-50 rounded-xl drop-shadow-md md:hover:scale-125 duration-200">
         <div
-          className={`absolute bottom-0 left-0 h-4 bg-indigo-500 rounded-xl`}
+          className="absolute bottom-0 left-0 h-4 bg-indigo-500 rounded-xl"
           style={{ width: `${percent}%` }}
         />
       </div>
@@ -175,27 +177,109 @@ const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
   );
 };
 
-const TraitsBlock = () => {
+type TraitsBlockProps = {
+  traits: {
+    id: string;
+    type: string;
+  }[];
+};
+
+const TraitsBlock = ({ traits }: TraitsBlockProps) => {
+  // Min 3 to show, if less - add blank
+  if (traits.length === 0) {
+    traits.push(
+      { id: "blank1", type: "BLANK" },
+      { id: "blank2", type: "BLANK" },
+      { id: "blank3", type: "BLANK" },
+    );
+  }
+  if (traits.length === 1) {
+    traits.push(
+      { id: "blank1", type: "BLANK" },
+      { id: "blank2", type: "BLANK" },
+    );
+  }
+  if (traits.length === 2) {
+    traits.push({ id: "blank1", type: "BLANK" });
+  }
+
+  const threeTraits = traits?.map((trait) => (
+    <HoverDropdown
+      key={trait.id}
+      dropdown={<DropdownHintByTraitType type={trait.type} />}
+    >
+      <div className="cursor-default md:hover:scale-125 hover:drop-shadow-md duration-200">
+        <ClientTraitBadge size="lg" type={trait.type} />
+      </div>
+    </HoverDropdown>
+  ));
+
   return (
     <div className="flex flex-row gap-2 justify-center md:group-hover:scale-105 duration-300">
-      <HoverDropdown
-        dropdown={
-          <div>
-            Client have a <b>Cautious Trait</b>. Don&apos;t know what&apos;s on
-            the client&apos;s mind.
-          </div>
-        }
-      >
-        <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
-          <ClientTraitBadge size="lg" variant="cautious" />
-        </div>
-      </HoverDropdown>
-      <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
-        <ClientTraitBadge size="lg" variant={null} />
-      </div>
-      <div className="cursor-default hover:scale-125 hover:drop-shadow-md duration-200">
-        <ClientTraitBadge size="lg" variant={null} />
-      </div>
+      {threeTraits}
     </div>
   );
+};
+
+const DropdownHintByTraitType = ({ type }: { type: string }) => {
+  if (type === "BLANK") {
+    return (
+      <div>
+        No Trait here. Wait a while, the client will probably receive it.
+      </div>
+    );
+  }
+  if (type === "ORDERLY") {
+    return (
+      <div>
+        Client have a <b>Orderly Trait</b>. Often orders, but for small amounts.
+      </div>
+    );
+  }
+  if (type === "SPONTANEOUS") {
+    return (
+      <div>
+        Client have a <b>Spontaneous Trait</b>. Rarely orders, but for large
+        amounts.
+      </div>
+    );
+  }
+  if (type === "COLD") {
+    return (
+      <div>
+        Client have a <b>Cold Trait</b>. Hasn&apos;t ordered for a long time.
+      </div>
+    );
+  }
+  if (type === "WELL-FED") {
+    return (
+      <div>
+        Client have a <b>Well-fed Trait</b>. Often orders for large amounts.
+      </div>
+    );
+  }
+  if (type === "SATISFIED") {
+    return (
+      <div>
+        Client have a <b>Satisfied Trait</b>. Happy with everything and always.
+      </div>
+    );
+  }
+  if (type === "PICKY") {
+    return (
+      <div>
+        Client have a <b>Picky Trait</b>. Always dissatisfied.
+      </div>
+    );
+  }
+  if (type === "CAUTIOUS") {
+    return (
+      <div>
+        Client have a <b>Cautious Trait</b>. Don&apos;t know what&apos;s on the
+        client&apos;s mind.
+      </div>
+    );
+  }
+
+  return <div>No hint here.</div>;
 };

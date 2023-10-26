@@ -12,18 +12,19 @@ import {
 
 type ClientTraitBadgeProps = {
   size: "sm" | "md" | "lg" | "xl";
-  variant:
-    | "orderly"
-    | "spontaneous"
-    | "cold"
-    | "well-fed"
-    | "satisfied"
-    | "picky"
-    | "cautious"
-    | null;
+  type:
+    | "ORDERLY"
+    | "SPONTANEOUS"
+    | "COLD"
+    | "WELL-FED"
+    | "SATISFIED"
+    | "PICKY"
+    | "CAUTIOUS"
+    | "BLANK"
+    | string;
 };
 
-export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
+export const ClientTraitBadge = ({ size, type }: ClientTraitBadgeProps) => {
   let widthAndHeight = "";
   let widthAndHeightIcon = "";
   let icon;
@@ -46,7 +47,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
     widthAndHeightIcon = "w-16 h-16";
   }
 
-  if (variant === "orderly") {
+  if (type === "ORDERLY") {
     bg = "text-lime-400";
     icon = (
       <IconSortDescending
@@ -54,7 +55,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
       />
     );
   }
-  if (variant === "spontaneous") {
+  if (type === "SPONTANEOUS") {
     bg = "text-orange-400";
     icon = (
       <IconHourglassHigh
@@ -62,7 +63,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
       />
     );
   }
-  if (variant === "cold") {
+  if (type === "COLD") {
     bg = "text-sky-400";
     icon = (
       <IconSnowflake
@@ -70,7 +71,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
       />
     );
   }
-  if (variant === "well-fed") {
+  if (type === "WELL-FED") {
     bg = "text-emerald-400";
     icon = (
       <IconGlassFull
@@ -78,7 +79,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
       />
     );
   }
-  if (variant === "satisfied") {
+  if (type === "SATISFIED") {
     bg = "text-green-400";
     icon = (
       <IconMoodHappy
@@ -86,7 +87,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
       />
     );
   }
-  if (variant === "picky") {
+  if (type === "PICKY") {
     bg = "text-rose-400";
     icon = (
       <IconCactus
@@ -94,7 +95,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
       />
     );
   }
-  if (variant === "cautious") {
+  if (type === "CAUTIOUS") {
     bg = "text-blue-400";
     icon = (
       <IconPencilQuestion
@@ -102,8 +103,7 @@ export const ClientTraitBadge = ({ size, variant }: ClientTraitBadgeProps) => {
       />
     );
   }
-
-  if (variant === null) {
+  if (type === "BLANK") {
     bg = "text-zinc-100";
     icon = (
       <IconBraces
