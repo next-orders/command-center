@@ -18,7 +18,7 @@ export const HoverDropdown = ({ dropdown, children }: HoverDropdownProps) => {
       trapFocus
       position="bottom"
       withArrow={false}
-      shadow="lg"
+      shadow="md"
       radius="lg"
       opened={opened}
     >

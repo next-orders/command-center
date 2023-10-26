@@ -6,7 +6,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["v1.next-orders.org", "avatar.o5system.net"],
+    domains: ["v1.next-orders.org"],
   },
   basePath: "/command-center",
   output: "standalone",

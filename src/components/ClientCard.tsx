@@ -7,18 +7,22 @@ type ClientCardProps = {
     id: string;
     firstName: string;
     lastName?: string;
-    avatar: string;
+    avatarId: string;
     level: number;
+    gender: string;
+    emotion: number;
   };
 };
 
 export const ClientCard = ({ client }: ClientCardProps) => {
+  const clientAvatar = `https://v1.next-orders.org/api/avatar/${client.avatarId}?gender=${client.gender}&emotion=${client.emotion}&size=140`;
+
   return (
     <Link href={`/client/${client.id}`}>
       <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 duration-200 group">
         <div className="relative">
           <Image
-            src={client.avatar}
+            src={clientAvatar}
             alt="Client"
             unoptimized
             width={300}
