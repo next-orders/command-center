@@ -122,168 +122,25 @@ export const GetProductById = async (id: string) => {
 };
 
 export const GetClients = async () => {
-  return [
-    {
-      id: "1",
-      firstName: "James",
-      lastName: "Franco",
-      level: 1,
-      gender: "male",
-      emotion: 3,
-      avatarId: "3620b2a9-3efe-4f31-b4e8-5e3cfaac55b5",
-      loyalty: 4,
-      traits: [
-        {
-          id: "1",
-          type: "CAUTIOUS",
-        },
-      ],
-    },
-    {
-      id: "2",
-      firstName: "Juliet",
-      level: 12,
-      gender: "female",
-      emotion: 9,
-      avatarId: "18859251-b3e0-4099-87e4-8e9397e54aef.svg",
-      loyalty: 34,
-      traits: [{ id: "2", type: "SPONTANEOUS" }],
-    },
-    {
-      id: "3",
-      firstName: "Ferdinand",
-      level: 24,
-      gender: "male",
-      emotion: 8,
-      avatarId: "7d8551f5-2fa9-4f99-ba00-617656f31144.svg",
-      loyalty: 114,
-      traits: [
-        { id: "3", type: "WELL-FED" },
-        { id: "4", type: "SATISFIED" },
-      ],
-    },
-    {
-      id: "4",
-      firstName: "Dale",
-      level: 38,
-      gender: "male",
-      emotion: 7,
-      avatarId: "3db90139-4122-4e30-85a1-6c15e8ecca79.svg",
-      loyalty: 34,
-      traits: [{ id: "3", type: "ORDERLY" }],
-    },
-    {
-      id: "5",
-      firstName: "Stacia",
-      level: 41,
-      gender: "female",
-      emotion: 5,
-      avatarId: "649dbdc7-5a5d-43be-9051-7bab6a8e3e7a.svg",
-      loyalty: 34,
-      traits: [],
-    },
-    {
-      id: "6",
-      firstName: "Marilyn",
-      level: 7,
-      gender: "female",
-      emotion: 6,
-      avatarId: "ee3ac3ec-6d05-43cb-a847-bdc6134e36a8.svg",
-      loyalty: 34,
-      traits: [],
-    },
-    {
-      id: "7",
-      firstName: "Darwin",
-      level: 50,
-      gender: "male",
-      emotion: 7,
-      avatarId: "3aaf80a3-3104-4888-980e-d83bf8363663.svg",
-      loyalty: 87,
-      traits: [{ id: "3", type: "CAUTIOUS" }],
-    },
-    {
-      id: "8",
-      firstName: "Bryanne",
-      level: 24,
-      gender: "female",
-      emotion: 10,
-      avatarId: "dd90cef4-281d-4ec0-b101-1cf0ad8ab807.svg",
-      loyalty: 34,
-      traits: [],
-    },
-    {
-      id: "9",
-      firstName: "Lessie",
-      level: 15,
-      gender: "female",
-      emotion: 9,
-      avatarId: "72f53a2e-7b44-4d7c-8e3f-fe88dfb19b59.svg",
-      loyalty: 34,
-      traits: [],
-    },
-    {
-      id: "10",
-      firstName: "Cortney",
-      level: 33,
-      gender: "female",
-      emotion: 4,
-      avatarId: "4b209064-5a1b-4007-88f2-4a6640891c61.svg",
-      loyalty: 34,
-      traits: [],
-    },
-    {
-      id: "11",
-      firstName: "Damian",
-      level: 19,
-      gender: "male",
-      emotion: 1,
-      avatarId: "58ecc81c-931f-48c7-9ae9-ec759f76ae91.svg",
-      loyalty: 0,
-      traits: [
-        { id: "3", type: "COLD" },
-        { id: "4", type: "PICKY" },
-      ],
-    },
-    {
-      id: "12",
-      firstName: "Thornton",
-      level: 8,
-      gender: "male",
-      emotion: 5,
-      avatarId: "a1b42269-0f9c-4f09-b7e9-4f3ccc41a8a8.svg",
-      loyalty: 34,
-      traits: [],
-    },
-    {
-      id: "13",
-      firstName: "Terrell",
-      level: 44,
-      gender: "male",
-      emotion: 6,
-      avatarId: "bbb2dbb4-2e9b-44ff-bc51-c67f3b050036.svg",
-      loyalty: 34,
-      traits: [],
-    },
-    {
-      id: "14",
-      firstName: "Cathy",
-      level: 37,
-      gender: "female",
-      emotion: 7,
-      avatarId: "3f2c02a6-d0c7-4824-9708-bcb655ac7c69.svg",
-      loyalty: 65,
-      traits: [
-        { id: "3", type: "WELL-FED" },
-        { id: "4", type: "SATISFIED" },
-      ],
-    },
-  ];
+  const clients = await api.getClients({
+    next: { ...nextConfig, tags: ["all", "clients"] },
+  });
+  if (!clients || clients instanceof Error) {
+    return null;
+  }
+
+  return clients;
 };
 
 export const GetClientById = async (id: string) => {
-  const clients = await GetClients();
-  return clients.find((client) => client.id === id);
+  const client = await api.getClientById(id, {
+    next: { ...nextConfig, tags: ["all", `client-${id}`] },
+  });
+  if (!client || client instanceof Error) {
+    return null;
+  }
+
+  return client;
 };
 
 export const GetNavigationMenu = async (): Promise<MenuItem[]> => {

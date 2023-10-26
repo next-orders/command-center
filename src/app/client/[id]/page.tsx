@@ -42,7 +42,7 @@ export default async function Page({ params }: PageProps) {
             height={300}
             className="w-full aspect-square rounded-xl"
           />
-          <div className="absolute top-5 left-0 right-0">
+          <div className="absolute top-6 left-0 right-0">
             <HoverDropdown
               dropdown={
                 <div>
@@ -162,14 +162,14 @@ type LoyaltyProgressProps = {
 };
 
 const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
-  if (percent < 10) percent = 10;
+  if (percent < 16) percent = 16;
   if (percent > 100) percent = 100;
 
   return (
     <div className="relative w-full md:group-hover:scale-105 duration-300">
-      <div className="relative w-28 h-4 mx-auto bg-zinc-50 rounded-xl drop-shadow-md md:hover:scale-125 duration-200">
+      <div className="relative w-32 h-5 mx-auto bg-zinc-50 rounded-xl drop-shadow-md md:hover:scale-125 duration-200">
         <div
-          className="absolute bottom-0 left-0 h-4 bg-indigo-500 rounded-xl"
+          className="absolute bottom-0 left-0 h-5 bg-indigo-500 rounded-xl"
           style={{ width: `${percent}%` }}
         />
       </div>
