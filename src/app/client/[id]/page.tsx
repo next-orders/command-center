@@ -1,35 +1,19 @@
+import { Suspense } from "react";
 import Image from "next/image";
-import { GetAvatarURL, GetClientById } from "@/server/actions";
-import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { LevelBadge } from "@/components/LevelBadge";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
-import { HoverDropdown } from "@/components/HoverDropdown";
-import { getColorByClientLevel } from "@/lib/helpers";
-import { ClientTrait } from "@next-orders/api-sdk";
+import ClientAvatarBlock from "@/app/client/[id]/ClientAvatarBlock";
+import { ClientAvatarBlockSkeleton } from "@/app/client/[id]/ClientAvatarBlockSkeleton";
 
 type PageProps = {
   params: { id: string };
 };
 
 export default async function Page({ params }: PageProps) {
-  const client = await GetClientById(params.id);
-  if (!client) {
-    notFound();
-  }
-
-  const avatarClothingColor = getColorByClientLevel(client.level);
-  const clientAvatarURL = GetAvatarURL(client.avatarId, 140, {
-    gender: client.gender,
-    emotion: client.emotion,
-    clothing: avatarClothingColor,
-  });
-  const clientLoyaltyPercent = client.loyalty;
-
   const breadcrumbs = [
     { title: "Home", href: "/" },
     { title: "Client base", href: `/client` },
-    { title: client.firstName, href: "#" },
+    { title: "Client page", href: "#" },
   ];
 
   return (
@@ -40,51 +24,9 @@ export default async function Page({ params }: PageProps) {
       <div className="mb-8">Get all data about this client</div>
 
       <div className="mb-4 mx-auto max-w-xs group">
-        <div className="relative w-full bg-zinc-50 rounded-2xl h-auto px-3 py-3">
-          <Image
-            src={clientAvatarURL}
-            alt="Client"
-            unoptimized
-            width={300}
-            height={300}
-            className="w-full aspect-square rounded-xl"
-          />
-          <div className="absolute top-6 left-0 right-0">
-            <HoverDropdown
-              dropdown={
-                <div>
-                  This is the level of <b>Client Loyalty</b>. For each action he
-                  receives an increase. Every day the level decreases
-                  automatically – &quot;passive cooling&quot;.
-                </div>
-              }
-            >
-              <LoyaltyProgress percent={clientLoyaltyPercent} />
-            </HoverDropdown>
-          </div>
-          <div className="absolute top-1 right-1 md:group-hover:scale-105 duration-300">
-            <HoverDropdown
-              dropdown={
-                <div>
-                  This is the <b>Client Level</b>. It takes into account all
-                  actions for all time.
-                </div>
-              }
-            >
-              <div className="md:hover:scale-125 duration-200">
-                <LevelBadge level={client.level} size="lg" />
-              </div>
-            </HoverDropdown>
-          </div>
-
-          <div className="mt-3 text-lg font-medium leading-tight text-center">
-            It&apos;s {client.firstName} {client.lastName}
-          </div>
-        </div>
-
-        <div className="mt-4">
-          <TraitsBlock traits={client.traits} />
-        </div>
+        <Suspense fallback={<ClientAvatarBlockSkeleton />}>
+          <ClientAvatarBlock id={params.id} />
+        </Suspense>
       </div>
 
       <div className="mt-24 text-center max-w-xl mx-auto">
@@ -163,157 +105,3 @@ export default async function Page({ params }: PageProps) {
     </>
   );
 }
-
-type LoyaltyProgressProps = {
-  percent: number;
-};
-
-const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
-  if (percent < 16) percent = 16;
-  if (percent > 100) percent = 100;
-
-  return (
-    <div className="relative w-full md:group-hover:scale-105 duration-300">
-      <div className="relative w-32 h-5 mx-auto bg-zinc-50 rounded-xl drop-shadow-md md:hover:scale-125 duration-200">
-        <div
-          className="absolute bottom-0 left-0 h-5 bg-indigo-500 rounded-xl"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-    </div>
-  );
-};
-
-type TraitsBlockProps = {
-  traits: ClientTrait[];
-};
-
-const TraitsBlock = ({ traits }: TraitsBlockProps) => {
-  // Min 3 to show, if less - add blank
-  if (traits.length === 0) {
-    traits.push(
-      {
-        id: "blank1",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: "blank2",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: "blank3",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    );
-  }
-  if (traits.length === 1) {
-    traits.push(
-      {
-        id: "blank1",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: "blank2",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    );
-  }
-  if (traits.length === 2) {
-    traits.push({
-      id: "blank1",
-      type: "BLANK",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-  }
-
-  const threeTraits = traits?.map((trait) => (
-    <HoverDropdown
-      key={trait.id}
-      dropdown={<DropdownHintByTraitType type={trait.type} />}
-    >
-      <div className="cursor-default md:hover:scale-125 hover:drop-shadow-md duration-200">
-        <ClientTraitBadge size="lg" type={trait.type} />
-      </div>
-    </HoverDropdown>
-  ));
-
-  return (
-    <div className="flex flex-row gap-2 justify-center md:group-hover:scale-105 duration-300">
-      {threeTraits}
-    </div>
-  );
-};
-
-const DropdownHintByTraitType = ({ type }: { type: string }) => {
-  if (type === "BLANK") {
-    return (
-      <div>
-        No Trait here. Wait a while, the client will probably receive it.
-      </div>
-    );
-  }
-  if (type === "ORDERLY") {
-    return (
-      <div>
-        Client have a <b>Orderly Trait</b>. Often orders, but for small amounts.
-      </div>
-    );
-  }
-  if (type === "SPONTANEOUS") {
-    return (
-      <div>
-        Client have a <b>Spontaneous Trait</b>. Rarely orders, but for large
-        amounts.
-      </div>
-    );
-  }
-  if (type === "COLD") {
-    return (
-      <div>
-        Client have a <b>Cold Trait</b>. Hasn&apos;t ordered for a long time.
-      </div>
-    );
-  }
-  if (type === "WELL-FED") {
-    return (
-      <div>
-        Client have a <b>Well-fed Trait</b>. Often orders for large amounts.
-      </div>
-    );
-  }
-  if (type === "SATISFIED") {
-    return (
-      <div>
-        Client have a <b>Satisfied Trait</b>. Happy with everything and always.
-      </div>
-    );
-  }
-  if (type === "PICKY") {
-    return (
-      <div>
-        Client have a <b>Picky Trait</b>. Always dissatisfied.
-      </div>
-    );
-  }
-  if (type === "CAUTIOUS") {
-    return (
-      <div>
-        Client have a <b>Cautious Trait</b>. Don&apos;t know what&apos;s on the
-        client&apos;s mind.
-      </div>
-    );
-  }
-
-  return <div>No hint here.</div>;
-};
