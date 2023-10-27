@@ -73,7 +73,7 @@ export const TraitsBlock = ({ traits }: TraitsBlockProps) => {
   );
 };
 
-const DropdownHintByTraitType = ({ type }: { type: string }) => {
+const DropdownHintByTraitType = ({ type }: { type: ClientTrait["type"] }) => {
   if (type === "BLANK") {
     return (
       <div>
@@ -103,7 +103,7 @@ const DropdownHintByTraitType = ({ type }: { type: string }) => {
       </div>
     );
   }
-  if (type === "WELL-FED") {
+  if (type === "WELL_FED") {
     return (
       <div>
         Client have a <b>Well-fed Trait</b>. Often orders for large amounts.

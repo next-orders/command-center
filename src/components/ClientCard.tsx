@@ -41,3 +41,14 @@ export const ClientCard = ({ client }: ClientCardProps) => {
     </Link>
   );
 };
+
+export const ClientCardSkeleton = () => {
+  return (
+    <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 animate-pulse">
+      <div className="w-full aspect-square rounded-xl bg-zinc-200" />
+      <div className="mt-2 text-base font-medium leading-tight text-center text-zinc-400">
+        Loading
+      </div>
+    </div>
+  );
+};
