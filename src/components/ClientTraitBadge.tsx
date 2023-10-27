@@ -63,7 +63,7 @@ export const ClientTraitBadge = ({ size, type }: ClientTraitBadgeProps) => {
       />
     );
   }
-  if (type === "WELL-FED") {
+  if (type === "WELL_FED") {
     bg = "text-emerald-400";
     icon = (
       <IconGlassFull

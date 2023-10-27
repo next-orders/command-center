@@ -1,6 +1,6 @@
 "use server";
 
-import { MainAPI } from "@next-orders/api-sdk";
+import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
 import { MenuItem } from "@/types";
 
 const API_URL = process.env.API_URL || "no-api-url-env";
@@ -141,6 +141,14 @@ export const GetClientById = async (id: string) => {
   }
 
   return client;
+};
+
+export const GetAvatarURL = (
+  avatarId: string,
+  size: number,
+  params?: AvatarParams,
+): string => {
+  return api.getAvatarURL(avatarId, size, params);
 };
 
 export const GetNavigationMenu = async (): Promise<MenuItem[]> => {

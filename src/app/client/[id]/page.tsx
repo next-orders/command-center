@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { GetClientById } from "@/server/actions";
+import { GetAvatarURL, GetClientById } from "@/server/actions";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LevelBadge } from "@/components/LevelBadge";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
 import { HoverDropdown } from "@/components/HoverDropdown";
 import { getColorByClientLevel } from "@/lib/helpers";
+import { ClientTrait } from "@next-orders/api-sdk";
 
 type PageProps = {
   params: { id: string };
@@ -18,7 +19,11 @@ export default async function Page({ params }: PageProps) {
   }
 
   const avatarClothingColor = getColorByClientLevel(client.level);
-  const clientAvatar = `https://v1.next-orders.org/api/avatar/${client.avatarId}?gender=${client.gender}&emotion=${client.emotion}&clothing=${avatarClothingColor}&size=140`;
+  const clientAvatarURL = GetAvatarURL(client.avatarId, 140, {
+    gender: client.gender,
+    emotion: client.emotion,
+    clothing: avatarClothingColor,
+  });
   const clientLoyaltyPercent = client.loyalty;
 
   const breadcrumbs = [
@@ -37,7 +42,7 @@ export default async function Page({ params }: PageProps) {
       <div className="mb-4 mx-auto max-w-xs group">
         <div className="relative w-full bg-zinc-50 rounded-2xl h-auto px-3 py-3">
           <Image
-            src={clientAvatar}
+            src={clientAvatarURL}
             alt="Client"
             unoptimized
             width={300}
@@ -124,7 +129,7 @@ export default async function Page({ params }: PageProps) {
           <ClientTraitBadge size="md" type="ORDERLY" />
           <ClientTraitBadge size="md" type="SPONTANEOUS" />
           <ClientTraitBadge size="md" type="COLD" />
-          <ClientTraitBadge size="md" type="WELL-FED" />
+          <ClientTraitBadge size="md" type="WELL_FED" />
           <ClientTraitBadge size="md" type="SATISFIED" />
           <ClientTraitBadge size="md" type="PICKY" />
           <ClientTraitBadge size="md" type="CAUTIOUS" />
@@ -180,29 +185,56 @@ const LoyaltyProgress = ({ percent }: LoyaltyProgressProps) => {
 };
 
 type TraitsBlockProps = {
-  traits: {
-    id: string;
-    type: string;
-  }[];
+  traits: ClientTrait[];
 };
 
 const TraitsBlock = ({ traits }: TraitsBlockProps) => {
   // Min 3 to show, if less - add blank
   if (traits.length === 0) {
     traits.push(
-      { id: "blank1", type: "BLANK" },
-      { id: "blank2", type: "BLANK" },
-      { id: "blank3", type: "BLANK" },
+      {
+        id: "blank1",
+        type: "BLANK",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: "blank2",
+        type: "BLANK",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: "blank3",
+        type: "BLANK",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     );
   }
   if (traits.length === 1) {
     traits.push(
-      { id: "blank1", type: "BLANK" },
-      { id: "blank2", type: "BLANK" },
+      {
+        id: "blank1",
+        type: "BLANK",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: "blank2",
+        type: "BLANK",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     );
   }
   if (traits.length === 2) {
-    traits.push({ id: "blank1", type: "BLANK" });
+    traits.push({
+      id: "blank1",
+      type: "BLANK",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
   }
 
   const threeTraits = traits?.map((trait) => (

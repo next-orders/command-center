@@ -10,9 +10,6 @@ const nextConfig = {
   },
   basePath: "/command-center",
   output: "standalone",
-  experimental: {
-    serverActions: true,
-  },
 };
 
 module.exports = nextConfig;
