@@ -9,7 +9,14 @@ const initialState = {
   message: null,
 };
 
-export const LoginForm = () => {
+type LoginFormProps = {
+  demo: {
+    email: string;
+    password: string;
+  };
+};
+
+export const LoginForm = ({ demo }: LoginFormProps) => {
   const [state, formAction] = useFormState(SignInForm, initialState);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -58,7 +65,12 @@ export const LoginForm = () => {
 
       <div className="flex flex-row gap-4 justify-center">
         <SubmitButton />
-        <SubmitAsDemoButton setEmail={setEmail} setPassword={setPassword} />
+        <SubmitAsDemoButton
+          setEmail={setEmail}
+          setPassword={setPassword}
+          email={demo.email}
+          password={demo.password}
+        />
       </div>
 
       <div className="mt-4 w-full text-center text-red-700">
@@ -85,19 +97,23 @@ function SubmitButton() {
 type SubmitAsDemoButtonProps = {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  password: string;
 };
 
 function SubmitAsDemoButton({
   setEmail,
   setPassword,
+  email,
+  password,
 }: SubmitAsDemoButtonProps) {
   const { pending } = useFormStatus();
 
   return (
     <button
       onClick={() => {
-        setEmail("demo@next-orders.org");
-        setPassword("123456");
+        setEmail(email);
+        setPassword(password);
       }}
       type="submit"
       aria-disabled={pending}

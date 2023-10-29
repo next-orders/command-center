@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { LoginForm } from "@/components/LoginForm";
+import { GetDemoSignInData } from "@/server/actions";
 
 export default function Page() {
+  const demoData = GetDemoSignInData();
+
   return (
     <div className="w-full h-screen mx-auto flex flex-row justify-center items-center">
       <div>
@@ -18,7 +21,7 @@ export default function Page() {
           We&apos;ve been waiting for you!
         </h1>
 
-        <LoginForm />
+        <LoginForm demo={demoData} />
       </div>
     </div>
   );
