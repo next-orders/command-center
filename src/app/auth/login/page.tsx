@@ -2,8 +2,8 @@ import Image from "next/image";
 import { LoginForm } from "@/components/LoginForm";
 import { GetDemoSignInData } from "@/server/actions";
 
-export default function Page() {
-  const demoData = GetDemoSignInData();
+export default async function Page() {
+  const demoData = await GetDemoSignInData();
 
   return (
     <div className="w-full h-screen mx-auto flex flex-row justify-center items-center">

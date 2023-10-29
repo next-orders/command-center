@@ -49,11 +49,13 @@ export const SignOut = () => {
   redirect("/auth/login");
 };
 
-export const GetDemoSignInData = () => {
-  return {
-    email: process.env.DEMO_AUTH_EMAIL as string,
-    password: process.env.DEMO_AUTH_PASS as string,
-  };
+export const GetDemoSignInData = async () => {
+  const data = await api.signInDemoData();
+  if (data instanceof Error) {
+    return null;
+  }
+
+  return data;
 };
 
 export const GetEmployeeAccessPayload = async () => {

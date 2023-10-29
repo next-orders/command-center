@@ -13,7 +13,7 @@ type LoginFormProps = {
   demo: {
     email: string;
     password: string;
-  };
+  } | null;
 };
 
 export const LoginForm = ({ demo }: LoginFormProps) => {
@@ -68,8 +68,7 @@ export const LoginForm = ({ demo }: LoginFormProps) => {
         <SubmitAsDemoButton
           setEmail={setEmail}
           setPassword={setPassword}
-          email={demo.email}
-          password={demo.password}
+          demo={demo}
         />
       </div>
 
@@ -97,23 +96,28 @@ function SubmitButton() {
 type SubmitAsDemoButtonProps = {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
-  email: string;
-  password: string;
+  demo: {
+    email: string;
+    password: string;
+  } | null;
 };
 
 function SubmitAsDemoButton({
   setEmail,
   setPassword,
-  email,
-  password,
+  demo,
 }: SubmitAsDemoButtonProps) {
   const { pending } = useFormStatus();
+
+  if (!demo || !demo.email) {
+    return null;
+  }
 
   return (
     <button
       onClick={() => {
-        setEmail(email);
-        setPassword(password);
+        setEmail(demo.email);
+        setPassword(demo.password);
       }}
       type="submit"
       aria-disabled={pending}
