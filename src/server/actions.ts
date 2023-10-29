@@ -50,7 +50,9 @@ export const SignOut = () => {
 };
 
 export const GetDemoSignInData = async () => {
-  const data = await api.signInDemoData();
+  const data = await api.signInDemoData({
+    next: { ...nextConfig, tags: ["all", "demo"] },
+  });
   if (data instanceof Error) {
     return null;
   }
