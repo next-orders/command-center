@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <>
+    <div className="mt-8 text-center">
       <div>
         <h1 className="mb-2 text-3xl font-semibold">Error 404</h1>
         <p>What you requested does not exist.</p>
@@ -18,6 +18,6 @@ export default function NotFound() {
           <Link href={"/dashboard"}>Go back to the Dashboard</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }
