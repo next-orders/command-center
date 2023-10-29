@@ -5,7 +5,6 @@ import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
 import { MenuItem } from "@/types";
 import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
 import { redirect } from "next/navigation";
-import { revalidateTag } from "next/cache";
 
 const API_URL = process.env.API_URL || "no-api-url-env";
 const SHOP_ID = process.env.SHOP_ID || "no-shop-id-env";
@@ -42,13 +41,11 @@ export const SignInForm = async (prevState: any, formData: FormData) => {
     cookies().set(COOKIES_ACCESS_TOKEN_KEY, employee.result.access_token);
   }
 
-  revalidateTag("all");
   redirect("/dashboard");
 };
 
 export const SignOut = () => {
   cookies().delete(COOKIES_ACCESS_TOKEN_KEY);
-  revalidateTag("all");
   redirect("/auth/login");
 };
 

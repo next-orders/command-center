@@ -16,7 +16,9 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   }
 
   if (isOnLoginPage && isLoggedIn) {
-    return NextResponse.redirect(new URL(`/command-center`, request.url));
+    return NextResponse.redirect(
+      new URL(`/command-center/dashboard`, request.url),
+    );
   }
   if (!isOnLoginPage && !isLoggedIn) {
     return NextResponse.redirect(

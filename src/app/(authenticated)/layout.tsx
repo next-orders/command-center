@@ -4,9 +4,6 @@ import { Shell } from "@/components/Shell";
 import { MantineProvider } from "@mantine/core";
 import { GetNavigationMenu } from "@/server/actions";
 
-import "@mantine/core/styles.layer.css";
-import "@/app/globals.scss";
-
 export const metadata: Metadata = {
   title: "Command Center",
   description: "Management of all business Entities",
