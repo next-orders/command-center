@@ -1,11 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { IconCheese, IconChefHat, IconPaperBag } from "@tabler/icons-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import Image from "next/image";
 
 export default async function Page() {
   const breadcrumbs = [
-    { title: "Home", href: "/" },
+    { title: "Dashboard", href: "/dashboard" },
     { title: "Products", href: "#" },
   ];
 

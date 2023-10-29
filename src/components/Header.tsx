@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Avatar, Burger, Input } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import { SignOut } from "@/server/actions";
 
 type Props = {
   isNavbarOpened: boolean;
@@ -31,12 +32,13 @@ export const Header = ({ isNavbarOpened, toggle }: Props) => {
       <div className="flex flex-row gap-4 items-center">
         <Link
           href={"https://v1.next-orders.org"}
-          className="px-4 py-1 text-white font-medium rounded-xl bg-emerald-500 hover:bg-emerald-600 hover:scale-95 duration-200 hidden sm:block"
+          className="px-4 py-2 font-medium rounded-xl bg-zinc-100 hover:bg-zinc-200 hover:scale-95 duration-200 hidden sm:block"
         >
           Open website
         </Link>
         <Avatar
           src={userAvatar}
+          onClick={() => SignOut()}
           className="w-12 h-12 cursor-pointer hover:scale-95 duration-200"
         />
       </div>

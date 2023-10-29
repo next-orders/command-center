@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import Image from "next/image";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
-import ClientAvatarBlock from "@/app/client/[id]/ClientAvatarBlock";
-import { ClientAvatarBlockSkeleton } from "@/app/client/[id]/ClientAvatarBlockSkeleton";
+import ClientAvatarBlock from "@/app/(authenticated)/client/[id]/ClientAvatarBlock";
+import { ClientAvatarBlockSkeleton } from "@/app/(authenticated)/client/[id]/ClientAvatarBlockSkeleton";
 
 type PageProps = {
   params: { id: string };
@@ -11,7 +11,7 @@ type PageProps = {
 
 export default async function Page({ params }: PageProps) {
   const breadcrumbs = [
-    { title: "Home", href: "/" },
+    { title: "Dashboard", href: "/dashboard" },
     { title: "Client base", href: `/client` },
     { title: "Client page", href: "#" },
   ];

@@ -17,7 +17,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   const breadcrumbs = [
-    { title: "Home", href: "/" },
+    { title: "Dashboard", href: "/dashboard" },
     { title: "Products", href: `/product` },
     { title: product.name, href: "#" },
   ];

@@ -1,21 +1,70 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
 import { MenuItem } from "@/types";
+import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
+import { redirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
 
 const API_URL = process.env.API_URL || "no-api-url-env";
-const API_PRIVATE_TOKEN =
-  process.env.API_PRIVATE_TOKEN || "no-api-private-token-env";
 const SHOP_ID = process.env.SHOP_ID || "no-shop-id-env";
-
-const api = new MainAPI(API_URL, API_PRIVATE_TOKEN);
-
 const MAX_CACHE_SECONDS = 0; // no data cache
+
+const api = new MainAPI(API_URL, ""); // Public access only
 
 const nextConfig = {
   // Problem: on build time Next try to fetch API, which is not declared. Empty data on deploy, until revalidation.
   // Solution: set revalidate to 0
   revalidate: process.env.DATA_CACHE_DISABLED ? 0 : MAX_CACHE_SECONDS,
+};
+
+const apiWithAccess = () => {
+  const accessToken = cookies().get(COOKIES_ACCESS_TOKEN_KEY)?.value || "";
+  return new MainAPI(API_URL, accessToken);
+};
+
+export const SignInForm = async (prevState: any, formData: FormData) => {
+  const email = (formData.get("email") as string) || "";
+  const password = (formData.get("password") as string) || "";
+
+  const employee = await api.signInEmployeeByEmail(
+    { email, password },
+    { next: { revalidate: 0 } },
+  );
+  if (employee instanceof Error) {
+    return { message: "Data is not correct" };
+  }
+
+  // Valid data
+  if (employee.result.access_token) {
+    // Set Access Token in Cookie
+    cookies().set(COOKIES_ACCESS_TOKEN_KEY, employee.result.access_token);
+  }
+
+  revalidateTag("all");
+  redirect("/dashboard");
+};
+
+export const SignOut = () => {
+  cookies().delete(COOKIES_ACCESS_TOKEN_KEY);
+  revalidateTag("all");
+  redirect("/auth/login");
+};
+
+export const GetEmployeeAccessPayload = async () => {
+  const accessToken = cookies().get(COOKIES_ACCESS_TOKEN_KEY)?.value || "";
+  const payload = await apiWithAccess().verifyToken(accessToken, {
+    next: { revalidate: 60, tags: ["all", "token"] },
+  });
+  if (payload instanceof Error) {
+    if (payload.message.includes("400")) {
+      throw new Error("Access Token is not valid");
+    }
+    throw new Error("Unknown");
+  }
+
+  return payload;
 };
 
 export const GetShop = async () => {
@@ -25,8 +74,8 @@ export const GetShop = async () => {
       tags: ["all", "shop"],
     },
   });
-  if (!shop || shop instanceof Error) {
-    return null;
+  if (shop instanceof Error) {
+    throw shop;
   }
 
   return shop;
@@ -121,23 +170,31 @@ export const GetProductById = async (id: string) => {
   return product;
 };
 
+/** Need Permission READ_CLIENTS */
 export const GetClients = async () => {
-  const clients = await api.getClients({
+  const clients = await apiWithAccess().getClients({
     next: { ...nextConfig, tags: ["all", "clients"] },
   });
-  if (!clients || clients instanceof Error) {
-    return null;
+  if (clients instanceof Error) {
+    if (clients.message.includes("401")) {
+      throw new Error("You have no required Permissions: READ_CLIENTS");
+    }
+    throw new Error("Unknown");
   }
 
   return clients;
 };
 
+/** Need Permission READ_CLIENTS */
 export const GetClientById = async (id: string) => {
-  const client = await api.getClientById(id, {
+  const client = await apiWithAccess().getClientById(id, {
     next: { ...nextConfig, tags: ["all", `client-${id}`] },
   });
-  if (!client || client instanceof Error) {
-    return null;
+  if (client instanceof Error) {
+    if (client.message.includes("401")) {
+      throw new Error("You have no required Permissions: READ_CLIENTS");
+    }
+    throw new Error("Unknown");
   }
 
   return client;
@@ -155,8 +212,8 @@ export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
   return [
     {
       id: "1",
-      label: "Home",
-      href: "/",
+      label: "Dashboard",
+      href: "/dashboard",
       icon: "IconDashboard",
     },
     {
