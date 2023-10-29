@@ -1,13 +1,11 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { GetEmployeeAccessPayload } from "@/server/actions";
 
 const LOGIN_PAGE = "/auth/login";
 
-export async function middleware(request: NextRequest) {
-  const url = request.nextUrl;
-
-  const isOnLoginPage = url.pathname.startsWith(LOGIN_PAGE);
-
+export async function middleware(request: NextRequest): Promise<NextResponse> {
+  const isOnLoginPage = request.nextUrl.pathname.startsWith(LOGIN_PAGE);
   let isLoggedIn = false;
 
   try {
@@ -18,14 +16,25 @@ export async function middleware(request: NextRequest) {
   }
 
   if (isOnLoginPage && isLoggedIn) {
-    return Response.redirect(new URL(`/command-center`, url));
+    return NextResponse.redirect(new URL(`/command-center`, request.url));
   }
   if (!isOnLoginPage && !isLoggedIn) {
-    return Response.redirect(new URL(`/command-center${LOGIN_PAGE}`, url));
+    return NextResponse.redirect(
+      new URL(`/command-center${LOGIN_PAGE}`, request.url),
+    );
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-  matcher: ["/((?!api|_next/static|_next/image|static|favicon.ico).*)"],
+  /*
+   * Match all request paths except for the ones starting with:
+   * - website-api (API routes)
+   * - _next/static (static files)
+   * - _next/image (image optimization files)
+   * - static (folder in public)
+   * - favicon.ico (favicon file)
+   */
+  matcher: ["/((?!website-api|_next/static|_next/image|static|favicon.ico).*)"],
 };
