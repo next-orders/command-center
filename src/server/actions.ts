@@ -1,13 +1,14 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
 import { MenuItem } from "@/types";
 import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
-import { redirect } from "next/navigation";
 
-const API_URL = process.env.API_URL || "no-api-url-env";
-const SHOP_ID = process.env.SHOP_ID || "no-shop-id-env";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
+const SHOP_ID = process.env.NEXT_PUBLIC_SHOP_ID || "no-shop-id-env";
+
 const MAX_CACHE_SECONDS = 0; // no data cache
 
 const api = new MainAPI(API_URL, ""); // Public access only
@@ -101,24 +102,6 @@ export const GetChannels = async () => {
   }
 
   return channels;
-};
-
-/** Need Permission READ_MEDIA */
-export const GetAllMedia = async () => {
-  const media = await apiWithAccess().getAllMedia({
-    next: {
-      ...nextConfig,
-      tags: ["all", "media"],
-    },
-  });
-  if (media instanceof Error) {
-    if (media.message.includes("401")) {
-      throw new Error("You have no required Permissions: READ_MEDIA");
-    }
-    throw new Error("Unknown");
-  }
-
-  return media;
 };
 
 export const GetAllDomains = async () => {

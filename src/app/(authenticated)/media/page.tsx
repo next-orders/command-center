@@ -1,7 +1,7 @@
-import { GetAllMedia } from "@/server/actions";
+import { IconPhotoPlus } from "@tabler/icons-react";
 import { MediaCard } from "@/components/MediaCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { IconPhotoPlus } from "@tabler/icons-react";
+import { GetAllMedia } from "@/client/api";
 
 export default async function Page() {
   const media = await GetAllMedia();

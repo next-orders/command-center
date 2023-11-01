@@ -69,7 +69,6 @@ export const MediaCard = ({ media }: MediaCardProps) => {
             <Image
               src={media.url ?? ""}
               alt={media.alt ?? ""}
-              unoptimized
               width={300}
               height={300}
               className="w-full aspect-square rounded-xl"
