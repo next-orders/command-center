@@ -103,15 +103,19 @@ export const GetChannels = async () => {
   return channels;
 };
 
+/** Need Permission READ_MEDIA */
 export const GetAllMedia = async () => {
-  const media = await api.getAllMedia({
+  const media = await apiWithAccess().getAllMedia({
     next: {
       ...nextConfig,
       tags: ["all", "media"],
     },
   });
-  if (!media || media instanceof Error) {
-    return null;
+  if (media instanceof Error) {
+    if (media.message.includes("401")) {
+      throw new Error("You have no required Permissions: READ_MEDIA");
+    }
+    throw new Error("Unknown");
   }
 
   return media;
@@ -148,17 +152,6 @@ export const GetCategories = async () => {
 export const GetProducts = async () => {
   const products = await api.getProducts({
     next: { ...nextConfig, tags: ["all", `products`] },
-  });
-  if (!products || products instanceof Error) {
-    return null;
-  }
-
-  return products;
-};
-
-export const GetProductsInCategory = async (id: string) => {
-  const products = await api.getProductsInCategory(id, {
-    next: { ...nextConfig, tags: ["all", `category-products-${id}`] },
   });
   if (!products || products instanceof Error) {
     return null;
