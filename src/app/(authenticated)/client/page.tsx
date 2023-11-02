@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import ClientsBlock from "@/app/(authenticated)/client/ClientsBlock";
-import { ClientsBlockSkeleton } from "@/app/(authenticated)/client/ClientsBlockSkeleton";
+import ClientsBlock from "./ClientsBlock";
+import { ClientsBlockSkeleton } from "./ClientsBlockSkeleton";
 
 export default async function Page() {
   const breadcrumbs = [
