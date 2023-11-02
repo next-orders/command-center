@@ -1,15 +1,10 @@
+import { Suspense } from "react";
 import { IconPhotoPlus } from "@tabler/icons-react";
-import { MediaCard } from "@/components/MediaCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GetAllMedia } from "@/client/api";
+import MediaBlock from "./MediaBlock";
+import { MediaBlockSkeleton } from "./MediaBlockSkeleton";
 
 export default async function Page() {
-  const media = await GetAllMedia();
-
-  const mediaCards = media?.map((media) => (
-    <MediaCard key={media.id} media={media} />
-  ));
-
   const breadcrumbs = [
     { title: "Dashboard", href: "/dashboard" },
     { title: "Media", href: "#" },
@@ -29,7 +24,9 @@ export default async function Page() {
       </div>
 
       <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">
-        {mediaCards}
+        <Suspense fallback={<MediaBlockSkeleton />}>
+          <MediaBlock />
+        </Suspense>
       </div>
     </>
   );

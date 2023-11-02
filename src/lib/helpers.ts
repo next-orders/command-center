@@ -9,3 +9,7 @@ export const getColorByClientLevel = (level: number) => {
 
   return "violet";
 };
+
+export const fakeBusyServer = (ms = 5000) => {
+  return new Promise((resolve) => setTimeout(() => resolve("ok"), ms));
+};

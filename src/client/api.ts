@@ -27,7 +27,7 @@ export const GetAllMedia = async () => {
     },
   });
   if (media instanceof Error) {
-    if (media.message.includes("Unauthorized")) {
+    if (media.message.includes("Forbidden")) {
       throw new Error("You have no required Permissions: READ_MEDIA");
     }
     throw new Error("Unknown");
