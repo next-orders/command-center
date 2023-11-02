@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { HoverDropdown } from "@/components/HoverDropdown";
 import { LevelBadge } from "@/components/LevelBadge";
-import { GetAvatarURL, GetClientById } from "@/server/actions";
+import { GetAvatarURL } from "@/server/actions";
 import { notFound } from "next/navigation";
 import { getColorByClientLevel } from "@/lib/helpers";
 import { TraitsBlock } from "@/components/TraitsBlock";
 import { LoyaltyProgress } from "@/components/LoyaltyProgress";
+import { GetClientById } from "@/client/api";
+import { ErrorBlock } from "@/components/ErrorBlock";
 
 type ClientAvatarBlockProps = {
   id: string;
@@ -15,6 +17,11 @@ export default async function ClientAvatarBlock({
   id,
 }: ClientAvatarBlockProps) {
   const client = await GetClientById(id);
+
+  if (client instanceof Error) {
+    return <ErrorBlock error={client} />;
+  }
+
   if (!client) {
     notFound();
   }
@@ -28,7 +35,7 @@ export default async function ClientAvatarBlock({
   const clientLoyaltyPercent = client.loyalty;
 
   return (
-    <>
+    <div className="mb-4 mx-auto max-w-xs group">
       <div className="relative w-full bg-zinc-50 rounded-2xl h-auto px-3 py-3">
         <Image
           src={clientAvatarURL}
@@ -74,6 +81,6 @@ export default async function ClientAvatarBlock({
       <div className="mt-4">
         <TraitsBlock traits={client.traits} />
       </div>
-    </>
+    </div>
   );
 }

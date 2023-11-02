@@ -20,18 +20,24 @@ const apiWithAccess = () => {
 
 /** Need Permission READ_MEDIA */
 export const GetAllMedia = async () => {
-  const media = await apiWithAccess().getAllMedia({
+  return apiWithAccess().getAllMedia({
     next: {
       ...nextConfig,
       tags: ["all", "media"],
     },
   });
-  if (media instanceof Error) {
-    if (media.message.includes("Forbidden")) {
-      return new Error("You have no required Permissions: READ_MEDIA");
-    }
-    return new Error("Unknown");
-  }
+};
 
-  return media;
+/** Need Permission READ_CLIENTS */
+export const GetClients = async () => {
+  return apiWithAccess().getClients({
+    next: { ...nextConfig, tags: ["all", "clients"] },
+  });
+};
+
+/** Need Permission READ_CLIENTS */
+export const GetClientById = async (id: string) => {
+  return apiWithAccess().getClientById(id, {
+    next: { ...nextConfig, tags: ["all", `client-${id}`] },
+  });
 };

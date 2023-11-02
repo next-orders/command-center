@@ -154,36 +154,6 @@ export const GetProductById = async (id: string) => {
   return product;
 };
 
-/** Need Permission READ_CLIENTS */
-export const GetClients = async () => {
-  const clients = await apiWithAccess().getClients({
-    next: { ...nextConfig, tags: ["all", "clients"] },
-  });
-  if (clients instanceof Error) {
-    if (clients.message.includes("401")) {
-      throw new Error("You have no required Permissions: READ_CLIENTS");
-    }
-    throw new Error("Unknown");
-  }
-
-  return clients;
-};
-
-/** Need Permission READ_CLIENTS */
-export const GetClientById = async (id: string) => {
-  const client = await apiWithAccess().getClientById(id, {
-    next: { ...nextConfig, tags: ["all", `client-${id}`] },
-  });
-  if (client instanceof Error) {
-    if (client.message.includes("401")) {
-      throw new Error("You have no required Permissions: READ_CLIENTS");
-    }
-    throw new Error("Unknown");
-  }
-
-  return client;
-};
-
 export const GetAvatarURL = (
   avatarId: string,
   size: number,

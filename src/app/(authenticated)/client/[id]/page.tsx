@@ -23,11 +23,9 @@ export default async function Page({ params }: PageProps) {
       <h1 className="mb-2 text-3xl font-semibold">Client page</h1>
       <div className="mb-8">Get all data about this client</div>
 
-      <div className="mb-4 mx-auto max-w-xs group">
-        <Suspense fallback={<ClientAvatarBlockSkeleton />}>
-          <ClientAvatarBlock id={params.id} />
-        </Suspense>
-      </div>
+      <Suspense fallback={<ClientAvatarBlockSkeleton />}>
+        <ClientAvatarBlock id={params.id} />
+      </Suspense>
 
       <div className="mt-24 text-center max-w-xl mx-auto">
         <Image

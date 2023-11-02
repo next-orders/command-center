@@ -21,7 +21,7 @@ export default function Error({ error, reset }: ErrorProps) {
     <div className="text-center">
       <h1 className="mt-16 mb-2 font-medium text-xl">Something went wrong!</h1>
       <h2 className="mb-8 font-medium text-md text-orange-700">
-        Error: {error.message}
+        Description: {error.message}
       </h2>
 
       <div className="flex flex-row gap-4 justify-center">
