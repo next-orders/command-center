@@ -1,10 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font";
+import { Inter } from "next/font/google";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
 import "@mantine/core/styles.layer.css";
 import "@/app/globals.scss";
+
+const inter = Inter({ subsets: ["latin", "cyrillic-ext"] });
 
 export const metadata: Metadata = {
   title: "Command Center",
@@ -17,7 +19,7 @@ type Props = {
 
 export default async function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={inter.className}>
       <head>
         <ColorSchemeScript />
       </head>

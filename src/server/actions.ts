@@ -7,7 +7,6 @@ import { MenuItem } from "@/types";
 import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
-const SHOP_ID = process.env.NEXT_PUBLIC_SHOP_ID || "no-shop-id-env";
 
 const MAX_CACHE_SECONDS = 0; // no data cache
 
@@ -76,15 +75,31 @@ export const GetEmployeeAccessPayload = async () => {
   return payload;
 };
 
+export const CreateShopForm = async (prevState: any, formData: FormData) => {
+  const name = (formData.get("name") as string) || "";
+  const description = (formData.get("description") as string) || "";
+
+  const create = await api.createShop(
+    { name, description },
+    { next: { revalidate: 0 } },
+  );
+  if (create instanceof Error) {
+    return { message: "Data is not correct" };
+  }
+
+  redirect("/dashboard");
+};
+
 export const GetShop = async () => {
-  const shop = await api.getShop(SHOP_ID, {
+  const shop = await api.getShop({
     next: {
       ...nextConfig,
       tags: ["all", "shop"],
     },
   });
   if (shop instanceof Error) {
-    throw shop;
+    // No shop in DB
+    return null;
   }
 
   return shop;

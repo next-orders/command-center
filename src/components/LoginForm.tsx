@@ -6,7 +6,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { SignInForm } from "@/server/actions";
 
 const initialState = {
-  message: null,
+  message: "",
 };
 
 type LoginFormProps = {

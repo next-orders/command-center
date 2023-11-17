@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
-const SHOP_ID = process.env.NEXT_PUBLIC_SHOP_ID || "no-shop-id-env";
 
 const MAX_CACHE_SECONDS = 0; // no data cache
 
@@ -13,9 +12,25 @@ const nextConfig = {
   revalidate: process.env.DATA_CACHE_DISABLED ? 0 : MAX_CACHE_SECONDS,
 };
 
+const apiWithPublicAccess = new MainAPI(API_URL, "");
+
 const apiWithAccess = () => {
   const accessToken = cookies().get(COOKIES_ACCESS_TOKEN_KEY)?.value || "";
   return new MainAPI(API_URL, accessToken);
+};
+
+export const GetApiVersion = async () => {
+  const apiData = await apiWithPublicAccess.getApiVersion({
+    next: {
+      ...nextConfig,
+      tags: ["all", "api"],
+    },
+  });
+  if (apiData instanceof Error) {
+    return null;
+  }
+
+  return apiData;
 };
 
 /** Need Permission READ_MEDIA */
