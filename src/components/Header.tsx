@@ -1,25 +1,36 @@
+"use client";
+
 import Link from "next/link";
-import { Avatar, Burger, Input } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
+import { Avatar, Input } from "@mantine/core";
+import { IconMenu2, IconSearch, IconX } from "@tabler/icons-react";
 import { SignOut } from "@/server/actions";
+import { useUIStore } from "@/store/ui";
 
-type Props = {
-  isNavbarOpened: boolean;
-  toggle: () => void;
-};
+export const Header = () => {
+  const isNavbarOpened = useUIStore((state) => state.isNavbarOpened);
+  const toggleNavbar = useUIStore((state) => state.toggleNavbar);
 
-export const Header = ({ isNavbarOpened, toggle }: Props) => {
   const userAvatar = `https://v1.next-orders.org/api/avatar/32d735e8-977d-4a19-ab8a-35c955c97a19?gender=male&emotion=7&size=140`;
 
   return (
-    <div className="w-full h-full px-4 md:px-6 flex flex-row flex-nowrap justify-between content-center items-center border-b border-zinc-100">
-      <div className="mr-2 flex justify-center items-center justify-items-center h-full hover:scale-110 transition duration-200">
-        <Burger
-          opened={isNavbarOpened}
-          onClick={toggle}
-          size="md"
-          aria-label="Navigation"
-        />
+    <div className="w-full h-full px-4 flex flex-row flex-nowrap justify-between content-center items-center border-b border-zinc-100">
+      <div className="mr-2 2xl:hidden flex justify-center items-center justify-items-center h-full hover:scale-110 transition duration-200">
+        <button
+          aria-label="Close Navigation"
+          data-active={isNavbarOpened}
+          onClick={toggleNavbar}
+          className="hidden data-[active=true]:block"
+        >
+          <IconX stroke={1.5} className="w-8 h-8" />
+        </button>
+        <button
+          aria-label="Open Navigation"
+          data-active={!isNavbarOpened}
+          onClick={toggleNavbar}
+          className="hidden data-[active=true]:block"
+        >
+          <IconMenu2 stroke={1.5} className="w-8 h-8" />
+        </button>
       </div>
 
       <div className="mr-auto">

@@ -1,8 +1,4 @@
-"use client";
-
 import React from "react";
-import { AppShell } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { Header } from "@/components/Header";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -14,30 +10,18 @@ type Props = {
 };
 
 export const Shell = ({ menu, children }: Props) => {
-  const [isNavbarOpened, { toggle, close }] = useDisclosure();
-
   return (
-    <AppShell
-      header={{ height: { base: 64, sm: 72, md: 72 } }}
-      navbar={{
-        width: 300,
-        breakpoint: "sm",
-        collapsed: { mobile: !isNavbarOpened, desktop: !isNavbarOpened },
-      }}
-      layout="alt"
-    >
-      <AppShell.Header withBorder={false}>
-        <Header isNavbarOpened={isNavbarOpened} toggle={toggle} />
-      </AppShell.Header>
+    <>
+      <header className="z-20 h-16 bg-white fixed top-0 left-0 right-0">
+        <Header />
+      </header>
 
-      <AppShell.Navbar withBorder={false} className="mt-16 md:mt-0">
-        <Navigation menu={menu} toggle={toggle} />
-      </AppShell.Navbar>
+      <Navigation menu={menu} />
 
-      <AppShell.Main onClick={close}>
-        <div className="px-4 pb-32 mt-4 md:px-6">{children}</div>
+      <main className="relative w-auto bg-white top-16 2xl:pl-72">
+        <div className="px-4 pb-10 pt-4">{children}</div>
         <Footer />
-      </AppShell.Main>
-    </AppShell>
+      </main>
+    </>
   );
 };
