@@ -11,7 +11,7 @@ export default async function Page() {
     // No Auth?
   }
 
-  if (isLoggedIn) return redirect("/dashboard");
+  if (isLoggedIn) return redirect("/command-center/dashboard");
 
-  return redirect("/auth/login");
+  return redirect("/command-center/auth/login");
 }

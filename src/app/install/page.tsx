@@ -6,7 +6,7 @@ export default async function Page() {
   const shop = await GetShop();
   if (shop) {
     // Shop is already in DB
-    return redirect("/auth/login");
+    return redirect("/command-center/auth/login");
   }
 
   return <InstallPage />;
