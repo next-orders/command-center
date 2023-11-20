@@ -41,12 +41,12 @@ export const SignInForm = async (prevState: any, formData: FormData) => {
     cookies().set(COOKIES_ACCESS_TOKEN_KEY, employee.result.access_token);
   }
 
-  redirect("/dashboard");
+  redirect("/command-center/dashboard");
 };
 
 export const SignOut = () => {
   cookies().delete(COOKIES_ACCESS_TOKEN_KEY);
-  redirect("/auth/login");
+  redirect("/command-center/auth/login");
 };
 
 export const GetDemoSignInData = async () => {
@@ -87,7 +87,7 @@ export const CreateShopForm = async (prevState: any, formData: FormData) => {
     return { message: "Data is not correct" };
   }
 
-  redirect("/dashboard");
+  redirect("/command-center/dashboard");
 };
 
 export const GetShop = async () => {
