@@ -9,6 +9,7 @@ const ERROR_PAGE = "/error";
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const response = NextResponse.next();
+  console.log(request.url);
 
   // Check API Version: is it healthy?
   const apiVersion = await GetApiVersion();
@@ -19,7 +20,10 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     if (!isOnErrorPage) {
       const errorMessage = "Main API is not responding";
       return NextResponse.redirect(
-        new URL(`/command-center/error?message=${errorMessage}`, request.url),
+        new URL(
+          `/command-center${ERROR_PAGE}?message=${errorMessage}`,
+          request.url,
+        ),
       );
     }
 
@@ -33,7 +37,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
     if (!isOnInstallPage) {
       return NextResponse.redirect(
-        new URL(`/command-center/install`, request.url),
+        new URL(`/command-center${INSTALL_PAGE}`, request.url),
       );
     }
 
