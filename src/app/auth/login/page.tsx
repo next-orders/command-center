@@ -9,7 +9,7 @@ export default async function Page() {
     <div className="w-full h-screen mx-auto flex flex-row justify-center items-center">
       <div>
         <Image
-          src="/command-center/static/eggs.png"
+          src="/static/eggs.png"
           alt=""
           unoptimized
           width={64}

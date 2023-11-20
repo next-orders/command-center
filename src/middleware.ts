@@ -3,27 +3,26 @@ import { NextResponse } from "next/server";
 import { GetEmployeeAccessPayload, GetShop } from "@/server/actions";
 import { GetApiVersion } from "@/client/api";
 
-const LOGIN_PAGE = "/auth/login";
-const INSTALL_PAGE = "/install";
-const ERROR_PAGE = "/error";
+const PAGES = {
+  LOGIN: "/auth/login",
+  DASHBOARD: "/dashboard",
+  INSTALL: "/install",
+  ERROR: "/error",
+};
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const response = NextResponse.next();
-  console.log(request.url);
 
   // Check API Version: is it healthy?
   const apiVersion = await GetApiVersion();
   if (!apiVersion?.ok || !apiVersion?.version) {
     // Api is not good...
-    const isOnErrorPage = request.nextUrl.pathname.startsWith(ERROR_PAGE);
+    const isOnErrorPage = request.nextUrl.pathname.startsWith(PAGES.ERROR);
 
     if (!isOnErrorPage) {
       const errorMessage = "Main API is not responding";
       return NextResponse.redirect(
-        new URL(
-          `/command-center${ERROR_PAGE}?message=${errorMessage}`,
-          request.url,
-        ),
+        new URL(`${PAGES.ERROR}?message=${errorMessage}`, request.url),
       );
     }
 
@@ -33,19 +32,16 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   // Check if shop is OK
   const shop = await GetShop();
   if (!shop) {
-    const isOnInstallPage = request.nextUrl.pathname.startsWith(INSTALL_PAGE);
-
+    const isOnInstallPage = request.nextUrl.pathname.startsWith(PAGES.INSTALL);
     if (!isOnInstallPage) {
-      return NextResponse.redirect(
-        new URL(`/command-center${INSTALL_PAGE}`, request.url),
-      );
+      return NextResponse.redirect(new URL(PAGES.INSTALL, request.url));
     }
 
     return response;
   }
 
   // Need to log in?
-  const isOnLoginPage = request.nextUrl.pathname.startsWith(LOGIN_PAGE);
+  const isOnLoginPage = request.nextUrl.pathname.startsWith(PAGES.LOGIN);
   let isLoggedIn = false;
 
   try {
@@ -56,14 +52,10 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   }
 
   if (isOnLoginPage && isLoggedIn) {
-    return NextResponse.redirect(
-      new URL(`/command-center/dashboard`, request.url),
-    );
+    return NextResponse.redirect(new URL(PAGES.DASHBOARD, request.url));
   }
   if (!isOnLoginPage && !isLoggedIn) {
-    return NextResponse.redirect(
-      new URL(`/command-center${LOGIN_PAGE}`, request.url),
-    );
+    return NextResponse.redirect(new URL(PAGES.LOGIN, request.url));
   }
 
   return response;

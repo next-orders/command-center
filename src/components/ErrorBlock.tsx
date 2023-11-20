@@ -9,7 +9,7 @@ export const ErrorBlock = ({ error }: ErrorBlockProps) => {
   return (
     <div className="my-12 text-center">
       <Image
-        src="/command-center/static/hot-drink.png"
+        src="/static/hot-drink.png"
         alt=""
         width={128}
         height={128}

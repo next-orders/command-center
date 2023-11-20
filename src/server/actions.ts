@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect, RedirectType } from "next/navigation";
+import { redirect } from "next/navigation";
 import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
 import { MenuItem } from "@/types";
 import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
@@ -46,7 +46,7 @@ export const SignInForm = async (prevState: any, formData: FormData) => {
 
 export const SignOut = () => {
   cookies().delete(COOKIES_ACCESS_TOKEN_KEY);
-  redirect("/auth/login", RedirectType.replace);
+  redirect("/auth/login");
 };
 
 export const GetDemoSignInData = async () => {

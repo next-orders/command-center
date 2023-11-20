@@ -17,5 +17,3 @@ Clone this repo and use standard commands:
 npm i
 npm run dev
 ```
-
-One moment: project has basePath "/command-center". All URLs will start with it. 

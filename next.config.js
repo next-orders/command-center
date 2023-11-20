@@ -13,7 +13,6 @@ const nextConfig = {
       },
     ],
   },
-  basePath: "/command-center",
   output: "standalone",
 };
 

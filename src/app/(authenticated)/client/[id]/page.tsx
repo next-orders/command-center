@@ -29,7 +29,7 @@ export default async function Page({ params }: PageProps) {
 
       <div className="mt-24 text-center max-w-xl mx-auto">
         <Image
-          src="/command-center/static/eggs.png"
+          src="/static/eggs.png"
           alt=""
           unoptimized
           width={64}
@@ -49,7 +49,7 @@ export default async function Page({ params }: PageProps) {
 
       <div className="mt-24 text-center max-w-xl mx-auto">
         <Image
-          src="/command-center/static/recipe-book.png"
+          src="/static/recipe-book.png"
           alt=""
           unoptimized
           width={64}
