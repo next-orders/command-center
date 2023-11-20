@@ -25,8 +25,6 @@
   },
   "homepage": "https://github.com/next-orders/command-center#readme",
   "dependencies": {
-    "@mantine/core": "7.2.2",
-    "@mantine/hooks": "7.2.2",
     "@next-orders/api-sdk": "^0.2.6",
     "@tabler/icons-react": "2.40.0",
     "next": "14.0.3",
@@ -44,8 +42,6 @@
     "eslint-config-next": "14.0.3",
     "eslint-config-prettier": "9.0.0",
     "postcss": "8.4.31",
-    "postcss-preset-mantine": "1.11.0",
-    "postcss-simple-vars": "7.0.1",
     "prettier": "^3.1.0",
     "sass": "^1.69.5",
     "tailwindcss": "3.3.5",

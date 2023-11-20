@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { Popover } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 
 type HoverDropdownProps = {
   dropdown: React.ReactNode;
@@ -10,26 +8,14 @@ type HoverDropdownProps = {
 };
 
 export const HoverDropdown = ({ dropdown, children }: HoverDropdownProps) => {
-  const [opened, { close, open }] = useDisclosure(false);
-
   return (
-    <Popover
-      width={280}
-      trapFocus
-      position="bottom"
-      withArrow={false}
-      shadow="md"
-      radius="lg"
-      opened={opened}
-    >
-      <Popover.Target>
-        <div onMouseEnter={open} onMouseLeave={close}>
-          {children}
+    <div className="relative block group/drop overflow-visible">
+      <div>{children}</div>
+      <div className="z-10 fixed left-4 top-20 lg:absolute lg:top-auto lg:left-0 lg:right-0 mt-4 origin-bottom-left invisible group-hover/drop:visible group-focus/drop:visible group-active/drop:visible group-focus-within/drop:visible group-focus-visible/drop:visible">
+        <div className="mx-auto w-72 bg-white px-4 py-4 rounded-2xl shadow-md duration-200 font-medium leading-normal">
+          {dropdown}
         </div>
-      </Popover.Target>
-      <Popover.Dropdown className="font-medium leading-normal">
-        {dropdown}
-      </Popover.Dropdown>
-    </Popover>
+      </div>
+    </div>
   );
 };

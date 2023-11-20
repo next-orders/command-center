@@ -8,7 +8,6 @@ This part of product is for first frontend: https://github.com/next-orders/v1
 - React
 - Next.js
 - TailwindCSS
-- Mantine components
 
 ## How to develop
 

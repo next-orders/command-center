@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { Avatar, Input } from "@mantine/core";
 import { IconMenu2, IconSearch, IconX } from "@tabler/icons-react";
 import { SignOut } from "@/server/actions";
 import { useUIStore } from "@/store/ui";
@@ -36,7 +36,7 @@ export const Header = () => {
       <div className="mr-auto">
         <div className="flex flex-row gap-2 items-center">
           <IconSearch stroke={1.5} />
-          <Input placeholder="Find anything" />
+          <input type="text" placeholder="Find anything" />
         </div>
       </div>
 
@@ -47,10 +47,14 @@ export const Header = () => {
         >
           Open website
         </Link>
-        <Avatar
+        <Image
           src={userAvatar}
+          width={40}
+          height={40}
+          alt=""
+          unoptimized
           onClick={() => SignOut()}
-          className="w-12 h-12 cursor-pointer hover:scale-95 duration-200"
+          className="w-12 h-12 rounded-full cursor-pointer hover:scale-95 duration-200"
         />
       </div>
     </div>

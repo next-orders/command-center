@@ -48,11 +48,11 @@ export default async function ClientAvatarBlock({
         <div className="absolute top-6 left-0 right-0">
           <HoverDropdown
             dropdown={
-              <div>
+              <>
                 This is the level of <b>Client Loyalty</b>. For each action he
                 receives an increase. Every day the level decreases
                 automatically – &quot;passive cooling&quot;.
-              </div>
+              </>
             }
           >
             <LoyaltyProgress percent={clientLoyaltyPercent} />
@@ -61,10 +61,10 @@ export default async function ClientAvatarBlock({
         <div className="absolute top-1 right-1 md:group-hover:scale-105 duration-300">
           <HoverDropdown
             dropdown={
-              <div>
+              <>
                 This is the <b>Client Level</b>. It takes into account all
                 actions for all time.
-              </div>
+              </>
             }
           >
             <div className="md:hover:scale-125 duration-200">
