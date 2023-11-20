@@ -8,6 +8,8 @@ const INSTALL_PAGE = "/install";
 const ERROR_PAGE = "/error";
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
+  const response = NextResponse.next();
+
   // Check API Version: is it healthy?
   const apiVersion = await GetApiVersion();
   if (!apiVersion?.ok || !apiVersion?.version) {
@@ -21,7 +23,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    return NextResponse.next();
+    return response;
   }
 
   // Check if shop is OK
@@ -35,7 +37,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    return NextResponse.next();
+    return response;
   }
 
   // Need to log in?
@@ -60,7 +62,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
