@@ -1,12 +1,11 @@
 import Image from "next/image";
 import { HoverDropdown } from "@/components/HoverDropdown";
 import { LevelBadge } from "@/components/LevelBadge";
-import { GetAvatarURL } from "@/server/actions";
 import { notFound } from "next/navigation";
 import { getColorByClientLevel } from "@/lib/helpers";
 import { TraitsBlock } from "@/components/TraitsBlock";
 import { LoyaltyProgress } from "@/components/LoyaltyProgress";
-import { GetClientById } from "@/client/api";
+import { GetAvatarURL, GetClientById } from "@/client/api";
 import { ErrorBlock } from "@/components/ErrorBlock";
 
 type ClientAvatarBlockProps = {

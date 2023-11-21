@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { LoginForm } from "@/components/LoginForm";
-import { GetDemoSignInData } from "@/server/actions";
+import { GetDemoSignInData } from "@/client/api";
 
 export default async function Page() {
   const demoData = await GetDemoSignInData();

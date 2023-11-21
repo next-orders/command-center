@@ -1,6 +1,6 @@
-import { GetChannels } from "@/server/actions";
 import { TableWithData } from "@/components/TableWithData";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { GetChannels } from "@/client/api";
 
 export default async function Page() {
   const channels = await GetChannels();

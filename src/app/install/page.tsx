@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { GetShop } from "@/server/actions";
+import { GetShop } from "@/client/api";
 import InstallPage from "@/app/install/client";
 
 export default async function Page() {

@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { GetProductById } from "@/server/actions";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TextInput } from "@/components/TextInput";
 import { ProductVariant } from "@next-orders/api-sdk";
+import { GetProductById } from "@/client/api";
 
 type PageProps = {
   params: { id: string };

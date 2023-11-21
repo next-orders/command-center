@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LevelBadge } from "@/components/LevelBadge";
 import { Client } from "@next-orders/api-sdk";
 import { getColorByClientLevel } from "@/lib/helpers";
-import { GetAvatarURL } from "@/server/actions";
+import { GetAvatarURL } from "@/client/api";
 
 type ClientCardProps = {
   client: Client;

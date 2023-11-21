@@ -1,6 +1,6 @@
-import { GetAllDomains } from "@/server/actions";
 import { TableWithData } from "@/components/TableWithData";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { GetAllDomains } from "@/client/api";
 
 export default async function Page() {
   const domains = await GetAllDomains();

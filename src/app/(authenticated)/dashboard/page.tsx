@@ -1,4 +1,5 @@
-import { GetEmployeeAccessPayload, GetShop } from "@/server/actions";
+import { GetEmployeeAccessPayload } from "@/server/actions";
+import { GetShop } from "@/client/api";
 
 export default async function Page() {
   const me = await GetEmployeeAccessPayload();

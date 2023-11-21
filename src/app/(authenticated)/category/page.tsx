@@ -1,6 +1,6 @@
-import { GetCategories } from "@/server/actions";
 import { TableWithData } from "@/components/TableWithData";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { GetCategories } from "@/client/api";
 
 export default async function Page() {
   const categories = await GetCategories();

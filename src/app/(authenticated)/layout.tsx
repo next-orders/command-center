@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Shell } from "@/components/Shell";
-import { GetNavigationMenu } from "@/server/actions";
+import { GetNavigationMenu } from "@/client/api";
 
 export const metadata: Metadata = {
   title: "Command Center",

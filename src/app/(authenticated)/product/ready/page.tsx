@@ -1,6 +1,6 @@
-import { GetProducts } from "@/server/actions";
 import { ProductProductionCard } from "@/components/ProductProductionCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { GetProducts } from "@/client/api";
 
 export default async function Page() {
   const products = await GetProducts();
