@@ -22,6 +22,7 @@ export const getBrowserLocale = (
 
   const browserLanguage = acceptLanguage.toLowerCase().split(",", 2);
   if (!browserLanguage[0]) {
+    console.warn(`Not found lang in headers: ${browserLanguage}`);
     return "EN";
   }
 
@@ -33,6 +34,9 @@ export const getBrowserLocale = (
     case "en-us":
       return "EN";
     default:
+      console.warn(
+        `Not found available lang: ${browserLanguage}. Returning default EN.`,
+      );
       return "EN";
   }
 };

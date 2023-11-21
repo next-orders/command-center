@@ -2,6 +2,8 @@ import { Dictionary } from "@/dictionaries/en";
 
 export const RU: Dictionary = {
   RETURN_BUTTON: "Вернуться",
+  SIGN_IN_BUTTON: "Войти",
+  DEMO_EMPLOYEE_BUTTON: "Демо-сотрудник",
   COMMAND_CENTER_LABEL: "Командный центр",
   DASHBOARD_LABEL: "Панель управления",
   CLIENT_BASE_LABEL: "База клиентов",
@@ -15,5 +17,10 @@ export const RU: Dictionary = {
   PRODUCTION_PAGE_LABEL: "Страница производства",
   READY_PAGE_LABEL: "Страница готовых товаров",
   IT_IS_LABEL: "Это",
+  SIGNIN_PAGE_WELCOME_LABEL: "Мы вас заждались!",
+  EMAIL_LABEL: "Email",
+  EMAIL_PLACEHOLDER: "Ваш электронный адрес",
+  PASSWORD_LABEL: "Пароль",
+  PASSWORD_PLACEHOLDER: "Ваш пароль",
   SEARCH_PLACEHOLDER: "Найти что-нибудь",
 };
