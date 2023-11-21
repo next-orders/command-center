@@ -1,6 +1,10 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
-import { COOKIES_ACCESS_TOKEN_KEY, COOKIES_LOCALE_KEY } from "@/lib/helpers";
+import {
+  COOKIES_ACCESS_TOKEN_KEY,
+  COOKIES_LOCALE_KEY,
+  getBrowserLocale,
+} from "@/lib/helpers";
 import { MenuItem } from "@/types";
 import { Locale } from "@/dictionaries";
 
@@ -21,8 +25,16 @@ const apiWithAccess = () => {
   return new MainAPI(API_URL, accessToken);
 };
 
-export const GetLocale = () => {
-  return (cookies().get(COOKIES_LOCALE_KEY)?.value as Locale) || "EN";
+export const GetLocale = (): Locale => {
+  const language = headers().get("Accept-Language");
+  const browserLocale = getBrowserLocale(language);
+
+  const locale = cookies().get(COOKIES_LOCALE_KEY)?.value;
+  if (!locale) {
+    return browserLocale;
+  }
+
+  return locale as Locale;
 };
 
 export const GetApiVersion = async () => {
