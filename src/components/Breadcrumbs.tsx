@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { BackBlock } from "@/components/BackBlock";
 import { getDictionary, Locale } from "@/dictionaries";
