@@ -123,20 +123,6 @@ export const GetProductById = async (id: string) => {
   return product;
 };
 
-export const GetCategories = async () => {
-  const categories = await apiWithPublicAccess.getCategories({
-    next: {
-      ...nextConfig,
-      tags: ["all", "categories"],
-    },
-  });
-  if (!categories || categories instanceof Error) {
-    return null;
-  }
-
-  return categories;
-};
-
 export const GetAvatarURL = (
   avatarId: string,
   size: number,

@@ -25,13 +25,13 @@
   },
   "homepage": "https://github.com/next-orders/command-center#readme",
   "dependencies": {
-    "@next-orders/api-sdk": "^0.2.6",
+    "@next-orders/api-sdk": "^0.2.8",
     "@tabler/icons-react": "2.41.0",
     "next": "14.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sharp": "0.32.6",
-    "zustand": "^4.4.6"
+    "zustand": "4.4.6"
   },
   "devDependencies": {
     "@types/node": "^20.9.3",
