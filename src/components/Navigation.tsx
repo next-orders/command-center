@@ -5,13 +5,17 @@ import { MenuItem } from "@/types";
 import { TablerIcon } from "@/components/TablerIcon";
 import { useUIStore } from "@/store/ui";
 import { LinkButton } from "@/components/LinkButton";
+import { getDictionary, Locale } from "@/dictionaries";
 
 type Props = {
   menu: MenuItem[];
+  locale: Locale;
 };
 
-export const Navigation = ({ menu }: Props) => {
+export const Navigation = ({ menu, locale }: Props) => {
   const isNavbarOpened = useUIStore((state) => state.isNavbarOpened);
+
+  const { COMMAND_CENTER_LABEL } = getDictionary(locale);
 
   const menuBlock = menu?.map((item) => (
     <LinkButton
@@ -31,7 +35,9 @@ export const Navigation = ({ menu }: Props) => {
         <div className="h-screen overflow-y-auto">
           <div className="mb-32">
             <div className="flex flex-row items-center py-2">
-              <div className="font-semibold text-xl">Command Center</div>
+              <div className="font-semibold text-xl">
+                {COMMAND_CENTER_LABEL}
+              </div>
             </div>
 
             {menuBlock}

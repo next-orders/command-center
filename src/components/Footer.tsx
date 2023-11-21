@@ -1,10 +1,29 @@
+"use client";
+
 import Link from "next/link";
 import { IconBrandGithubFilled, IconHearts } from "@tabler/icons-react";
+import { Locale } from "@/dictionaries";
+import { SetLocale } from "@/server/actions";
 
-export const Footer = () => {
+export const Footer = ({ locale }: { locale: Locale }) => {
   return (
     <div className="px-4 lg:px-12 pb-10 mt-20 text-center">
+      <LanguageBlock locale={locale} />
       {!process.env.NEXT_PUBLIC_DISABLE_COPYRIGHT && <CopyrightBlock />}
+    </div>
+  );
+};
+
+const LanguageBlock = ({ locale }: { locale: Locale }) => {
+  return (
+    <div className="mb-4">
+      <select
+        defaultValue={locale}
+        onChange={(event) => SetLocale(event.currentTarget.value as Locale)}
+      >
+        <option value="EN">🇺🇸 English</option>
+        <option value="RU">🇷🇺 Русский</option>
+      </select>
     </div>
   );
 };

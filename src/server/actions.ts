@@ -3,7 +3,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { MainAPI } from "@next-orders/api-sdk";
-import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
+import { COOKIES_ACCESS_TOKEN_KEY, COOKIES_LOCALE_KEY } from "@/lib/helpers";
+import { Locale } from "@/dictionaries";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
 
@@ -12,6 +13,10 @@ const api = new MainAPI(API_URL, ""); // Public access only
 const apiWithAccess = () => {
   const accessToken = cookies().get(COOKIES_ACCESS_TOKEN_KEY)?.value || "";
   return new MainAPI(API_URL, accessToken);
+};
+
+export const SetLocale = (locale: Locale) => {
+  cookies().set(COOKIES_LOCALE_KEY, locale);
 };
 
 export const SignInForm = async (prevState: any, formData: FormData) => {

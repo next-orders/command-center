@@ -1,9 +1,12 @@
 import { ProductProductionCard } from "@/components/ProductProductionCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GetProducts } from "@/client/api";
+import { GetLocale, GetProducts } from "@/client/api";
+import { BreadcrumbLinks } from "@/types";
+import { PAGES } from "@/lib/pages";
 
 export default async function Page() {
   const products = await GetProducts();
+  const locale = GetLocale();
 
   const cards = products
     ?.filter((product) => product.type === "READY")
@@ -11,15 +14,14 @@ export default async function Page() {
       <ProductProductionCard key={product.id} product={product} />
     ));
 
-  const breadcrumbs = [
-    { title: "Dashboard", href: "/dashboard" },
-    { title: "Products", href: `/product` },
-    { title: "Ready", href: "#" },
+  const breadcrumbs: BreadcrumbLinks[] = [
+    { page: PAGES.PRODUCTS, href: `/product` },
+    { page: PAGES.READY_PAGE, href: "#" },
   ];
 
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} />
+      <Breadcrumbs links={breadcrumbs} locale={locale} />
 
       <h1 className="mb-2 text-3xl font-semibold">Ready Products</h1>
       <div className="mb-8">All loaded items</div>

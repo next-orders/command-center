@@ -7,13 +7,16 @@ import { TraitsBlock } from "@/components/TraitsBlock";
 import { LoyaltyProgress } from "@/components/LoyaltyProgress";
 import { GetAvatarURL, GetClientById } from "@/client/api";
 import { ErrorBlock } from "@/components/ErrorBlock";
+import { getDictionary, Locale } from "@/dictionaries";
 
 type ClientAvatarBlockProps = {
   id: string;
+  locale: Locale;
 };
 
 export default async function ClientAvatarBlock({
   id,
+  locale,
 }: ClientAvatarBlockProps) {
   const client = await GetClientById(id);
 
@@ -32,6 +35,8 @@ export default async function ClientAvatarBlock({
     clothing: avatarClothingColor,
   });
   const clientLoyaltyPercent = client.loyalty;
+
+  const { IT_IS_LABEL } = getDictionary(locale);
 
   return (
     <div className="mb-4 mx-auto max-w-xs group">
@@ -73,7 +78,7 @@ export default async function ClientAvatarBlock({
         </div>
 
         <div className="mt-3 text-lg font-medium leading-tight text-center">
-          It&apos;s {client.firstName} {client.lastName}
+          {IT_IS_LABEL} {client.firstName} {client.lastName}
         </div>
       </div>
 

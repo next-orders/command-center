@@ -4,27 +4,31 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
 import ClientAvatarBlock from "@/app/(authenticated)/client/[id]/ClientAvatarBlock";
 import { ClientAvatarBlockSkeleton } from "@/app/(authenticated)/client/[id]/ClientAvatarBlockSkeleton";
+import { PAGES } from "@/lib/pages";
+import { BreadcrumbLinks } from "@/types";
+import { GetLocale } from "@/client/api";
 
 type PageProps = {
   params: { id: string };
 };
 
 export default async function Page({ params }: PageProps) {
-  const breadcrumbs = [
-    { title: "Dashboard", href: "/dashboard" },
-    { title: "Client base", href: `/client` },
-    { title: "Client page", href: "#" },
+  const locale = GetLocale();
+
+  const breadcrumbs: BreadcrumbLinks[] = [
+    { page: PAGES.CLIENT_BASE, href: `/client` },
+    { page: PAGES.CLIENT_PAGE, href: "#" },
   ];
 
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} />
+      <Breadcrumbs links={breadcrumbs} locale={locale} />
 
       <h1 className="mb-2 text-3xl font-semibold">Client page</h1>
       <div className="mb-8">Get all data about this client</div>
 
       <Suspense fallback={<ClientAvatarBlockSkeleton />}>
-        <ClientAvatarBlock id={params.id} />
+        <ClientAvatarBlock id={params.id} locale={locale} />
       </Suspense>
 
       <div className="mt-24 text-center max-w-xl mx-auto">

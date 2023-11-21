@@ -1,9 +1,12 @@
 import { TableWithData } from "@/components/TableWithData";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GetAllDomains } from "@/client/api";
+import { GetAllDomains, GetLocale } from "@/client/api";
+import { BreadcrumbLinks } from "@/types";
+import { PAGES } from "@/lib/pages";
 
 export default async function Page() {
   const domains = await GetAllDomains();
+  const locale = GetLocale();
 
   const tableColumns = [
     { key: "id", label: "Id" },
@@ -15,14 +18,11 @@ export default async function Page() {
       host: el.host,
     })) || [];
 
-  const breadcrumbs = [
-    { title: "Dashboard", href: "/dashboard" },
-    { title: "Domains", href: "#" },
-  ];
+  const breadcrumbs: BreadcrumbLinks[] = [{ page: PAGES.DOMAINS, href: "#" }];
 
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} />
+      <Breadcrumbs links={breadcrumbs} locale={locale} />
       <h1 className="mb-2 text-3xl font-semibold">Domains</h1>
       <div>You can see the loaded data</div>
 

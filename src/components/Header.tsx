@@ -1,14 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { IconMenu2, IconSearch, IconX } from "@tabler/icons-react";
 import { SignOut } from "@/server/actions";
 import { useUIStore } from "@/store/ui";
+import { getDictionary, Locale } from "@/dictionaries";
 
-export const Header = () => {
+export const Header = ({ locale }: { locale: Locale }) => {
   const isNavbarOpened = useUIStore((state) => state.isNavbarOpened);
   const toggleNavbar = useUIStore((state) => state.toggleNavbar);
+
+  const { SEARCH_PLACEHOLDER } = getDictionary(locale);
 
   const userAvatar = `https://v1.next-orders.org/api/avatar/32d735e8-977d-4a19-ab8a-35c955c97a19?gender=male&emotion=7&size=140`;
 
@@ -36,17 +38,11 @@ export const Header = () => {
       <div className="mr-auto">
         <div className="flex flex-row gap-2 items-center">
           <IconSearch stroke={1.5} />
-          <input type="text" placeholder="Find anything" />
+          <input type="text" placeholder={SEARCH_PLACEHOLDER} />
         </div>
       </div>
 
       <div className="flex flex-row gap-4 items-center">
-        <Link
-          href={"https://v1.next-orders.org"}
-          className="px-4 py-2 font-medium rounded-xl bg-zinc-100 hover:bg-zinc-200 hover:scale-95 duration-200 hidden sm:block"
-        >
-          Open website
-        </Link>
         <Image
           src={userAvatar}
           width={40}

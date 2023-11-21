@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Page } from "@/lib/pages";
 
 export type MenuItem = {
   id: string;
@@ -26,4 +27,9 @@ export type MenuAction = {
   label: string;
   url?: string;
   icon: ReactNode;
+};
+
+export type BreadcrumbLinks = {
+  page: Page;
+  href: string;
 };

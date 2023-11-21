@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
 import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
-import { COOKIES_ACCESS_TOKEN_KEY } from "@/lib/helpers";
+import { COOKIES_ACCESS_TOKEN_KEY, COOKIES_LOCALE_KEY } from "@/lib/helpers";
 import { MenuItem } from "@/types";
+import { Locale } from "@/dictionaries";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
 
@@ -20,10 +21,14 @@ const apiWithAccess = () => {
   return new MainAPI(API_URL, accessToken);
 };
 
+export const GetLocale = () => {
+  return (cookies().get(COOKIES_LOCALE_KEY)?.value as Locale) || "EN";
+};
+
 export const GetApiVersion = async () => {
   const apiData = await apiWithPublicAccess.getApiVersion({
     next: {
-      ...nextConfig,
+      revalidate: 60,
       tags: ["all", "api"],
     },
   });
@@ -37,7 +42,7 @@ export const GetApiVersion = async () => {
 export const GetShop = async () => {
   const shop = await apiWithPublicAccess.getShop({
     next: {
-      ...nextConfig,
+      revalidate: 60,
       tags: ["all", "shop"],
     },
   });

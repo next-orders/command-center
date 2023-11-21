@@ -2,16 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconCheese, IconChefHat, IconPaperBag } from "@tabler/icons-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { BreadcrumbLinks } from "@/types";
+import { PAGES } from "@/lib/pages";
+import { GetLocale } from "@/client/api";
 
 export default async function Page() {
-  const breadcrumbs = [
-    { title: "Dashboard", href: "/dashboard" },
-    { title: "Products", href: "#" },
-  ];
+  const locale = GetLocale();
+
+  const breadcrumbs: BreadcrumbLinks[] = [{ page: PAGES.PRODUCTS, href: "#" }];
 
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} />
+      <Breadcrumbs links={breadcrumbs} locale={locale} />
 
       <h1 className="mb-2 text-3xl font-semibold">Products</h1>
       <div className="mb-8">Can be a Production, Ready or Ingredient</div>

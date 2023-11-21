@@ -1,17 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { BackBlock } from "@/components/BackBlock";
-
-type Links = {
-  title: string;
-  href: string;
-};
+import { getDictionary, Locale } from "@/dictionaries";
+import { BreadcrumbLinks } from "@/types";
 
 type Props = {
-  links: Links[];
+  links: BreadcrumbLinks[];
+  locale: Locale;
 };
 
-export const Breadcrumbs = ({ links }: Props) => {
-  const crumbs = links.map((link, index) => (
+export const Breadcrumbs = ({ links, locale }: Props) => {
+  const preparedLinks = prepareLinks(links, locale);
+
+  const crumbs = preparedLinks.map((link, index) => (
     <li
       key={index}
       className="relative after:content-['/'] after:px-1 after:text-lg after:text-zinc-300 last:after:content-['']"
@@ -34,7 +36,22 @@ export const Breadcrumbs = ({ links }: Props) => {
         </ol>
       </nav>
 
-      <BackBlock />
+      <BackBlock locale={locale} />
     </div>
   );
+};
+
+const prepareLinks = (links: BreadcrumbLinks[], locale: Locale) => {
+  const dictionary = getDictionary(locale);
+
+  const prepared = [{ title: dictionary.DASHBOARD_LABEL, href: "/dashboard" }];
+
+  for (const link of links) {
+    prepared.push({
+      title: dictionary[link.page.dictionary],
+      href: link.href,
+    });
+  }
+
+  return prepared;
 };

@@ -1,10 +1,11 @@
-import React from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TextInput } from "@/components/TextInput";
 import { ProductVariant } from "@next-orders/api-sdk";
-import { GetProductById } from "@/client/api";
+import { GetLocale, GetProductById } from "@/client/api";
+import { BreadcrumbLinks } from "@/types";
+import { PAGES } from "@/lib/pages";
 
 type PageProps = {
   params: { id: string };
@@ -16,10 +17,11 @@ export default async function Page({ params }: PageProps) {
     notFound();
   }
 
-  const breadcrumbs = [
-    { title: "Dashboard", href: "/dashboard" },
-    { title: "Products", href: `/product` },
-    { title: product.name, href: "#" },
+  const locale = GetLocale();
+
+  const breadcrumbs: BreadcrumbLinks[] = [
+    { page: PAGES.PRODUCTS, href: `/product` },
+    { page: PAGES.PRODUCT_PAGE, href: "#" },
   ];
 
   const variants = product.variants?.map((variant) => (
@@ -28,7 +30,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} />
+      <Breadcrumbs links={breadcrumbs} locale={locale} />
 
       <h1 className="mb-2 text-3xl font-semibold">Product page</h1>
       <div className="mb-8">Here you can edit product data</div>

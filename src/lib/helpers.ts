@@ -1,4 +1,5 @@
 export const COOKIES_ACCESS_TOKEN_KEY = "next-orders.access-token";
+export const COOKIES_LOCALE_KEY = "next-orders.locale";
 
 export const getColorByClientLevel = (level: number) => {
   if (level < 10) return "amber";
@@ -8,8 +9,4 @@ export const getColorByClientLevel = (level: number) => {
   if (level < 50) return "pink";
 
   return "violet";
-};
-
-export const fakeBusyServer = (ms = 5000) => {
-  return new Promise((resolve) => setTimeout(() => resolve("ok"), ms));
 };
