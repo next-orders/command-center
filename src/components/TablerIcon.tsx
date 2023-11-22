@@ -2,6 +2,7 @@ import {
   IconBuildingStore,
   IconCheese,
   IconDashboard,
+  IconNews,
   IconPhoto,
   IconPoint,
   IconUsers,
@@ -21,6 +22,7 @@ export const TablerIcon = ({ icon }: { icon: string | null }) => {
     return <IconWorldWww stroke={1.5} className="w-6 h-6" />;
   if (icon === "IconUsers")
     return <IconUsers stroke={1.5} className="w-6 h-6" />;
+  if (icon === "IconNews") return <IconNews stroke={1.5} className="w-6 h-6" />;
 
   return <IconPoint stroke={1.5} className="w-6 h-6" />;
 };

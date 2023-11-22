@@ -118,6 +118,48 @@ export const GetClientById = async (id: string) => {
   });
 };
 
+export const GetChannelById = async (channelId: string) => {
+  const channel = await apiWithPublicAccess.getChannel(channelId, {
+    next: {
+      ...nextConfig,
+      tags: ["all", `channel-${channelId}`],
+    },
+  });
+  if (!channel || channel instanceof Error) {
+    return null;
+  }
+
+  return channel;
+};
+
+export const GetMenuById = async (menuId: string) => {
+  const menu = await apiWithPublicAccess.getMenuById(menuId, {
+    next: {
+      ...nextConfig,
+      tags: ["all", `menu-${menuId}`],
+    },
+  });
+  if (!menu || menu instanceof Error) {
+    return null;
+  }
+
+  return menu;
+};
+
+export const GetMenusInChannel = async (channelId: string) => {
+  const menus = await apiWithPublicAccess.getAllMenusInChannel(channelId, {
+    next: {
+      ...nextConfig,
+      tags: ["all", `menus-${channelId}`],
+    },
+  });
+  if (!menus || menus instanceof Error) {
+    return null;
+  }
+
+  return menus;
+};
+
 export const GetProducts = async () => {
   const products = await apiWithPublicAccess.getProducts({
     next: { ...nextConfig, tags: ["all", `products`] },
@@ -169,30 +211,36 @@ export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
     },
     {
       id: "2",
-      label: "Media",
-      href: "/media",
-      icon: "IconPhoto",
-    },
-    {
-      id: "3",
-      label: "Domains",
-      href: "/domain",
-      icon: "IconWorldWww",
-    },
-    {
-      id: "4",
       label: "Channels",
       href: "/channel",
       icon: "IconBuildingStore",
     },
     {
+      id: "3",
+      label: "Menus",
+      href: "/menu",
+      icon: "IconNews",
+    },
+    {
+      id: "4",
+      label: "Media",
+      href: "/media",
+      icon: "IconPhoto",
+    },
+    {
       id: "5",
+      label: "Domains",
+      href: "/domain",
+      icon: "IconWorldWww",
+    },
+    {
+      id: "6",
       label: "Products",
       href: "/product",
       icon: "IconCheese",
     },
     {
-      id: "6",
+      id: "7",
       label: "Clients",
       href: "/client",
       icon: "IconUsers",

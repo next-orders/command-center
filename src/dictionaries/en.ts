@@ -13,6 +13,8 @@ export const EN = {
   CHANNEL_PAGE_LABEL: "Channel Page",
   DOMAINS_LABEL: "Domains",
   MEDIA_LABEL: "Media",
+  MENUS_LABEL: "Menus",
+  MENU_PAGE_LABEL: "Menu Page",
   PRODUCTS_LABEL: "Products",
   PRODUCT_PAGE_LABEL: "Product page",
   INGREDIENTS_PAGE_LABEL: "Ingredients page",

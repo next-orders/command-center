@@ -24,6 +24,8 @@ export const PAGES = {
     dictionary: "READY_PAGE_LABEL",
     label: "Ready page",
   },
+  MENUS: { dictionary: "MENUS_LABEL", label: "Menus" },
+  MENU_PAGE: { dictionary: "MENU_PAGE_LABEL", label: "Menu Page" },
 } as const;
 
 export type Page = {

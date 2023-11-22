@@ -12,6 +12,8 @@ export const RU: Dictionary = {
   CHANNEL_PAGE_LABEL: "Страница канала",
   DOMAINS_LABEL: "Домены",
   MEDIA_LABEL: "Медиа",
+  MENUS_LABEL: "Меню",
+  MENU_PAGE_LABEL: "Страница меню",
   PRODUCTS_LABEL: "Продукты",
   PRODUCT_PAGE_LABEL: "Страница продукта",
   INGREDIENTS_PAGE_LABEL: "Страница ингредиентов",
