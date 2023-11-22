@@ -1,40 +1,66 @@
-import { TableWithData } from "@/components/TableWithData";
+import { Suspense } from "react";
+import Image from "next/image";
+import { IconTextPlus } from "@tabler/icons-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GetChannels, GetLocale } from "@/client/api";
+import { GetLocale } from "@/client/api";
 import { BreadcrumbLinks } from "@/types";
 import { PAGES } from "@/lib/pages";
+import ChannelsBlock from "@/app/(authenticated)/channel/ChannelsBlock";
+import { ChannelsBlockSkeleton } from "@/app/(authenticated)/channel/ChannelsBlockSkeleton";
+import { ChannelCreateModal } from "@/app/(authenticated)/channel/ChannelCreateModal";
+import { Button } from "@/components/Button";
 
 export default async function Page() {
-  const channels = await GetChannels();
   const locale = GetLocale();
-
-  const tableColumns = [
-    { key: "id", label: "Id" },
-    { key: "name", label: "Name" },
-    { key: "currencyCode", label: "Currency" },
-    { key: "domainId", label: "Domain Id" },
-    { key: "isActive", label: "Active" },
-  ];
-  const tableData =
-    channels?.map((el) => ({
-      id: el.id,
-      name: el.name,
-      currencyCode: el.currencyCode,
-      domainId: el.domainId,
-      isActive: el.isActive ? "true" : "false",
-    })) || [];
 
   const breadcrumbs: BreadcrumbLinks[] = [{ page: PAGES.CHANNELS, href: "#" }];
 
   return (
     <>
       <Breadcrumbs links={breadcrumbs} locale={locale} />
-      <h1 className="mb-2 text-3xl font-semibold">Channels</h1>
-      <div>You can see the loaded data</div>
 
-      <div className="mt-4">
-        <TableWithData data={{ columns: tableColumns, data: tableData }} />
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
+        <div>
+          <h1 className="mb-2 text-3xl font-semibold">Channels</h1>
+          <div>You can see the loaded data</div>
+        </div>
+
+        <div>
+          <Button>
+            <IconTextPlus stroke={1.5} /> Add new
+          </Button>
+        </div>
       </div>
+
+      <Suspense fallback={<ChannelsBlockSkeleton />}>
+        <ChannelsBlock />
+      </Suspense>
+
+      <ChannelInfoBlock />
+      <ChannelCreateModal />
     </>
   );
 }
+
+const ChannelInfoBlock = () => {
+  return (
+    <div className="mt-24 text-center max-w-xl mx-auto">
+      <Image
+        src="/static/eggs.png"
+        alt=""
+        unoptimized
+        width={64}
+        height={64}
+        className="mx-auto mb-4"
+      />
+      <h2 className="mb-4 text-lg font-semibold">
+        Sales channels are one of the main business entities
+      </h2>
+      <p className="text-left">
+        Website, Telegram channel, social network group, point on the map with
+        contacts - all these are your online sales channels. It is through them
+        that people learn about your cuisine and become customers.
+      </p>
+    </div>
+  );
+};

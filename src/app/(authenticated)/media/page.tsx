@@ -6,6 +6,7 @@ import { MediaBlockSkeleton } from "./MediaBlockSkeleton";
 import { BreadcrumbLinks } from "@/types";
 import { PAGES } from "@/lib/pages";
 import { GetLocale } from "@/client/api";
+import { Button } from "@/components/Button";
 
 export default async function Page() {
   const locale = GetLocale();
@@ -20,8 +21,11 @@ export default async function Page() {
           <h1 className="mb-2 text-3xl font-semibold">Media</h1>
           <div>You can see the loaded files</div>
         </div>
-        <div className="px-4 py-4 flex flex-row gap-2 font-normal bg-zinc-100 rounded-2xl cursor-pointer hover:scale-95 duration-200">
-          <IconPhotoPlus stroke={1.5} /> Load new file
+
+        <div>
+          <Button>
+            <IconPhotoPlus stroke={1.5} /> Load new file
+          </Button>
         </div>
       </div>
 

@@ -4,6 +4,7 @@ import { LevelBadge } from "@/components/LevelBadge";
 import { Client } from "@next-orders/api-sdk";
 import { getColorByClientLevel } from "@/lib/helpers";
 import { GetAvatarURL } from "@/client/api";
+import { getDictionary, Locale } from "@/dictionaries";
 
 type ClientCardProps = {
   client: Client;
@@ -42,12 +43,14 @@ export const ClientCard = ({ client }: ClientCardProps) => {
   );
 };
 
-export const ClientCardSkeleton = () => {
+export const ClientCardSkeleton = ({ locale }: { locale: Locale }) => {
+  const { LOADING_LABEL } = getDictionary(locale);
+
   return (
     <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 animate-pulse">
       <div className="w-full aspect-square rounded-xl bg-zinc-200" />
       <div className="mt-2 text-base font-medium leading-tight text-center text-zinc-400">
-        Loading
+        {LOADING_LABEL}
       </div>
     </div>
   );

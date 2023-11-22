@@ -27,10 +27,18 @@ export default async function Page({ params }: PageProps) {
       <h1 className="mb-2 text-3xl font-semibold">Client page</h1>
       <div className="mb-8">Get all data about this client</div>
 
-      <Suspense fallback={<ClientAvatarBlockSkeleton />}>
+      <Suspense fallback={<ClientAvatarBlockSkeleton locale={locale} />}>
         <ClientAvatarBlock id={params.id} locale={locale} />
       </Suspense>
 
+      <ClientInfoBlock />
+    </>
+  );
+}
+
+const ClientInfoBlock = () => {
+  return (
+    <>
       <div className="mt-24 text-center max-w-xl mx-auto">
         <Image
           src="/static/eggs.png"
@@ -106,4 +114,4 @@ export default async function Page({ params }: PageProps) {
       </div>
     </>
   );
-}
+};

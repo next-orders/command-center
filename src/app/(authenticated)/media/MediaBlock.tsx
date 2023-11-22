@@ -1,6 +1,7 @@
 import { GetAllMedia } from "@/client/api";
 import { MediaCard } from "@/components/MediaCard";
 import { ErrorBlock } from "@/components/ErrorBlock";
+import Image from "next/image";
 
 export default async function MediaBlock() {
   const media = await GetAllMedia();
@@ -9,8 +10,10 @@ export default async function MediaBlock() {
     return <ErrorBlock error={media} />;
   }
 
-  if (!media) {
-    return <div>You have no Media</div>;
+  const haveNoEntities = !media?.length;
+
+  if (haveNoEntities) {
+    return <MediaEmptyStateBlock />;
   }
 
   return (
@@ -19,3 +22,20 @@ export default async function MediaBlock() {
     </div>
   );
 }
+
+const MediaEmptyStateBlock = () => {
+  return (
+    <div className="mt-10 text-center max-w-xl mx-auto">
+      <Image
+        src="/static/green-notebook.png"
+        alt=""
+        unoptimized
+        width={64}
+        height={64}
+        className="mx-auto mb-6"
+      />
+      <h2 className="mb-1 text-lg font-semibold">You have no Media files</h2>
+      <p>Maybe it&apos;s time to add one?</p>
+    </div>
+  );
+};

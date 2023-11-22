@@ -2,9 +2,10 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { MainAPI } from "@next-orders/api-sdk";
+import { CurrencyCode, LanguageCode, MainAPI } from "@next-orders/api-sdk";
 import { COOKIES_ACCESS_TOKEN_KEY, COOKIES_LOCALE_KEY } from "@/lib/helpers";
 import { Locale } from "@/dictionaries";
+import { revalidateTag } from "next/cache";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
 
@@ -73,4 +74,26 @@ export const CreateShopForm = async (prevState: any, formData: FormData) => {
   }
 
   redirect("/dashboard");
+};
+
+export const CreateChannelForm = async (prevState: any, formData: FormData) => {
+  const slug = (formData.get("slug") as string) || "";
+  const name = (formData.get("name") as string) || "";
+  const description = (formData.get("description") as string) || "";
+  const currencyCode = (formData.get("currencyCode") as CurrencyCode) || "";
+  const languageCode = (formData.get("languageCode") as LanguageCode) || "";
+
+  const create = await apiWithAccess().createChannel(
+    { slug, name, description, currencyCode, languageCode },
+    { next: { revalidate: 0 } },
+  );
+  if (create instanceof Error) {
+    return {
+      message: `Error. ${create.message}`,
+    };
+  }
+
+  revalidateTag("channels");
+
+  return { message: "OK" };
 };

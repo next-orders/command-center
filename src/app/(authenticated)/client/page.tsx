@@ -20,7 +20,7 @@ export default async function Page() {
       <h1 className="mb-2 text-3xl font-semibold">Client base</h1>
       <div className="mb-8">Wait, what? They are like bosses in game?</div>
 
-      <Suspense fallback={<ClientsBlockSkeleton />}>
+      <Suspense fallback={<ClientsBlockSkeleton locale={locale} />}>
         <ClientsBlock />
       </Suspense>
     </>
