@@ -1,28 +1,28 @@
 "use client";
 
 import { IconTextPlus } from "@tabler/icons-react";
-import { useModalStore } from "@/store/modal";
 import { Button } from "@/components/Button";
 import { getDictionary, Locale } from "@/dictionaries";
 import { CreateBlock } from "@/components/CreateBlock";
+import { useModalStore } from "@/store/modal";
 
-type ChannelCreateBlockProps = {
+type ProductionCreateBlockProps = {
   locale: Locale;
   countNow: number;
 };
 
-export const ChannelCreateBlock = ({
+export const ProductionCreateBlock = ({
   locale,
   countNow,
-}: ChannelCreateBlockProps) => {
-  const toggle = useModalStore((state) => state.toggleCreateChannel);
+}: ProductionCreateBlockProps) => {
+  const toggle = useModalStore((state) => state.toggleCreateProduction);
 
-  const { CREATE_CHANNEL_LABEL } = getDictionary(locale);
+  const { CREATE_PRODUCTION_LABEL } = getDictionary(locale);
 
   return (
     <CreateBlock locale={locale} countNow={countNow}>
       <Button onClick={toggle}>
-        <IconTextPlus stroke={1.5} /> {CREATE_CHANNEL_LABEL}
+        <IconTextPlus stroke={1.5} /> {CREATE_PRODUCTION_LABEL}
       </Button>
     </CreateBlock>
   );

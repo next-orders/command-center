@@ -162,7 +162,7 @@ export const GetMenusInChannel = async (channelId: string) => {
 
 export const GetProducts = async () => {
   const products = await apiWithPublicAccess.getProducts({
-    next: { ...nextConfig, tags: ["all", `products`] },
+    next: { ...nextConfig, tags: ["all", "products"] },
   });
   if (!products || products instanceof Error) {
     return null;

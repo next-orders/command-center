@@ -113,3 +113,26 @@ export const CreateMediaForm = async (prevState: any, formData: FormData) => {
 
   return { message: "OK" };
 };
+
+export const CreateProductionForm = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  const type = "PRODUCTION";
+  const name = (formData.get("name") as string) || "";
+  const description = (formData.get("description") as string) || "";
+
+  const create = await apiWithAccess().createProduct(
+    { type, name, description },
+    { next: { revalidate: 0 } },
+  );
+  if (create instanceof Error) {
+    return {
+      message: create.message,
+    };
+  }
+
+  revalidateTag("products");
+
+  return { message: "OK" };
+};

@@ -7,6 +7,9 @@ interface ModalState {
   // Media
   isOpenedCreateMedia: boolean;
   toggleCreateMedia: () => void;
+  // Production
+  isOpenedCreateProduction: boolean;
+  toggleCreateProduction: () => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
@@ -19,5 +22,10 @@ export const useModalStore = create<ModalState>((set) => ({
   toggleCreateMedia: () =>
     set(({ isOpenedCreateMedia }) => ({
       isOpenedCreateMedia: !isOpenedCreateMedia,
+    })),
+  isOpenedCreateProduction: false,
+  toggleCreateProduction: () =>
+    set(({ isOpenedCreateProduction }) => ({
+      isOpenedCreateProduction: !isOpenedCreateProduction,
     })),
 }));

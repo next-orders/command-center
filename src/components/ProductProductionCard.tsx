@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  IconDiamond,
-  IconEye,
-  IconEyeOff,
-  IconFileArrowRight,
-  IconTag,
-} from "@tabler/icons-react";
+import { IconDiamond, IconEye, IconTag } from "@tabler/icons-react";
 import { Product, ProductVariant } from "@next-orders/api-sdk";
-import { MenuAction } from "@/types";
 
 export const ProductProductionCard = ({ product }: { product: Product }) => {
   const mainVariant = product.variants?.length
@@ -17,43 +10,23 @@ export const ProductProductionCard = ({ product }: { product: Product }) => {
 
   const media = mainVariant?.media?.length ? mainVariant.media[0] : undefined;
 
-  const actionsInMenu: MenuAction[] = [
-    {
-      id: "1",
-      label: "Open",
-      url: `/product/${product.id}`,
-      icon: <IconFileArrowRight stroke={1.5} className="text-zinc-500" />,
-    },
-    {
-      id: "2",
-      label: "Enable / Disable",
-      icon: <IconEyeOff stroke={1.5} className="text-zinc-500" />,
-    },
-  ];
-
   return (
     <Link href={`/product/${product.id}`}>
-      <div className="px-4 py-4 bg-zinc-50 rounded-2xl cursor-pointer hover:scale-95 duration-200">
-        <div className="mb-2 flex flex-row justify-between gap-2">
-          <div className="flex flex-row gap-4 items-center">
-            <Image
-              src={media?.url || "/static/no-image-zinc.png"}
-              alt={media?.alt || "Empty alt"}
-              width={60}
-              height={60}
-              unoptimized
-              className="rounded-xl"
-            />
-            <div>
-              <div className="text-lg font-medium line-clamp-2">
-                {product.name}
-              </div>
-              <div className="text-sm text-zinc-500">{product.description}</div>
-            </div>
-          </div>
+      <div className="px-4 py-4 bg-zinc-50 rounded-2xl cursor-pointer hover:scale-95 active:scale-90 duration-200">
+        <Image
+          src={media?.url || "/static/no-image-zinc.png"}
+          alt={media?.alt || ""}
+          width={80}
+          height={80}
+          className="rounded-xl mx-auto"
+        />
+
+        <div className="text-center">
+          <div className="text-lg font-medium line-clamp-2">{product.name}</div>
+          <div className="text-sm text-zinc-500">{product.description}</div>
         </div>
 
-        <div className="flex flex-row flex-wrap gap-2">
+        <div className="mt-4 flex flex-row flex-wrap gap-2 justify-center">
           <OnOffBlock isAvailable={product.isAvailableForPurchase} />
           <ScoreBlock score={product.score} />
           <VariantsBlock variants={product.variants} />
