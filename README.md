@@ -3,6 +3,8 @@ Here you can control products, orders, all other entities. Full interaction with
 
 This part of product is for first frontend: https://github.com/next-orders/v1
 
+![client-base-desktop](https://github.com/next-orders/command-center/blob/main/public/static/client-base-desktop.jpg?raw=true)
+
 ## Stack
 
 - React
