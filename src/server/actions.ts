@@ -89,11 +89,27 @@ export const CreateChannelForm = async (prevState: any, formData: FormData) => {
   );
   if (create instanceof Error) {
     return {
-      message: `Error. ${create.message}`,
+      message: create.message,
     };
   }
 
   revalidateTag("channels");
+
+  return { message: "OK" };
+};
+
+export const CreateMediaForm = async (prevState: any, formData: FormData) => {
+  // alt, file
+  const create = await apiWithAccess().uploadMedia(formData, {
+    next: { revalidate: 0 },
+  });
+  if (create instanceof Error) {
+    return {
+      message: create.message,
+    };
+  }
+
+  revalidateTag("media");
 
   return { message: "OK" };
 };
