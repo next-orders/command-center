@@ -8,19 +8,17 @@ import { useModalStore } from "@/store/modal";
 
 type ProductionCreateBlockProps = {
   locale: Locale;
-  countNow: number;
 };
 
 export const ProductionCreateBlock = ({
   locale,
-  countNow,
 }: ProductionCreateBlockProps) => {
   const toggle = useModalStore((state) => state.toggleCreateProduction);
 
   const { CREATE_PRODUCTION_LABEL } = getDictionary(locale);
 
   return (
-    <CreateBlock locale={locale} countNow={countNow}>
+    <CreateBlock locale={locale}>
       <Button onClick={toggle}>
         <IconTextPlus stroke={1.5} /> {CREATE_PRODUCTION_LABEL}
       </Button>

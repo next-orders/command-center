@@ -8,19 +8,15 @@ import { CreateBlock } from "@/components/CreateBlock";
 
 type MediaCreateBlockProps = {
   locale: Locale;
-  countNow: number;
 };
 
-export const MediaCreateBlock = ({
-  locale,
-  countNow,
-}: MediaCreateBlockProps) => {
+export const MediaCreateBlock = ({ locale }: MediaCreateBlockProps) => {
   const toggle = useModalStore((state) => state.toggleCreateMedia);
 
   const { CREATE_MEDIA_LABEL } = getDictionary(locale);
 
   return (
-    <CreateBlock locale={locale} countNow={countNow}>
+    <CreateBlock locale={locale}>
       <Button onClick={toggle}>
         <IconPhotoPlus stroke={1.5} /> {CREATE_MEDIA_LABEL}
       </Button>

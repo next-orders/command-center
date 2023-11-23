@@ -6,14 +6,11 @@ import { IconBuildingStore } from "@tabler/icons-react";
 
 export default async function ChannelsBlock() {
   const channels = await GetChannels();
-
   const locale = GetLocale();
 
-  const count = channels?.length || 0;
   const haveNoEntities = !channels?.length;
-
   if (haveNoEntities) {
-    return <ChannelCreateBlock countNow={count} locale={locale} />;
+    return <ChannelCreateBlock locale={locale} />;
   }
 
   const showChannels = channels?.map((channel) => (
@@ -24,7 +21,7 @@ export default async function ChannelsBlock() {
     <div className="mt-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-2 items-center">
       {showChannels}
       <div className="col-span-1">
-        <ChannelCreateBlock countNow={count} locale={locale} />
+        <ChannelCreateBlock locale={locale} />
       </div>
     </div>
   );

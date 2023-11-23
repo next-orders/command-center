@@ -16,13 +16,13 @@ export const ProductProductionCard = ({ product }: { product: Product }) => {
         <Image
           src={media?.url || "/static/no-image-zinc.png"}
           alt={media?.alt || ""}
-          width={80}
-          height={80}
+          width={120}
+          height={120}
           className="rounded-xl mx-auto"
         />
 
         <div className="text-center">
-          <div className="text-lg font-medium line-clamp-2">{product.name}</div>
+          <div className="text-xl font-medium line-clamp-2">{product.name}</div>
           <div className="text-sm text-zinc-500">{product.description}</div>
         </div>
 
