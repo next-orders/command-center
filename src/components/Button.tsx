@@ -4,14 +4,17 @@ type ButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
   type?: "submit" | "button" | "reset" | undefined;
+  isLoading?: boolean;
 };
 
-export const Button = ({ children, onClick, type }: ButtonProps) => {
+export const Button = ({ children, onClick, type, isLoading }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
       type={type}
-      className="w-full px-4 py-3 flex flex-row gap-2 justify-center font-normal bg-zinc-100 rounded-2xl cursor-pointer hover:bg-zinc-200 hover:scale-95 active:scale-90 duration-200"
+      disabled={isLoading}
+      aria-disabled={isLoading}
+      className="w-full px-4 py-3 flex flex-row gap-2 justify-center font-normal bg-zinc-100 rounded-2xl cursor-pointer outline-2 outline-offset-1 outline-zinc-500 focus:ring-zinc-500 focus:border-zinc-500 hover:bg-zinc-200 hover:scale-95 active:scale-90 duration-200 disabled:animate-pulse"
     >
       {children}
     </button>

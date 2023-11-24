@@ -136,7 +136,7 @@ export const GetMenuById = async (menuId: string) => {
   const menu = await apiWithPublicAccess.getMenuById(menuId, {
     next: {
       ...nextConfig,
-      tags: ["all", `menu-${menuId}`],
+      tags: ["all", "menus", `menu-${menuId}`],
     },
   });
   if (!menu || menu instanceof Error) {
@@ -150,7 +150,7 @@ export const GetMenusInChannel = async (channelId: string) => {
   const menus = await apiWithPublicAccess.getAllMenusInChannel(channelId, {
     next: {
       ...nextConfig,
-      tags: ["all", `menus-${channelId}`],
+      tags: ["all", "menus", `menus-${channelId}`],
     },
   });
   if (!menus || menus instanceof Error) {
@@ -180,6 +180,20 @@ export const GetProductById = async (id: string) => {
   }
 
   return product;
+};
+
+export const GetProductVariantsInCategory = async (categoryId: string) => {
+  const products = await apiWithPublicAccess.getProductVariantsInCategory(
+    categoryId,
+    {
+      next: { ...nextConfig, tags: ["all", `product-variants-${categoryId}`] },
+    },
+  );
+  if (!products || products instanceof Error) {
+    return null;
+  }
+
+  return products;
 };
 
 export const GetAvatarURL = (

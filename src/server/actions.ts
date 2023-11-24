@@ -98,6 +98,29 @@ export const CreateChannelForm = async (prevState: any, formData: FormData) => {
   return { message: "OK" };
 };
 
+export const CreateMenuCategoryForm = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  const slug = (formData.get("slug") as string) || "";
+  const name = (formData.get("name") as string) || "";
+  const menuId = (formData.get("menuId") as string) || "";
+
+  const create = await apiWithAccess().createMenuCategory(
+    { slug, name, menuId },
+    { next: { revalidate: 0 } },
+  );
+  if (create instanceof Error) {
+    return {
+      message: create.message,
+    };
+  }
+
+  revalidateTag("menus");
+
+  return { message: "OK" };
+};
+
 export const CreateMediaForm = async (prevState: any, formData: FormData) => {
   // alt, file
   const create = await apiWithAccess().uploadMedia(formData, {

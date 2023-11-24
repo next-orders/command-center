@@ -16,9 +16,9 @@ export const ProductProductionCard = ({ product }: { product: Product }) => {
         <Image
           src={media?.url || "/static/no-image-zinc.png"}
           alt={media?.alt || ""}
-          width={120}
-          height={120}
-          className="rounded-xl mx-auto"
+          width={100}
+          height={100}
+          className="mb-2 mx-auto rounded-xl"
         />
 
         <div className="text-center">

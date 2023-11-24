@@ -1,19 +1,14 @@
-import { GetLocale, GetMenuById } from "@/client/api";
-import { notFound } from "next/navigation";
+import { GetLocale } from "@/client/api";
 import { BreadcrumbLinks } from "@/types";
 import { PAGES } from "@/lib/pages";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import CategoriesBlock from "@/app/(authenticated)/menu/[id]/CategoriesBlock";
 
 type PageProps = {
   params: { id: string };
 };
 
 export default async function Page({ params }: PageProps) {
-  const menu = await GetMenuById(params.id);
-  if (!menu) {
-    notFound();
-  }
-
   const locale = GetLocale();
 
   const breadcrumbs: BreadcrumbLinks[] = [
@@ -31,6 +26,8 @@ export default async function Page({ params }: PageProps) {
           <div>You can see the loaded data</div>
         </div>
       </div>
+
+      <CategoriesBlock menuId={params.id} />
     </>
   );
 }

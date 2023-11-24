@@ -1,6 +1,7 @@
 import React from "react";
 
 type InputProps = {
+  type?: "text" | "password";
   name: string;
   label: string;
   placeholder?: string;
@@ -17,6 +18,7 @@ export const Input = ({
   isRequired,
   value,
   onChange,
+  type = "text",
 }: InputProps) => {
   return (
     <>
@@ -27,7 +29,7 @@ export const Input = ({
         {label} {isRequired && "*"}
       </label>
       <input
-        type="text"
+        type={type}
         id={name}
         name={name}
         placeholder={placeholder}

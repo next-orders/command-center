@@ -4,6 +4,9 @@ interface ModalState {
   // Channel
   isOpenedCreateChannel: boolean;
   toggleCreateChannel: () => void;
+  // MenuCategory
+  isOpenedCreateMenuCategory: boolean;
+  toggleCreateMenuCategory: () => void;
   // Media
   isOpenedCreateMedia: boolean;
   toggleCreateMedia: () => void;
@@ -17,6 +20,11 @@ export const useModalStore = create<ModalState>((set) => ({
   toggleCreateChannel: () =>
     set(({ isOpenedCreateChannel }) => ({
       isOpenedCreateChannel: !isOpenedCreateChannel,
+    })),
+  isOpenedCreateMenuCategory: false,
+  toggleCreateMenuCategory: () =>
+    set(({ isOpenedCreateMenuCategory }) => ({
+      isOpenedCreateMenuCategory: !isOpenedCreateMenuCategory,
     })),
   isOpenedCreateMedia: false,
   toggleCreateMedia: () =>

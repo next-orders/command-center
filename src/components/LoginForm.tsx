@@ -5,6 +5,7 @@ import { IconArrowRight, IconWand } from "@tabler/icons-react";
 import { useFormState, useFormStatus } from "react-dom";
 import { SignInForm } from "@/server/actions";
 import { getDictionary, Locale } from "@/dictionaries";
+import { Input } from "@/components/Input";
 
 const initialState = {
   message: "",
@@ -33,41 +34,26 @@ export const LoginForm = ({ locale, demo }: LoginFormProps) => {
   return (
     <form action={formAction} className="max-w-sm">
       <div className="w-full mb-6">
-        <div>
-          <label
-            className="mb-1 mt-5 block text-sm font-medium text-zinc-900"
-            htmlFor="email"
-          >
-            {EMAIL_LABEL}
-          </label>
-          <input
-            className="peer block w-full rounded-2xl border border-zinc-200 py-2 px-4 text-lg outline-2 placeholder:text-zinc-400"
-            id="email"
-            type="email"
+        <div className="mb-4">
+          <Input
             name="email"
+            label={EMAIL_LABEL}
             placeholder={EMAIL_PLACEHOLDER}
-            required
+            isRequired
             value={email}
-            onChange={(event) => setEmail(event.currentTarget.value)}
+            onChange={setEmail}
           />
         </div>
-        <div className="mt-4">
-          <label
-            className="mb-1 mt-5 block text-sm font-medium text-zinc-900"
-            htmlFor="password"
-          >
-            {PASSWORD_LABEL}
-          </label>
-          <input
-            className="peer block w-full rounded-2xl border border-zinc-200 py-2 px-4 text-lg outline-2 placeholder:text-zinc-400"
-            id="password"
-            type="password"
+
+        <div className="mb-4">
+          <Input
             name="password"
+            type="password"
+            label={PASSWORD_LABEL}
             placeholder={PASSWORD_PLACEHOLDER}
-            required
-            minLength={6}
+            isRequired
             value={password}
-            onChange={(event) => setPassword(event.currentTarget.value)}
+            onChange={setPassword}
           />
         </div>
       </div>
@@ -97,7 +83,8 @@ function SubmitButton({ locale }: { locale: Locale }) {
     <button
       type="submit"
       aria-disabled={pending}
-      className="px-5 py-3 flex flex-row gap-2 justify-center text-base font-medium cursor-pointer bg-zinc-100 hover:bg-zinc-200 hover:scale-95 duration-200 rounded-2xl"
+      disabled={pending}
+      className="px-5 py-3 flex flex-row gap-2 justify-center text-base font-medium cursor-pointer bg-zinc-100 hover:bg-zinc-200 hover:scale-95 duration-200 rounded-2xl disabled:animate-pulse"
     >
       {SIGN_IN_BUTTON} <IconArrowRight stroke={1.5} />
     </button>

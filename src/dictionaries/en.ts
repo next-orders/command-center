@@ -26,6 +26,7 @@ export const EN = {
   YOU_HAVE_NONE_LABEL: "You have none",
   MAYBE_ITS_TIME_LABEL: "Maybe it's time?",
   CREATE_CHANNEL_LABEL: "Create Channel",
+  CREATE_MENU_CATEGORY_LABEL: "Create Category",
   CREATE_MEDIA_LABEL: "Create Media",
   CREATE_PRODUCTION_LABEL: "Create Product",
   SIGNIN_PAGE_WELCOME_LABEL: "We've been waiting for you!",

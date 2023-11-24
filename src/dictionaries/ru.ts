@@ -25,6 +25,7 @@ export const RU: Dictionary = {
   YOU_HAVE_NONE_LABEL: "У вас еще нет",
   MAYBE_ITS_TIME_LABEL: "Может быть, пришло время?",
   CREATE_CHANNEL_LABEL: "Создать канал",
+  CREATE_MENU_CATEGORY_LABEL: "Создать категорию",
   CREATE_MEDIA_LABEL: "Загрузить медиа",
   CREATE_PRODUCTION_LABEL: "Создать продукт",
   SIGNIN_PAGE_WELCOME_LABEL: "Мы вас заждались!",
