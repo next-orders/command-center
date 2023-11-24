@@ -173,7 +173,7 @@ export const GetProducts = async () => {
 
 export const GetProductById = async (id: string) => {
   const product = await apiWithPublicAccess.getProductById(id, {
-    next: { ...nextConfig, tags: ["all", `product-${id}`] },
+    next: { ...nextConfig, tags: ["all", "products", `product-${id}`] },
   });
   if (!product || product instanceof Error) {
     return null;
@@ -186,7 +186,10 @@ export const GetProductVariantsInCategory = async (categoryId: string) => {
   const products = await apiWithPublicAccess.getProductVariantsInCategory(
     categoryId,
     {
-      next: { ...nextConfig, tags: ["all", `product-variants-${categoryId}`] },
+      next: {
+        ...nextConfig,
+        tags: ["all", "products", `product-variants-${categoryId}`],
+      },
     },
   );
   if (!products || products instanceof Error) {

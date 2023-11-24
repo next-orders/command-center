@@ -28,6 +28,7 @@ export const RU: Dictionary = {
   CREATE_MENU_CATEGORY_LABEL: "Создать категорию",
   CREATE_MEDIA_LABEL: "Загрузить медиа",
   CREATE_PRODUCTION_LABEL: "Создать продукт",
+  CREATE_PRODUCT_VARIANT_LABEL: "Создать продукт",
   SIGNIN_PAGE_WELCOME_LABEL: "Мы вас заждались!",
   EMAIL_LABEL: "Email",
   EMAIL_PLACEHOLDER: "Ваш электронный адрес",

@@ -2,7 +2,12 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { CurrencyCode, LanguageCode, MainAPI } from "@next-orders/api-sdk";
+import {
+  CurrencyCode,
+  LanguageCode,
+  MainAPI,
+  WeightUnit,
+} from "@next-orders/api-sdk";
 import { COOKIES_ACCESS_TOKEN_KEY, COOKIES_LOCALE_KEY } from "@/lib/helpers";
 import { Locale } from "@/dictionaries";
 import { revalidateTag } from "next/cache";
@@ -133,6 +138,50 @@ export const CreateMediaForm = async (prevState: any, formData: FormData) => {
   }
 
   revalidateTag("media");
+
+  return { message: "OK" };
+};
+
+export const CreateProductVariantForm = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  const categoryId = (formData.get("categoryId") as string) || "";
+  const productId = (formData.get("productId") as string) || "";
+
+  const slug = (formData.get("slug") as string) || "";
+  const name = (formData.get("name") as string) || "";
+  const description = (formData.get("description") as string) || "";
+  const sku = (formData.get("sku") as string) || "";
+  const weightUnit = (formData.get("weightUnit") as WeightUnit) || "";
+  const weightValue = (formData.get("weightValue") as string) || "";
+  const gross = (formData.get("gross") as string) || "";
+  const net = (formData.get("net") as string) || "";
+  const tax = (formData.get("tax") as string) || "";
+
+  const create = await apiWithAccess().createProductVariant(
+    {
+      slug,
+      name,
+      description,
+      sku,
+      weightUnit,
+      weightValue: Number(weightValue),
+      gross: Number(gross),
+      net: Number(net),
+      tax: Number(tax),
+      categoryId,
+      productId,
+    },
+    { next: { revalidate: 0 } },
+  );
+  if (create instanceof Error) {
+    return {
+      message: create.message,
+    };
+  }
+
+  revalidateTag("products");
 
   return { message: "OK" };
 };

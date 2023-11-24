@@ -1,10 +1,13 @@
+import Image from "next/image";
 import {
   GetLocale,
   GetMenuById,
   GetProductVariantsInCategory,
 } from "@/client/api";
 import { CategoryCreateBlock } from "@/app/(authenticated)/menu/[id]/CategoryCreateBlock";
-import { MenuCategory } from "@next-orders/api-sdk";
+import { MenuCategory, ProductVariant } from "@next-orders/api-sdk";
+import { Locale } from "@/dictionaries";
+import { ProductVariantCreateBlock } from "@/app/(authenticated)/menu/[id]/ProductVariantCreateBlock";
 
 type CategoriesBlockProps = {
   menuId: string;
@@ -22,7 +25,7 @@ export default async function CategoriesBlock({
   }
 
   const showCategories = menu.categories.map((category) => (
-    <CategoryBlock key={category.id} category={category} />
+    <CategoryBlock key={category.id} category={category} locale={locale} />
   ));
 
   return (
@@ -36,16 +39,49 @@ export default async function CategoriesBlock({
 }
 
 type CategoryBlockProps = {
+  locale: Locale;
   category: MenuCategory;
 };
 
-const CategoryBlock = async ({ category }: CategoryBlockProps) => {
+const CategoryBlock = async ({ category, locale }: CategoryBlockProps) => {
   const products = await GetProductVariantsInCategory(category.id);
+
+  const showProducts = products?.map((variant) => (
+    <ProductVariantCard key={variant.id} variant={variant} />
+  ));
 
   return (
     <div className="mt-4 mb-6">
       <h2 className="text-2xl font-medium">{category.name}</h2>
-      <pre>{JSON.stringify(products, null, 2)}</pre>
+
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2 items-center">
+        <ProductVariantCreateBlock locale={locale} category={category} />
+        {showProducts}
+      </div>
+    </div>
+  );
+};
+
+type ProductVariantCardProps = {
+  variant: ProductVariant;
+};
+
+const ProductVariantCard = ({ variant }: ProductVariantCardProps) => {
+  const photo = variant.media.length ? variant.media[0] : null;
+
+  return (
+    <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
+      <Image
+        src={photo?.url ?? "/static/no-image-zinc.png"}
+        alt={photo?.alt ?? ""}
+        width={300}
+        height={300}
+        className="w-full aspect-square rounded-xl"
+      />
+
+      <div className="mt-2 text-base font-medium leading-tight text-center">
+        {variant.name}
+      </div>
     </div>
   );
 };

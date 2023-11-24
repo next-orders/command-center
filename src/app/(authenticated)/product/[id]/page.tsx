@@ -73,7 +73,7 @@ const ProductVariantBlock = ({ variant }: ProductVariantBlockProps) => {
       <div className="mb-2 flex flex-row justify-between gap-2">
         <div className="flex flex-row gap-2 items-center">
           <Image
-            src={media?.url || ""}
+            src={media?.url || "/static/no-image-zinc.png"}
             alt={media?.alt || "Photo"}
             width={60}
             height={60}

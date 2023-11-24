@@ -13,6 +13,9 @@ interface ModalState {
   // Production
   isOpenedCreateProduction: boolean;
   toggleCreateProduction: () => void;
+  // ProductVariant
+  isOpenedCreateProductVariant: boolean;
+  toggleCreateProductVariant: () => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
@@ -35,5 +38,10 @@ export const useModalStore = create<ModalState>((set) => ({
   toggleCreateProduction: () =>
     set(({ isOpenedCreateProduction }) => ({
       isOpenedCreateProduction: !isOpenedCreateProduction,
+    })),
+  isOpenedCreateProductVariant: false,
+  toggleCreateProductVariant: () =>
+    set(({ isOpenedCreateProductVariant }) => ({
+      isOpenedCreateProductVariant: !isOpenedCreateProductVariant,
     })),
 }));

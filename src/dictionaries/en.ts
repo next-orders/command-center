@@ -29,6 +29,7 @@ export const EN = {
   CREATE_MENU_CATEGORY_LABEL: "Create Category",
   CREATE_MEDIA_LABEL: "Create Media",
   CREATE_PRODUCTION_LABEL: "Create Product",
+  CREATE_PRODUCT_VARIANT_LABEL: "Create Product",
   SIGNIN_PAGE_WELCOME_LABEL: "We've been waiting for you!",
   EMAIL_LABEL: "Email",
   EMAIL_PLACEHOLDER: "Your email address",
