@@ -71,13 +71,15 @@ const ProductVariantCard = ({ variant }: ProductVariantCardProps) => {
 
   return (
     <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
-      <Image
-        src={photo?.url ?? "/static/no-image-zinc.png"}
-        alt={photo?.alt ?? ""}
-        width={300}
-        height={300}
-        className="w-full aspect-square rounded-xl"
-      />
+      <div className="aspect-square">
+        <Image
+          src={photo?.url ?? "/static/no-image-zinc.png"}
+          alt={photo?.alt ?? ""}
+          width={300}
+          height={300}
+          className="w-full rounded-xl"
+        />
+      </div>
 
       <div className="mt-2 text-base font-medium leading-tight text-center">
         {variant.name}
