@@ -29,7 +29,7 @@ export default async function CategoriesBlock({
   ));
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 mb-8">
       {showCategories}
       <div className="col-span-1">
         <CategoryCreateBlock locale={locale} menuId={menuId} />

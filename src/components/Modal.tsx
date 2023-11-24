@@ -20,7 +20,7 @@ export const Modal = ({ title, isOpened, toggle, children }: ModalProps) => {
         className="z-40 fixed left-0 top-0 w-full max-w-lg h-[100dvh] overflow-y-auto p-2 m-0 pb-20 shadow-none rounded-2xl -translate-x-full data-[active=true]:translate-x-0 data-[active=true]:right-0 data-[active=true]:mx-auto transition-transform"
         data-active={isOpened}
       >
-        <div className="mt-16 p-4 md:p-6 lg:p-8 bg-white rounded-2xl">
+        <div className="mt-16 p-4 md:p-6 lg:p-8 bg-white rounded-2xl shadow-lg">
           <div className="mb-4 flex flex-row justify-between items-center">
             <h3 className="text-xl md:text-2xl font-medium">{title}</h3>
 

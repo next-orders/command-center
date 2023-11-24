@@ -24,13 +24,15 @@ export const MediaCard = ({ media }: MediaCardProps) => {
 
   return (
     <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
-      <Image
-        src={media.url ?? ""}
-        alt={media.alt ?? ""}
-        width={300}
-        height={300}
-        className="w-full aspect-square rounded-xl"
-      />
+      <div className="aspect-square">
+        <Image
+          src={media.url ?? ""}
+          alt={media.alt ?? ""}
+          width={300}
+          height={300}
+          className="w-full rounded-xl"
+        />
+      </div>
 
       <div className="mt-2 text-base font-medium leading-tight text-center">
         {media.alt}
