@@ -7,19 +7,12 @@ import { Button } from "@/components/Button";
 import { useFormState, useFormStatus } from "react-dom";
 import { CreateProductVariantForm } from "@/server/actions";
 import { Input } from "@/components/Input";
-import { MenuCategory } from "@next-orders/api-sdk";
 
 const initialState = {
   message: "",
 };
 
-type ProductVariantCreateModalProps = {
-  category: MenuCategory;
-};
-
-export const ProductVariantCreateModal = ({
-  category,
-}: ProductVariantCreateModalProps) => {
+export const ProductVariantCreateModal = () => {
   const toggle = useModalStore((state) => state.toggleCreateProductVariant);
   const isOpened = useModalStore((state) => state.isOpenedCreateProductVariant);
 
@@ -29,6 +22,7 @@ export const ProductVariantCreateModal = ({
   );
   const { pending } = useFormStatus();
 
+  const [categoryId, setCategoryId] = React.useState("");
   const [productId, setProductId] = React.useState("");
   const [slug, setSlug] = React.useState("");
   const [name, setName] = React.useState("");
@@ -41,15 +35,20 @@ export const ProductVariantCreateModal = ({
   const [tax, setTax] = React.useState("");
 
   return (
-    <Modal
-      title={`Create new Product in Category ${category.name}`}
-      toggle={toggle}
-      isOpened={isOpened}
-    >
+    <Modal title="Create new Product" toggle={toggle} isOpened={isOpened}>
       <form action={formAction}>
         <div className="w-full text-center text-red-700">{state?.message}</div>
 
-        <input type="hidden" name="categoryId" value={category.id} />
+        <div className="mb-4">
+          <Input
+            name="categoryId"
+            label="Category Id"
+            placeholder="Menu Category"
+            isRequired
+            value={categoryId}
+            onChange={setCategoryId}
+          />
+        </div>
 
         <div className="mb-4">
           <Input

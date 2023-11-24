@@ -3,6 +3,7 @@ import { BreadcrumbLinks } from "@/types";
 import { PAGES } from "@/lib/pages";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import CategoriesBlock from "@/app/(authenticated)/menu/[id]/CategoriesBlock";
+import { ProductVariantCreateModal } from "@/app/(authenticated)/menu/[id]/ProductVariantCreateModal";
 
 type PageProps = {
   params: { id: string };
@@ -28,6 +29,8 @@ export default async function Page({ params }: PageProps) {
       </div>
 
       <CategoriesBlock menuId={params.id} />
+
+      <ProductVariantCreateModal />
     </>
   );
 }
