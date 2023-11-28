@@ -67,7 +67,7 @@ type ProductVariantCardProps = {
 };
 
 const ProductVariantCard = ({ variant }: ProductVariantCardProps) => {
-  const photo = variant.media.length ? variant.media[0] : null;
+  const photo = variant.media.length ? variant.media[0].media : null;
 
   return (
     <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">

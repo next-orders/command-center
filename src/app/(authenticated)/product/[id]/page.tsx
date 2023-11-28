@@ -66,7 +66,7 @@ type ProductVariantBlockProps = {
 };
 
 const ProductVariantBlock = ({ variant }: ProductVariantBlockProps) => {
-  const media = variant?.media?.length ? variant.media[0] : undefined;
+  const media = variant?.media?.length ? variant.media[0].media : undefined;
 
   return (
     <div className="px-2 py-2 bg-zinc-50 rounded-2xl">
