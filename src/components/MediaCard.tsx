@@ -24,13 +24,16 @@ export const MediaCard = ({ media }: MediaCardProps) => {
 
   return (
     <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
-      <div className="aspect-square">
+      <div className="relative w-full aspect-square">
         <Image
           src={media.url ?? ""}
           alt={media.alt ?? ""}
-          width={300}
-          height={300}
-          className="w-full rounded-xl"
+          priority
+          fill
+          sizes="(max-width: 768px) 100vw, 768px"
+          objectPosition="center"
+          objectFit="cover"
+          className="rounded-xl"
         />
       </div>
 

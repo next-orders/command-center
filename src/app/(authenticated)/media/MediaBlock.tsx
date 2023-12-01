@@ -22,8 +22,8 @@ export default async function MediaBlock() {
   ));
 
   return (
-    <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2 items-center">
-      <div className="col-span-2">
+    <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">
+      <div className="col-span-2 self-center">
         <MediaCreateBlock locale={locale} />
       </div>
       {showMedia}

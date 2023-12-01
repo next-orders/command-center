@@ -54,8 +54,10 @@ const CategoryBlock = async ({ category, locale }: CategoryBlockProps) => {
     <div className="mt-4 mb-6">
       <h2 className="text-2xl font-medium">{category.name}</h2>
 
-      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2 items-center">
-        <ProductVariantCreateBlock locale={locale} />
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">
+        <div className="col-span-1 self-center text-center">
+          <ProductVariantCreateBlock locale={locale} />
+        </div>
         {showProducts}
       </div>
     </div>
@@ -71,13 +73,16 @@ const ProductVariantCard = ({ variant }: ProductVariantCardProps) => {
 
   return (
     <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
-      <div className="aspect-square">
+      <div className="relative w-full aspect-square">
         <Image
           src={photo?.url ?? "/static/no-image-zinc.png"}
           alt={photo?.alt ?? ""}
-          width={300}
-          height={300}
-          className="w-full rounded-xl"
+          priority
+          fill
+          sizes="(max-width: 768px) 100vw, 768px"
+          objectPosition="center"
+          objectFit="cover"
+          className="rounded-xl"
         />
       </div>
 
