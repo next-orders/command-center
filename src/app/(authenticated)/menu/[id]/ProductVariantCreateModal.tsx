@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import slugify from "slug";
 import { Modal } from "@/components/Modal";
 import { useModalStore } from "@/store/modal";
 import { Button } from "@/components/Button";
@@ -34,6 +35,12 @@ export const ProductVariantCreateModal = () => {
   const [net, setNet] = React.useState("");
   const [tax, setTax] = React.useState("");
 
+  // Lets generate slug on Name change
+  const handleNameChange = (value: string) => {
+    setName(value);
+    setSlug(slugify(value));
+  };
+
   return (
     <Modal title="Create new Product" toggle={toggle} isOpened={isOpened}>
       <form action={formAction}>
@@ -63,23 +70,12 @@ export const ProductVariantCreateModal = () => {
 
         <div className="mb-4">
           <Input
-            name="slug"
-            label="Slug"
-            placeholder="Unique identifying part of a web address"
-            isRequired
-            value={slug}
-            onChange={setSlug}
-          />
-        </div>
-
-        <div className="mb-4">
-          <Input
             name="name"
             label="Name"
             placeholder="Main heading"
             isRequired
             value={name}
-            onChange={setName}
+            onChange={handleNameChange}
           />
         </div>
 
@@ -91,6 +87,17 @@ export const ProductVariantCreateModal = () => {
             isRequired={false}
             value={description}
             onChange={setDescription}
+          />
+        </div>
+
+        <div className="mb-4">
+          <Input
+            name="slug"
+            label="Slug"
+            placeholder="Unique identifying part of a web address"
+            isRequired
+            value={slug}
+            onChange={setSlug}
           />
         </div>
 

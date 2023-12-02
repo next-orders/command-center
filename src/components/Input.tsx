@@ -35,6 +35,7 @@ export const Input = ({
         placeholder={placeholder}
         required={isRequired}
         value={value}
+        onWheel={(event) => event.currentTarget.blur()}
         onChange={(event) => onChange(event.currentTarget.value)}
         className="peer block w-full rounded-2xl border border-zinc-200 py-3 px-4 text-base outline-2 outline-offset-1 outline-zinc-500 placeholder:text-zinc-400"
       />
