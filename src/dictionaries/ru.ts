@@ -19,6 +19,7 @@ export const RU: Dictionary = {
   INGREDIENTS_PAGE_LABEL: "Страница ингредиентов",
   PRODUCTION_PAGE_LABEL: "Страница производства",
   READY_PAGE_LABEL: "Страница готовых товаров",
+  PRODUCT_VARIANT_PAGE_LABEL: "Страница варианта товара",
   IT_IS_LABEL: "Это",
   LOADING_LABEL: "Загружаем",
   YOU_HAVE_SOME_LABEL: "У вас есть несколько",

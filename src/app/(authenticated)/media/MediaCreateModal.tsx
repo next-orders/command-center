@@ -28,7 +28,7 @@ export const MediaCreateModal = () => {
         <div className="mb-4">
           <Input
             name="alt"
-            label="Alt"
+            label="Name"
             placeholder="Short description of the file"
             isRequired
             value={alt}

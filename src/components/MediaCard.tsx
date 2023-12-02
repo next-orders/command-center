@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { IconEyeOff, IconFileArrowRight } from "@tabler/icons-react";
 import { Media } from "@next-orders/api-sdk";
@@ -23,7 +25,10 @@ export const MediaCard = ({ media }: MediaCardProps) => {
   ];
 
   return (
-    <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
+    <div
+      onClick={() => navigator.clipboard.writeText(media.id)}
+      className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group"
+    >
       <div className="relative w-full aspect-square">
         <Image
           src={media.url ?? ""}

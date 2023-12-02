@@ -26,6 +26,10 @@ export const PAGES = {
   },
   MENUS: { dictionary: "MENUS_LABEL", label: "Menus" },
   MENU_PAGE: { dictionary: "MENU_PAGE_LABEL", label: "Menu Page" },
+  PRODUCT_VARIANT_PAGE: {
+    dictionary: "PRODUCT_VARIANT_PAGE_LABEL",
+    label: "Product Variant Page",
+  },
 } as const;
 
 export type Page = {

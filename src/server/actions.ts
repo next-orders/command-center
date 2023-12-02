@@ -208,3 +208,26 @@ export const CreateProductionForm = async (
 
   return { message: "OK" };
 };
+
+export const AddProductVariantMediaForm = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  const productVariantId = (formData.get("productVariantId") as string) || "";
+  const mediaId = (formData.get("mediaId") as string) || "";
+
+  const add = await apiWithAccess().addMediaToProductVariant(
+    productVariantId,
+    mediaId,
+    { next: { revalidate: 0 } },
+  );
+  if (add instanceof Error) {
+    return {
+      message: add.message,
+    };
+  }
+
+  revalidateTag("products");
+
+  return { message: "OK" };
+};

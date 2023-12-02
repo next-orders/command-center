@@ -1,12 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   GetLocale,
   GetMenuById,
   GetProductVariantsInCategory,
 } from "@/client/api";
-import { CategoryCreateBlock } from "@/app/(authenticated)/menu/[id]/CategoryCreateBlock";
 import { MenuCategory, ProductVariant } from "@next-orders/api-sdk";
 import { Locale } from "@/dictionaries";
+import { CategoryCreateBlock } from "@/app/(authenticated)/menu/[id]/CategoryCreateBlock";
 import { ProductVariantCreateBlock } from "@/app/(authenticated)/menu/[id]/ProductVariantCreateBlock";
 
 type CategoriesBlockProps = {
@@ -70,9 +71,13 @@ type ProductVariantCardProps = {
 
 const ProductVariantCard = ({ variant }: ProductVariantCardProps) => {
   const photo = variant.media.length ? variant.media[0].media : null;
+  const url = `/product-variant/${variant.id}`;
 
   return (
-    <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
+    <Link
+      href={url}
+      className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 cursor-pointer hover:scale-95 active:scale-90 duration-200 group"
+    >
       <div className="relative w-full aspect-square">
         <Image
           src={photo?.url ?? "/static/no-image-zinc.png"}
@@ -89,6 +94,6 @@ const ProductVariantCard = ({ variant }: ProductVariantCardProps) => {
       <div className="mt-2 text-base font-medium leading-tight text-center">
         {variant.name}
       </div>
-    </div>
+    </Link>
   );
 };

@@ -20,6 +20,7 @@ export const EN = {
   INGREDIENTS_PAGE_LABEL: "Ingredients page",
   PRODUCTION_PAGE_LABEL: "Production page",
   READY_PAGE_LABEL: "Ready page",
+  PRODUCT_VARIANT_PAGE_LABEL: "Product Variant Page",
   IT_IS_LABEL: "It's",
   LOADING_LABEL: "Loading",
   YOU_HAVE_SOME_LABEL: "You have some",
