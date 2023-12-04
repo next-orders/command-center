@@ -7,7 +7,12 @@ type ButtonProps = {
   isLoading?: boolean;
 };
 
-export const Button = ({ children, onClick, type, isLoading }: ButtonProps) => {
+export const Button = ({
+  children,
+  onClick,
+  type = "button",
+  isLoading,
+}: ButtonProps) => {
   return (
     <button
       onClick={onClick}

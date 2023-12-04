@@ -1,4 +1,4 @@
-import { GetLocale } from "@/client/api";
+import { GetLocale, GetProducts } from "@/client/api";
 import { BreadcrumbLinks } from "@/types";
 import { PAGES } from "@/lib/pages";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -11,6 +11,7 @@ type PageProps = {
 
 export default async function Page({ params }: PageProps) {
   const locale = GetLocale();
+  const products = await GetProducts();
 
   const breadcrumbs: BreadcrumbLinks[] = [{ page: PAGES.MENU_PAGE, href: "#" }];
 
@@ -23,7 +24,7 @@ export default async function Page({ params }: PageProps) {
 
       <CategoriesBlock menuId={params.id} />
 
-      <ProductVariantCreateModal />
+      <ProductVariantCreateModal products={products} />
     </>
   );
 }

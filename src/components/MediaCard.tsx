@@ -36,9 +36,7 @@ export const MediaCard = ({ media }: MediaCardProps) => {
           priority
           fill
           sizes="(max-width: 768px) 100vw, 768px"
-          objectPosition="center"
-          objectFit="cover"
-          className="rounded-xl"
+          className="rounded-xl object-cover object-center"
         />
       </div>
 

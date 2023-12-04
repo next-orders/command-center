@@ -32,7 +32,7 @@ export default async function CategoriesBlock({
   return (
     <div className="mt-4 mb-8">
       {showCategories}
-      <div className="col-span-1">
+      <div className="mt-8 col-span-1">
         <CategoryCreateBlock locale={locale} menuId={menuId} />
       </div>
     </div>
@@ -53,7 +53,9 @@ const CategoryBlock = async ({ category, locale }: CategoryBlockProps) => {
 
   return (
     <div className="mt-4 mb-6">
-      <h2 className="text-2xl font-medium">{category.name}</h2>
+      <h2 className="text-2xl font-medium">
+        {category.name} <span className="text-xs">{category.id}</span>
+      </h2>
 
       <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">
         <div className="col-span-1 self-center text-center">
@@ -85,9 +87,7 @@ const ProductVariantCard = ({ variant }: ProductVariantCardProps) => {
           priority
           fill
           sizes="(max-width: 768px) 100vw, 768px"
-          objectPosition="center"
-          objectFit="cover"
-          className="rounded-xl"
+          className="rounded-xl object-cover object-center"
         />
       </div>
 
