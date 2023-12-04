@@ -8,7 +8,7 @@ import {
 import { MenuCategory, ProductVariant } from "@next-orders/api-sdk";
 import { Locale } from "@/dictionaries";
 import { CategoryCreateBlock } from "@/app/(authenticated)/menu/[id]/CategoryCreateBlock";
-import { ProductVariantCreateBlock } from "@/app/(authenticated)/menu/[id]/ProductVariantCreateBlock";
+import { getIconUrl } from "@/lib/helpers";
 
 type CategoriesBlockProps = {
   menuId: string;
@@ -31,10 +31,10 @@ export default async function CategoriesBlock({
 
   return (
     <div className="mt-4 mb-8">
-      {showCategories}
-      <div className="mt-8 col-span-1">
+      <div className="mb-8">
         <CategoryCreateBlock locale={locale} menuId={menuId} />
       </div>
+      {showCategories}
     </div>
   );
 }
@@ -51,16 +51,26 @@ const CategoryBlock = async ({ category, locale }: CategoryBlockProps) => {
     <ProductVariantCard key={variant.id} variant={variant} />
   ));
 
+  const iconUrl = getIconUrl(category.icon);
+
   return (
-    <div className="mt-4 mb-6">
-      <h2 className="text-2xl font-medium">
-        {category.name} <span className="text-xs">{category.id}</span>
-      </h2>
+    <div className="mb-8">
+      <div className="flex flex-row gap-2">
+        <Image
+          src={iconUrl}
+          alt=""
+          width={32}
+          height={32}
+          className="w-8 h-8 cursor-pointer hover:scale-90 duration-200"
+        />
+
+        <h2 className="text-2xl font-medium">
+          {category.name}{" "}
+          <span className="ml-2 text-xs text-zinc-500">{category.id}</span>
+        </h2>
+      </div>
 
       <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">
-        <div className="col-span-1 self-center text-center">
-          <ProductVariantCreateBlock locale={locale} />
-        </div>
         {showProducts}
       </div>
     </div>

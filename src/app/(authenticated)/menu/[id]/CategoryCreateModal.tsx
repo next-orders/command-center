@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import slugify from "slug";
 import { Modal } from "@/components/Modal";
 import { useModalStore } from "@/store/modal";
 import { Button } from "@/components/Button";
@@ -26,8 +27,14 @@ export const CategoryCreateModal = ({ menuId }: CategoryCreateModalProps) => {
   );
   const { pending } = useFormStatus();
 
-  const [slug, setSlug] = React.useState("");
   const [name, setName] = React.useState("");
+  const [slug, setSlug] = React.useState("");
+
+  // Lets generate slug on Name change
+  const handleNameChange = (value: string) => {
+    setName(value);
+    setSlug(slugify(value));
+  };
 
   return (
     <Modal title="Create new Category" toggle={toggle} isOpened={isOpened}>
@@ -38,23 +45,23 @@ export const CategoryCreateModal = ({ menuId }: CategoryCreateModalProps) => {
 
         <div className="mb-4">
           <Input
+            name="name"
+            label="Name"
+            placeholder="Main heading"
+            isRequired
+            value={name}
+            onChange={handleNameChange}
+          />
+        </div>
+
+        <div className="mb-4">
+          <Input
             name="slug"
             label="Slug"
             placeholder="Unique identifying part of a web address"
             isRequired
             value={slug}
             onChange={setSlug}
-          />
-        </div>
-
-        <div className="mb-4">
-          <Input
-            name="name"
-            label="Name"
-            placeholder="Main heading"
-            isRequired
-            value={name}
-            onChange={setName}
           />
         </div>
 
