@@ -93,7 +93,7 @@ export const ProductVariantCreateModal = ({
               label="Category"
               placeholder="Menu Category"
               isRequired
-              defaultValue=""
+              defaultValue={categoryId}
               onChange={setCategoryId}
               options={categoriesOptions}
             />
@@ -146,13 +146,31 @@ export const ProductVariantCreateModal = ({
             </div>
 
             <div>
-              <Input
+              <Select
                 name="weightUnit"
                 label="Weight Unit"
                 placeholder="G, KG, LB or OZ"
                 isRequired
-                value={weightUnit}
+                defaultValue={weightUnit}
                 onChange={setWeightUnit}
+                options={[
+                  {
+                    value: "G",
+                    label: "g",
+                  },
+                  {
+                    value: "KG",
+                    label: "kg",
+                  },
+                  {
+                    value: "LB",
+                    label: "lb",
+                  },
+                  {
+                    value: "OZ",
+                    label: "oz",
+                  },
+                ]}
               />
             </div>
           </div>
