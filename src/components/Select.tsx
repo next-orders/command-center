@@ -1,23 +1,29 @@
-type InputProps = {
-  type?: "text" | "password" | "number";
+type SelectProps = {
   name: string;
   label: string;
   placeholder?: string;
   isRequired: boolean;
-  value: string;
+  defaultValue: string;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void;
+  options: { value: string; label: string }[] | undefined;
 };
 
-export const Input = ({
+export const Select = ({
   name,
   label,
   placeholder,
   isRequired,
-  value,
+  defaultValue,
   onChange,
-  type = "text",
-}: InputProps) => {
+  options,
+}: SelectProps) => {
+  const showOptions = options?.map((option) => (
+    <option key={option.value} value={option.value}>
+      {option.label}
+    </option>
+  ));
+
   return (
     <>
       <label
@@ -26,17 +32,18 @@ export const Input = ({
       >
         {label} {isRequired && "*"}
       </label>
-      <input
-        type={type}
+      <select
         id={name}
         name={name}
         placeholder={placeholder}
         required={isRequired}
-        value={value}
+        defaultValue={defaultValue}
         onWheel={(event) => event.currentTarget.blur()}
         onChange={(event) => onChange(event.currentTarget.value)}
         className="peer block w-full rounded-2xl border border-zinc-200 py-3 px-4 text-base outline-2 outline-offset-1 outline-zinc-500 placeholder:text-zinc-400"
-      />
+      >
+        {showOptions}
+      </select>
     </>
   );
 };

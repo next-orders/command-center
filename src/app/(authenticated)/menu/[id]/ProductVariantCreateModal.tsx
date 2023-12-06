@@ -2,15 +2,17 @@
 
 import React from "react";
 import slugify from "slug";
-import { Modal } from "@/components/Modal";
-import { useModalStore } from "@/store/modal";
-import { Button } from "@/components/Button";
 import { useFormState, useFormStatus } from "react-dom";
+import { useModalStore } from "@/store/modal";
 import { CreateProductVariantForm } from "@/server/actions";
-import { Input } from "@/components/Input";
 import { ProductChooseModal } from "@/app/(authenticated)/menu/[id]/ProductChooseModal";
-import { Product } from "@next-orders/api-sdk";
+import { MenuCategory, Product } from "@next-orders/api-sdk";
 import { Locale } from "@/dictionaries";
+import { Button } from "@/components/Button";
+import { Modal } from "@/components/Modal";
+import { Input } from "@/components/Input";
+import { EntitySelect } from "@/components/EntitySelect";
+import { Select } from "@/components/Select";
 
 const initialState = {
   message: "",
@@ -19,11 +21,13 @@ const initialState = {
 type ProductVariantCreateModalProps = {
   locale: Locale;
   products: Product[] | null;
+  categories: MenuCategory[] | null | undefined;
 };
 
 export const ProductVariantCreateModal = ({
   locale,
   products,
+  categories,
 }: ProductVariantCreateModalProps) => {
   const toggle = useModalStore((state) => state.toggleCreateProductVariant);
   const isOpened = useModalStore((state) => state.isOpenedCreateProductVariant);
@@ -55,38 +59,44 @@ export const ProductVariantCreateModal = ({
     setSlug(slugify(value));
   };
 
+  // Find selected Product
+  const productSelected = products?.find((p) => p.id === productId);
+
+  // Prepare categories for select
+  const categoriesOptions = categories?.map((category) => ({
+    value: category.id,
+    label: category.name,
+  }));
+
   return (
     <>
       <Modal title="Create new Product" toggle={toggle} isOpened={isOpened}>
         <form action={formAction}>
+          <input type="hidden" name="productId" value={productId} required />
+
           <div className="w-full text-center text-red-700">
             {state?.message}
           </div>
 
           <div className="mb-4">
-            <Input
-              name="categoryId"
-              label="Category Id"
-              placeholder="Menu Category"
-              isRequired
-              value={categoryId}
-              onChange={setCategoryId}
+            <EntitySelect
+              type="PRODUCT"
+              entity={productSelected}
+              onClick={toggleChooseProduct}
+              locale={locale}
             />
           </div>
 
           <div className="mb-4">
-            <Input
-              name="productId"
-              label="Abstract Product Id"
-              placeholder="The main product that is the parent"
+            <Select
+              name="categoryId"
+              label="Category"
+              placeholder="Menu Category"
               isRequired
-              value={productId}
-              onChange={setProductId}
+              defaultValue=""
+              onChange={setCategoryId}
+              options={categoriesOptions}
             />
-
-            <div className="mt-2">
-              <Button onClick={toggleChooseProduct}>Choose</Button>
-            </div>
           </div>
 
           <div className="mb-4">
@@ -122,27 +132,29 @@ export const ProductVariantCreateModal = ({
             />
           </div>
 
-          <div className="mb-4">
-            <Input
-              name="weightUnit"
-              label="Weight Unit"
-              placeholder="G, KG, LB or OZ"
-              isRequired
-              value={weightUnit}
-              onChange={setWeightUnit}
-            />
-          </div>
+          <div className="mb-4 grid grid-cols-2 gap-4">
+            <div>
+              <Input
+                type="number"
+                name="weightValue"
+                label="Weight Value"
+                placeholder="Positive number"
+                isRequired
+                value={weightValue}
+                onChange={setWeightValue}
+              />
+            </div>
 
-          <div className="mb-4">
-            <Input
-              type="number"
-              name="weightValue"
-              label="Weight Value"
-              placeholder="Positive number"
-              isRequired
-              value={weightValue}
-              onChange={setWeightValue}
-            />
+            <div>
+              <Input
+                name="weightUnit"
+                label="Weight Unit"
+                placeholder="G, KG, LB or OZ"
+                isRequired
+                value={weightUnit}
+                onChange={setWeightUnit}
+              />
+            </div>
           </div>
 
           <div className="mb-4">
