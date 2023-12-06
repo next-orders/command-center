@@ -6,8 +6,10 @@ import { useModalStore } from "@/store/modal";
 import { Button } from "@/components/Button";
 import { EntityModal } from "@/components/EntityModal";
 import { Product } from "@next-orders/api-sdk";
+import { getDictionary, Locale } from "@/dictionaries";
 
 type ProductChooseModalProps = {
+  locale: Locale;
   products: Product[] | null;
   selected: string;
   // eslint-disable-next-line no-unused-vars
@@ -15,6 +17,7 @@ type ProductChooseModalProps = {
 };
 
 export const ProductChooseModal = ({
+  locale,
   products,
   selected,
   setSelected,
@@ -22,8 +25,19 @@ export const ProductChooseModal = ({
   const toggle = useModalStore((state) => state.toggleChooseProduct);
   const isOpened = useModalStore((state) => state.isOpenedChooseProduct);
 
+  const { FIND_BY_NAME_PLACEHOLDER, CHOOSE_BUTTON, CHOOSE_A_PRODUCT_LABEL } =
+    getDictionary(locale);
+
+  const [find, setFind] = React.useState("");
+
+  //
   const showProducts = products
-    ?.filter((product) => product.type === "PRODUCTION")
+    ?.filter(
+      (product) => product.type === "PRODUCTION" || product.type === "READY",
+    )
+    ?.filter((product) =>
+      product.name.toLowerCase().includes(find.toLowerCase()),
+    )
     ?.map((product) => {
       const isSelected = selected === product.id;
 
@@ -38,13 +52,17 @@ export const ProductChooseModal = ({
     });
 
   return (
-    <EntityModal title="Choose a Product" toggle={toggle} isOpened={isOpened}>
+    <EntityModal
+      title={CHOOSE_A_PRODUCT_LABEL}
+      toggle={toggle}
+      isOpened={isOpened}
+    >
       <input
         type="text"
-        placeholder="Find by name"
-        value=""
+        placeholder={FIND_BY_NAME_PLACEHOLDER}
+        value={find}
         onWheel={(event) => event.currentTarget.blur()}
-        // onChange={(event) => onChange(event.currentTarget.value)}
+        onChange={(event) => setFind(event.currentTarget.value)}
         className="peer block w-full rounded-2xl border border-zinc-200 py-3 px-4 text-base outline-2 outline-offset-1 outline-zinc-500 placeholder:text-zinc-400"
       />
 
@@ -53,7 +71,7 @@ export const ProductChooseModal = ({
       </div>
 
       <div className="mt-6">
-        <Button onClick={toggle}>Choose</Button>
+        <Button onClick={toggle}>{CHOOSE_BUTTON}</Button>
       </div>
     </EntityModal>
   );

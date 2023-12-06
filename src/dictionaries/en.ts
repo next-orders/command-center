@@ -3,6 +3,7 @@ export type DictionaryKey = keyof Dictionary;
 
 export const EN = {
   RETURN_BUTTON: "Return",
+  CHOOSE_BUTTON: "Choose",
   SIGN_IN_BUTTON: "Sign In",
   DEMO_EMPLOYEE_BUTTON: "Demo Employee",
   COMMAND_CENTER_LABEL: "Command Center",
@@ -40,4 +41,6 @@ export const EN = {
   PASSWORD_LABEL: "Password",
   PASSWORD_PLACEHOLDER: "Your password",
   SEARCH_PLACEHOLDER: "Find anything",
+  FIND_BY_NAME_PLACEHOLDER: "Find by name",
+  CHOOSE_A_PRODUCT_LABEL: "Choose a Product",
 };

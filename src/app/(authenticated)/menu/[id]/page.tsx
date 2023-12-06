@@ -24,7 +24,7 @@ export default async function Page({ params }: PageProps) {
 
       <CategoriesBlock menuId={params.id} />
 
-      <ProductVariantCreateModal products={products} />
+      <ProductVariantCreateModal products={products} locale={locale} />
     </>
   );
 }

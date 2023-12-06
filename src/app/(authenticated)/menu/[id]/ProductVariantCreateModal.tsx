@@ -10,16 +10,19 @@ import { CreateProductVariantForm } from "@/server/actions";
 import { Input } from "@/components/Input";
 import { ProductChooseModal } from "@/app/(authenticated)/menu/[id]/ProductChooseModal";
 import { Product } from "@next-orders/api-sdk";
+import { Locale } from "@/dictionaries";
 
 const initialState = {
   message: "",
 };
 
 type ProductVariantCreateModalProps = {
+  locale: Locale;
   products: Product[] | null;
 };
 
 export const ProductVariantCreateModal = ({
+  locale,
   products,
 }: ProductVariantCreateModalProps) => {
   const toggle = useModalStore((state) => state.toggleCreateProductVariant);
@@ -187,6 +190,7 @@ export const ProductVariantCreateModal = ({
       </Modal>
 
       <ProductChooseModal
+        locale={locale}
         products={products}
         selected={productId}
         setSelected={setProductId}

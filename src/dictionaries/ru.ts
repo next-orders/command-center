@@ -2,6 +2,7 @@ import { Dictionary } from "@/dictionaries/en";
 
 export const RU: Dictionary = {
   RETURN_BUTTON: "Вернуться",
+  CHOOSE_BUTTON: "Выбрать",
   SIGN_IN_BUTTON: "Войти",
   DEMO_EMPLOYEE_BUTTON: "Демо-сотрудник",
   COMMAND_CENTER_LABEL: "Командный центр",
@@ -39,4 +40,6 @@ export const RU: Dictionary = {
   PASSWORD_LABEL: "Пароль",
   PASSWORD_PLACEHOLDER: "Ваш пароль",
   SEARCH_PLACEHOLDER: "Найти что-нибудь",
+  FIND_BY_NAME_PLACEHOLDER: "Найти по названию",
+  CHOOSE_A_PRODUCT_LABEL: "Выберите продукт",
 };
