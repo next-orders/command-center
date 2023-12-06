@@ -6,9 +6,9 @@ import {
   GetProductVariantsInCategory,
 } from "@/client/api";
 import { MenuCategory, ProductVariant } from "@next-orders/api-sdk";
-import { Locale } from "@/dictionaries";
 import { CategoryCreateBlock } from "@/app/(authenticated)/menu/[id]/CategoryCreateBlock";
 import { getIconUrl } from "@/lib/helpers";
+import { CategoryButton } from "@/app/(authenticated)/menu/[id]/CategoryButton";
 
 type CategoriesBlockProps = {
   menuId: string;
@@ -26,7 +26,7 @@ export default async function CategoriesBlock({
   }
 
   const showCategories = menu.categories.map((category) => (
-    <CategoryBlock key={category.id} category={category} locale={locale} />
+    <CategoryBlock key={category.id} category={category} />
   ));
 
   return (
@@ -40,11 +40,10 @@ export default async function CategoriesBlock({
 }
 
 type CategoryBlockProps = {
-  locale: Locale;
   category: MenuCategory;
 };
 
-const CategoryBlock = async ({ category, locale }: CategoryBlockProps) => {
+const CategoryBlock = async ({ category }: CategoryBlockProps) => {
   const products = await GetProductVariantsInCategory(category.id);
 
   const showProducts = products?.map((variant) => (
@@ -54,23 +53,12 @@ const CategoryBlock = async ({ category, locale }: CategoryBlockProps) => {
   const iconUrl = getIconUrl(category.icon);
 
   return (
-    <div className="mb-8">
-      <div className="flex flex-row gap-2">
-        <Image
-          src={iconUrl}
-          alt=""
-          width={32}
-          height={32}
-          className="w-8 h-8 cursor-pointer hover:scale-90 duration-200"
-        />
-
-        <h2 className="text-2xl font-medium">
-          {category.name}{" "}
-          <span className="ml-2 text-xs text-zinc-500">{category.id}</span>
-        </h2>
+    <div className="mb-12">
+      <div>
+        <CategoryButton category={category} iconUrl={iconUrl} />
       </div>
 
-      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">
+      <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">
         {showProducts}
       </div>
     </div>

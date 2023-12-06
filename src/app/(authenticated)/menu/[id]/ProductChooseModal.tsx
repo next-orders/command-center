@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { IconChefHat } from "@tabler/icons-react";
+import { IconChefHat, IconSquareRoundedCheckFilled } from "@tabler/icons-react";
 import { useModalStore } from "@/store/modal";
 import { Button } from "@/components/Button";
 import { EntityModal } from "@/components/EntityModal";
@@ -73,14 +73,19 @@ const ProductChooseCard = ({
 }: ProductChooseCardProps) => {
   return (
     <div
-      className="px-4 py-4 bg-zinc-50 rounded-2xl cursor-pointer hover:scale-95 active:scale-90 duration-200 group border-2 border-transparent data-[active=true]:border-teal-500"
+      className="relative px-4 py-4 bg-zinc-50 rounded-2xl cursor-pointer hover:scale-95 active:scale-90 duration-200 group border-4 border-transparent data-[active=true]:border-teal-500"
       data-active={isSelected}
       onClick={() => setSelected(product.id)}
     >
+      <IconSquareRoundedCheckFilled
+        stroke={1.5}
+        className="z-10 w-8 h-8 absolute hidden top-2 left-2 text-teal-500 group-data-[active=true]:block"
+      />
+
       <div className="mb-2 px-4 py-4 bg-white rounded-2xl group-hover:scale-105 duration-200">
         <IconChefHat
           stroke={1.5}
-          className="mx-auto mb-2 w-12 h-12 text-zinc-400 group-hover:text-violet-500 duration-500"
+          className="mx-auto mb-2 w-12 h-12 text-zinc-400"
         />
       </div>
 

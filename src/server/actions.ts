@@ -152,12 +152,13 @@ export const CreateProductVariantForm = async (
   const slug = (formData.get("slug") as string) || "";
   const name = (formData.get("name") as string) || "";
   const description = (formData.get("description") as string) || "";
-  const sku = (formData.get("sku") as string) || "";
   const weightUnit = (formData.get("weightUnit") as WeightUnit) || "";
   const weightValue = (formData.get("weightValue") as string) || "";
   const gross = (formData.get("gross") as string) || "";
   const net = (formData.get("net") as string) || "";
   const tax = (formData.get("tax") as string) || "";
+
+  const sku = ""; // Don't ask on creating
 
   const create = await apiWithAccess().createProductVariant(
     {

@@ -3,6 +3,10 @@ import { DictionaryKey } from "@/dictionaries/en";
 export const PAGES = {
   CLIENT_BASE: { dictionary: "CLIENT_BASE_LABEL", label: "Client Base" },
   CLIENT_PAGE: { dictionary: "CLIENT_PAGE_LABEL", label: "Client Page" },
+  EMPLOYEE_BASE: {
+    dictionary: "EMPLOYEE_BASE_LABEL",
+    label: "Employee Base",
+  },
   CHANNELS: { dictionary: "CHANNELS_LABEL", label: "Channels" },
   CHANNEL_PAGE: { dictionary: "CHANNEL_PAGE_LABEL", label: "Channel Page" },
   DOMAINS: { dictionary: "DOMAINS_LABEL", label: "Domains" },

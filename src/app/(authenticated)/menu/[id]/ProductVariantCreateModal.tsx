@@ -40,7 +40,6 @@ export const ProductVariantCreateModal = ({
   const [slug, setSlug] = React.useState("");
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [sku, setSku] = React.useState("");
   const [weightUnit, setWeightUnit] = React.useState("");
   const [weightValue, setWeightValue] = React.useState("");
   const [gross, setGross] = React.useState("");
@@ -117,17 +116,6 @@ export const ProductVariantCreateModal = ({
               isRequired
               value={slug}
               onChange={setSlug}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Input
-              name="sku"
-              label="SKU"
-              placeholder="Stock keeping unit, unique identifier"
-              isRequired={false}
-              value={sku}
-              onChange={setSku}
             />
           </div>
 

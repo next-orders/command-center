@@ -6,7 +6,7 @@ import {
   getBrowserLocale,
 } from "@/lib/helpers";
 import { MenuItem } from "@/types";
-import { Locale } from "@/dictionaries";
+import { getDictionary, Locale } from "@/dictionaries";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
 
@@ -230,42 +230,59 @@ export const GetDemoSignInData = async () => {
 };
 
 export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
+  const locale = GetLocale();
+  const {
+    DASHBOARD_LABEL,
+    CHANNELS_LABEL,
+    MEDIA_LABEL,
+    DOMAINS_LABEL,
+    PRODUCTS_LABEL,
+    CLIENTS_LABEL,
+    EMPLOYEES_LABEL,
+  } = getDictionary(locale);
+
   return [
     {
       id: "1",
-      label: "Dashboard",
+      label: DASHBOARD_LABEL,
       href: "/dashboard",
       icon: "IconDashboard",
     },
     {
       id: "2",
-      label: "Channels",
+      label: CHANNELS_LABEL,
       href: "/channel",
       icon: "IconBuildingStore",
     },
     {
       id: "3",
-      label: "Media",
+      label: MEDIA_LABEL,
       href: "/media",
       icon: "IconPhoto",
     },
     {
       id: "4",
-      label: "Domains",
+      label: DOMAINS_LABEL,
       href: "/domain",
       icon: "IconWorldWww",
     },
     {
       id: "5",
-      label: "Products",
+      label: PRODUCTS_LABEL,
       href: "/product",
       icon: "IconCheese",
     },
     {
       id: "6",
-      label: "Clients",
+      label: CLIENTS_LABEL,
       href: "/client",
       icon: "IconUsers",
+    },
+    {
+      id: "7",
+      label: EMPLOYEES_LABEL,
+      href: "/employee",
+      icon: "IconUserScan",
     },
   ];
 };
