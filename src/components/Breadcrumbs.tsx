@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { BackBlock } from "@/components/BackBlock";
-import { getDictionary } from "@/dictionaries";
-import type { Dictionary } from "@/dictionaries/en";
-import { PageKey, PAGES } from "@/lib/pages";
+import { getDictionary, prepareLocalizedLinks } from "@/dictionaries";
+import { PageKey } from "@/lib/pages";
 import { GetLocale } from "@/client/api";
 
 type BreadcrumbsProps = {
@@ -36,7 +35,7 @@ export const Breadcrumbs = ({ keys }: BreadcrumbsProps) => {
   );
 };
 
-type BreadcrumbLink = {
+export type BreadcrumbLink = {
   title: string;
   href: string;
 };
@@ -56,19 +55,3 @@ const BreadcrumbItem = ({ link }: BreadcrumbItemProps) => (
     </Link>
   </li>
 );
-
-const createLinkFromPageKey = (
-  dictionary: Dictionary,
-  pageKey: PageKey,
-): BreadcrumbLink => {
-  const { dictionaryKey, href } = PAGES[pageKey];
-  const title = dictionary[dictionaryKey];
-
-  return { title, href };
-};
-
-const prepareLocalizedLinks = (
-  keys: PageKey[],
-  dictionary: Dictionary,
-): BreadcrumbLink[] =>
-  keys.map((key) => createLinkFromPageKey(dictionary, key));

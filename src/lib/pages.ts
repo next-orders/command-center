@@ -1,10 +1,10 @@
-import { DictionaryKey } from "@/dictionaries/en";
+import { TranslationKey } from "@/dictionaries";
 
 export type Pages = typeof PAGES;
 export type PageKey = keyof Pages;
 export type PageHref = Pages[PageKey]["href"];
 export type PageRecord = {
-  dictionaryKey: DictionaryKey;
+  dictionaryKey: TranslationKey;
   href: PageHref;
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "command-center",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Control products, orders, all other entities. Full interaction with API and frontend.",
   "scripts": {
     "dev": "next dev",

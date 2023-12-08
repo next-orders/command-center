@@ -13,9 +13,11 @@ export const BackBlock = ({ locale }: BackBlockProps) => {
   const router = useRouter();
   const { RETURN_BUTTON } = getDictionary(locale);
 
+  const handleClick = () => router.back();
+
   return (
     <div className="w-full md:w-auto mx-auto md:mx-0">
-      <Button onClick={() => router.back()}>
+      <Button onClick={handleClick}>
         <IconArrowBackUp stroke={1.5} /> {RETURN_BUTTON}
       </Button>
     </div>
