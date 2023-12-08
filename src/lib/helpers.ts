@@ -32,7 +32,12 @@ export const getBrowserLocale = (
       return "RU";
     case "en":
     case "en-us":
+    case "en-gr":
       return "EN";
+    case "es":
+    case "es-es":
+    case "es-mx":
+      return "ES";
     default:
       console.warn(
         `Not found available lang: ${browserLanguage}. Returning default EN.`,
