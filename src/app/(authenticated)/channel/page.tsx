@@ -1,21 +1,14 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GetLocale } from "@/client/api";
-import { BreadcrumbLinks } from "@/types";
-import { PAGES } from "@/lib/pages";
 import ChannelsBlock from "@/app/(authenticated)/channel/ChannelsBlock";
 import { ChannelsBlockSkeleton } from "@/app/(authenticated)/channel/ChannelsBlockSkeleton";
 import { ChannelCreateModal } from "@/app/(authenticated)/channel/ChannelCreateModal";
 
 export default async function Page() {
-  const locale = GetLocale();
-
-  const breadcrumbs: BreadcrumbLinks[] = [{ page: PAGES.CHANNELS, href: "#" }];
-
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} locale={locale} />
+      <Breadcrumbs keys={["CHANNELS"]} />
 
       <h1 className="mb-2 text-3xl font-semibold">Channels</h1>
       <div>You can see the loaded data</div>

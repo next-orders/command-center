@@ -1,6 +1,4 @@
 import { GetLocale, GetMenuById, GetProducts } from "@/client/api";
-import { BreadcrumbLinks } from "@/types";
-import { PAGES } from "@/lib/pages";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import CategoriesBlock from "@/app/(authenticated)/menu/[id]/CategoriesBlock";
 import { ProductVariantCreateModal } from "@/app/(authenticated)/menu/[id]/ProductVariantCreateModal";
@@ -14,11 +12,9 @@ export default async function Page({ params }: PageProps) {
   const products = await GetProducts();
   const menu = await GetMenuById(params.id);
 
-  const breadcrumbs: BreadcrumbLinks[] = [{ page: PAGES.MENU_PAGE, href: "#" }];
-
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} locale={locale} />
+      <Breadcrumbs keys={["MENU_PAGE"]} />
 
       <h1 className="mb-2 text-3xl font-semibold">Menu Page</h1>
       <div>You can see the loaded data</div>

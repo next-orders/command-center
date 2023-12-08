@@ -1,42 +1,45 @@
 import { DictionaryKey } from "@/dictionaries/en";
 
+export type Pages = typeof PAGES;
+export type PageKey = keyof Pages;
+export type PageHref = Pages[PageKey]["href"];
+export type PageRecord = {
+  dictionaryKey: DictionaryKey;
+  href: PageHref;
+};
+
 export const PAGES = {
-  CLIENT_BASE: { dictionary: "CLIENT_BASE_LABEL", label: "Client Base" },
-  CLIENT_PAGE: { dictionary: "CLIENT_PAGE_LABEL", label: "Client Page" },
+  DASHBOARD: { dictionaryKey: "DASHBOARD_LABEL", href: "/dashboard" },
+  CLIENT_BASE: { dictionaryKey: "CLIENT_BASE_LABEL", href: "/client" },
+  CLIENT_PAGE: { dictionaryKey: "CLIENT_PAGE_LABEL", href: "#" },
   EMPLOYEE_BASE: {
-    dictionary: "EMPLOYEE_BASE_LABEL",
-    label: "Employee Base",
+    dictionaryKey: "EMPLOYEE_BASE_LABEL",
+    href: "/employee",
   },
-  CHANNELS: { dictionary: "CHANNELS_LABEL", label: "Channels" },
-  CHANNEL_PAGE: { dictionary: "CHANNEL_PAGE_LABEL", label: "Channel Page" },
-  DOMAINS: { dictionary: "DOMAINS_LABEL", label: "Domains" },
-  MEDIA: { dictionary: "MEDIA_LABEL", label: "Media" },
-  PRODUCTS: { dictionary: "PRODUCTS_LABEL", label: "Products" },
+  CHANNELS: { dictionaryKey: "CHANNELS_LABEL", href: "/channel" },
+  CHANNEL_PAGE: { dictionaryKey: "CHANNEL_PAGE_LABEL", href: "#" },
+  DOMAINS: { dictionaryKey: "DOMAINS_LABEL", href: "/domain" },
+  MEDIA: { dictionaryKey: "MEDIA_LABEL", href: "/media" },
+  PRODUCTS: { dictionaryKey: "PRODUCTS_LABEL", href: "/product" },
   PRODUCT_PAGE: {
-    dictionary: "PRODUCT_PAGE_LABEL",
-    label: "Product page",
+    dictionaryKey: "PRODUCT_PAGE_LABEL",
+    href: "#",
   },
   INGREDIENTS_PAGE: {
-    dictionary: "INGREDIENTS_PAGE_LABEL",
-    label: "Ingredients page",
+    dictionaryKey: "INGREDIENTS_PAGE_LABEL",
+    href: "#",
   },
   PRODUCTION_PAGE: {
-    dictionary: "PRODUCTION_PAGE_LABEL",
-    label: "Production page",
+    dictionaryKey: "PRODUCTION_PAGE_LABEL",
+    href: "#",
   },
   READY_PAGE: {
-    dictionary: "READY_PAGE_LABEL",
-    label: "Ready page",
+    dictionaryKey: "READY_PAGE_LABEL",
+    href: "#",
   },
-  MENUS: { dictionary: "MENUS_LABEL", label: "Menus" },
-  MENU_PAGE: { dictionary: "MENU_PAGE_LABEL", label: "Menu Page" },
+  MENU_PAGE: { dictionaryKey: "MENU_PAGE_LABEL", href: "#" },
   PRODUCT_VARIANT_PAGE: {
-    dictionary: "PRODUCT_VARIANT_PAGE_LABEL",
-    label: "Product Variant Page",
+    dictionaryKey: "PRODUCT_VARIANT_PAGE_LABEL",
+    href: "#",
   },
 } as const;
-
-export type Page = {
-  dictionary: DictionaryKey;
-  label: string;
-};

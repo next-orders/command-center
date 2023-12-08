@@ -1,36 +1,33 @@
 import Link from "next/link";
 import { BackBlock } from "@/components/BackBlock";
-import { getDictionary, Locale } from "@/dictionaries";
-import { BreadcrumbLinks } from "@/types";
+import { getDictionary } from "@/dictionaries";
+import type { Dictionary } from "@/dictionaries/en";
+import { PageKey, PAGES } from "@/lib/pages";
+import { GetLocale } from "@/client/api";
 
-type Props = {
-  links: BreadcrumbLinks[];
-  locale: Locale;
+type BreadcrumbsProps = {
+  keys: PageKey[];
 };
 
-export const Breadcrumbs = ({ links, locale }: Props) => {
-  const preparedLinks = prepareLinks(links, locale);
+export const Breadcrumbs = ({ keys }: BreadcrumbsProps) => {
+  const locale = GetLocale();
+  const dictionary = getDictionary(locale);
 
-  const crumbs = preparedLinks.map((link, index) => (
-    <li
-      key={index}
-      className="relative after:content-['/'] after:px-1 after:text-lg after:text-zinc-300 last:after:content-['']"
-    >
-      <Link
-        href={link.href}
-        className="px-3 py-2 inline-block rounded-xl outline-2 outline-offset-1 outline-zinc-500 focus:ring-zinc-500 focus:border-zinc-500 hover:bg-zinc-200 hover:scale-95 duration-200 bg-zinc-100 data-[active=true]:bg-zinc-50"
-        data-active={link.href === "#"}
-      >
-        {link.title}
-      </Link>
-    </li>
+  // Dashboard page is always at start
+  const preparedLinks = prepareLocalizedLinks(
+    ["DASHBOARD", ...keys],
+    dictionary,
+  );
+
+  const breadcrumbItems = preparedLinks.map((link, index) => (
+    <BreadcrumbItem key={index} link={link} />
   ));
 
   return (
     <div className="mb-6 flex flex-row justify-between items-center">
       <nav className="hidden md:block">
         <ol role="list" className="flex flex-row">
-          {crumbs}
+          {breadcrumbItems}
         </ol>
       </nav>
 
@@ -39,17 +36,39 @@ export const Breadcrumbs = ({ links, locale }: Props) => {
   );
 };
 
-const prepareLinks = (links: BreadcrumbLinks[], locale: Locale) => {
-  const dictionary = getDictionary(locale);
-
-  const prepared = [{ title: dictionary.DASHBOARD_LABEL, href: "/dashboard" }];
-
-  for (const link of links) {
-    prepared.push({
-      title: dictionary[link.page.dictionary],
-      href: link.href,
-    });
-  }
-
-  return prepared;
+type BreadcrumbLink = {
+  title: string;
+  href: string;
 };
+
+type BreadcrumbItemProps = {
+  link: BreadcrumbLink;
+};
+
+const BreadcrumbItem = ({ link }: BreadcrumbItemProps) => (
+  <li className="relative after:content-['/'] after:px-1 after:text-lg after:text-zinc-300 last:after:content-['']">
+    <Link
+      href={link.href}
+      className="px-3 py-2 inline-block rounded-xl outline-2 outline-offset-1 outline-zinc-500 focus:ring-zinc-500 focus:border-zinc-500 hover:bg-zinc-200 hover:scale-95 duration-200 bg-zinc-100 data-[active=true]:bg-zinc-50"
+      data-active={link.href === "#"}
+    >
+      {link.title}
+    </Link>
+  </li>
+);
+
+const createLinkFromPageKey = (
+  dictionary: Dictionary,
+  pageKey: PageKey,
+): BreadcrumbLink => {
+  const { dictionaryKey, href } = PAGES[pageKey];
+  const title = dictionary[dictionaryKey];
+
+  return { title, href };
+};
+
+const prepareLocalizedLinks = (
+  keys: PageKey[],
+  dictionary: Dictionary,
+): BreadcrumbLink[] =>
+  keys.map((key) => createLinkFromPageKey(dictionary, key));

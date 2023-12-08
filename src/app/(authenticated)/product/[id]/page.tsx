@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TextInput } from "@/components/TextInput";
 import { ProductVariant } from "@next-orders/api-sdk";
-import { GetLocale, GetProductById } from "@/client/api";
-import { BreadcrumbLinks } from "@/types";
-import { PAGES } from "@/lib/pages";
+import { GetProductById } from "@/client/api";
 
 type PageProps = {
   params: { id: string };
@@ -17,20 +15,13 @@ export default async function Page({ params }: PageProps) {
     notFound();
   }
 
-  const locale = GetLocale();
-
-  const breadcrumbs: BreadcrumbLinks[] = [
-    { page: PAGES.PRODUCTS, href: `/product` },
-    { page: PAGES.PRODUCT_PAGE, href: "#" },
-  ];
-
   const variants = product.variants?.map((variant) => (
     <ProductVariantBlock key={variant.id} variant={variant} />
   ));
 
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} locale={locale} />
+      <Breadcrumbs keys={["PRODUCTS", "PRODUCT_PAGE"]} />
 
       <h1 className="mb-2 text-3xl font-semibold">Product page</h1>
       <div className="mb-8">Here you can edit product data</div>

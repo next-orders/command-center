@@ -1,10 +1,8 @@
-import { BreadcrumbLinks } from "@/types";
-import { PAGES } from "@/lib/pages";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GetChannelById, GetLocale, GetMenusInChannel } from "@/client/api";
-import { notFound } from "next/navigation";
-import { Menu } from "@next-orders/api-sdk";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { GetChannelById, GetMenusInChannel } from "@/client/api";
+import { Menu } from "@next-orders/api-sdk";
 
 type PageProps = {
   params: { id: string };
@@ -18,20 +16,13 @@ export default async function Page({ params }: PageProps) {
 
   const menus = await GetMenusInChannel(channel.id);
 
-  const locale = GetLocale();
-
-  const breadcrumbs: BreadcrumbLinks[] = [
-    { page: PAGES.CHANNELS, href: "/channel" },
-    { page: PAGES.CHANNEL_PAGE, href: "#" },
-  ];
-
   const showMenus = menus?.map((menu) => (
     <MenuCard key={menu.id} menu={menu} />
   ));
 
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} locale={locale} />
+      <Breadcrumbs keys={["CHANNELS", "CHANNEL_PAGE"]} />
 
       <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
         <div>

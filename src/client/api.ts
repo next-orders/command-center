@@ -29,12 +29,12 @@ export const GetLocale = (): Locale => {
   const language = headers().get("Accept-Language");
   const browserLocale = getBrowserLocale(language);
 
-  const locale = cookies().get(COOKIES_LOCALE_KEY)?.value;
-  if (!locale) {
-    return browserLocale;
+  const localeFromCookies = cookies().get(COOKIES_LOCALE_KEY)?.value;
+  if (localeFromCookies) {
+    return localeFromCookies as Locale;
   }
 
-  return locale as Locale;
+  return browserLocale;
 };
 
 export const GetApiVersion = async () => {

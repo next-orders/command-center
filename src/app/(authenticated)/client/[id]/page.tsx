@@ -4,8 +4,6 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
 import ClientAvatarBlock from "@/app/(authenticated)/client/[id]/ClientAvatarBlock";
 import { ClientAvatarBlockSkeleton } from "@/app/(authenticated)/client/[id]/ClientAvatarBlockSkeleton";
-import { PAGES } from "@/lib/pages";
-import { BreadcrumbLinks } from "@/types";
 import { GetLocale } from "@/client/api";
 
 type PageProps = {
@@ -15,14 +13,9 @@ type PageProps = {
 export default async function Page({ params }: PageProps) {
   const locale = GetLocale();
 
-  const breadcrumbs: BreadcrumbLinks[] = [
-    { page: PAGES.CLIENT_BASE, href: `/client` },
-    { page: PAGES.CLIENT_PAGE, href: "#" },
-  ];
-
   return (
     <>
-      <Breadcrumbs links={breadcrumbs} locale={locale} />
+      <Breadcrumbs keys={["CLIENT_BASE", "CLIENT_PAGE"]} />
 
       <h1 className="mb-2 text-3xl font-semibold">Client page</h1>
       <div className="mb-8">Get all data about this client</div>

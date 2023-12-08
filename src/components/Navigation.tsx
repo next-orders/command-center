@@ -7,12 +7,12 @@ import { useUIStore } from "@/store/ui";
 import { LinkButton } from "@/components/LinkButton";
 import { getDictionary, Locale } from "@/dictionaries";
 
-type Props = {
+type NavigationProps = {
   menu: MenuItem[];
   locale: Locale;
 };
 
-export const Navigation = ({ menu, locale }: Props) => {
+export const Navigation = ({ menu, locale }: NavigationProps) => {
   const isNavbarOpened = useUIStore((state) => state.isNavbarOpened);
 
   const { COMMAND_CENTER_LABEL } = getDictionary(locale);
