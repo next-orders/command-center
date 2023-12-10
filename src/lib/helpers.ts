@@ -13,20 +13,19 @@ export const getColorByClientLevel = (level: number) => {
   return "violet";
 };
 
-export const getBrowserLocale = (
-  acceptLanguage: unknown | null | undefined,
-): Locale => {
+const ensureLanguage = (acceptLanguage: unknown): string => {
   if (!acceptLanguage || typeof acceptLanguage !== "string") {
     return "EN";
   }
+  return acceptLanguage;
+};
 
-  const browserLanguage = acceptLanguage.toLowerCase().split(",", 2);
-  if (!browserLanguage[0]) {
-    console.warn(`Not found lang in headers: ${browserLanguage}`);
-    return "EN";
-  }
+const getPrimaryLanguage = (acceptLanguage: string): string => {
+  return acceptLanguage.toLowerCase().split(",", 2)[0];
+};
 
-  switch (browserLanguage[0]) {
+const getSupportedLocale = (browserLanguage: string): Locale => {
+  switch (browserLanguage) {
     case "ru":
     case "ru-ru":
       return "RU";
@@ -44,6 +43,12 @@ export const getBrowserLocale = (
       );
       return "EN";
   }
+};
+
+export const getBrowserLocale = (acceptLanguage: unknown): Locale => {
+  const ensuredLanguage = ensureLanguage(acceptLanguage);
+  const primaryLanguage = getPrimaryLanguage(ensuredLanguage);
+  return getSupportedLocale(primaryLanguage);
 };
 
 export const getIconUrl = (icon: string | null) => {

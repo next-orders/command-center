@@ -1,64 +1,20 @@
 import { ClientTrait } from "@next-orders/api-sdk";
 import { HoverDropdown } from "@/components/HoverDropdown";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
+import { getDropdownByTraitType, Locale } from "@/dictionaries";
 
 type TraitsBlockProps = {
   traits: ClientTrait[];
+  locale: Locale;
 };
 
-export const TraitsBlock = ({ traits }: TraitsBlockProps) => {
-  // Min 3 to show, if less - add blank
-  if (traits.length === 0) {
-    traits.push(
-      {
-        id: "blank1",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: "blank2",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: "blank3",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    );
-  }
-  if (traits.length === 1) {
-    traits.push(
-      {
-        id: "blank1",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: "blank2",
-        type: "BLANK",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    );
-  }
-  if (traits.length === 2) {
-    traits.push({
-      id: "blank1",
-      type: "BLANK",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-  }
+export const TraitsBlock = ({ traits, locale }: TraitsBlockProps) => {
+  const traitsToShow = getTraitsWithMinimum(traits);
 
-  const threeTraits = traits?.map((trait) => (
+  const threeTraits = traitsToShow?.map((trait) => (
     <HoverDropdown
       key={trait.id}
-      dropdown={<DropdownHintByTraitType type={trait.type} />}
+      dropdown={getDropdownByTraitType(trait.type, locale)}
     >
       <div className="cursor-default md:hover:scale-125 hover:drop-shadow-md duration-200">
         <ClientTraitBadge size="lg" type={trait.type} />
@@ -73,65 +29,27 @@ export const TraitsBlock = ({ traits }: TraitsBlockProps) => {
   );
 };
 
-const DropdownHintByTraitType = ({ type }: { type: ClientTrait["type"] }) => {
-  if (type === "BLANK") {
-    return (
-      <div>
-        No Trait here. Wait a while, the client will probably receive it.
-      </div>
-    );
-  }
-  if (type === "ORDERLY") {
-    return (
-      <div>
-        Client have a <b>Orderly Trait</b>. Often orders, but for small amounts.
-      </div>
-    );
-  }
-  if (type === "SPONTANEOUS") {
-    return (
-      <div>
-        Client have a <b>Spontaneous Trait</b>. Rarely orders, but for large
-        amounts.
-      </div>
-    );
-  }
-  if (type === "COLD") {
-    return (
-      <div>
-        Client have a <b>Cold Trait</b>. Hasn&apos;t ordered for a long time.
-      </div>
-    );
-  }
-  if (type === "WELL_FED") {
-    return (
-      <div>
-        Client have a <b>Well-fed Trait</b>. Often orders for large amounts.
-      </div>
-    );
-  }
-  if (type === "SATISFIED") {
-    return (
-      <div>
-        Client have a <b>Satisfied Trait</b>. Happy with everything and always.
-      </div>
-    );
-  }
-  if (type === "PICKY") {
-    return (
-      <div>
-        Client have a <b>Picky Trait</b>. Always dissatisfied.
-      </div>
-    );
-  }
-  if (type === "CAUTIOUS") {
-    return (
-      <div>
-        Client have a <b>Cautious Trait</b>. Don&apos;t know what&apos;s on the
-        client&apos;s mind.
-      </div>
-    );
+const getTraitsWithMinimum = (
+  traits: ClientTrait[],
+  minCount = 3,
+): ClientTrait[] => {
+  const blankTrait: ClientTrait = {
+    id: "",
+    type: "BLANK",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
+  // Copy the array to avoid mutating the input
+  const traitsCopy = [...traits];
+
+  // Min 3 to show, if less - add blank
+  for (let i = traitsCopy.length; i < minCount; i++) {
+    traitsCopy.push({
+      ...blankTrait,
+      id: `blank${i + 1}`,
+    });
   }
 
-  return <div>No hint here.</div>;
+  return traitsCopy;
 };

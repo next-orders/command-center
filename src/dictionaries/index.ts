@@ -1,5 +1,6 @@
 import { PageKey, PAGES } from "@/lib/pages";
 import { BreadcrumbLink } from "@/components/Breadcrumbs";
+import { ClientTrait } from "@next-orders/api-sdk";
 
 export type Locale = "EN" | "ES" | "RU";
 
@@ -170,6 +171,61 @@ const Translations = {
     ES: "Elija un producto",
     RU: "Выберите продукт",
   },
+  CLIENT_LOYALTY_TOOLTIP: {
+    EN: 'This is the level of **Client Loyalty**. For each action he receives an increase. Every day the level decreases automatically – "passive cooling".',
+    ES: 'Este es el nivel de **Fidelización del Cliente**. Por cada acción recibe un aumento. Cada día el nivel disminuye automáticamente – "enfriamiento pasivo".',
+    RU: 'Это уровень **Лояльности клиента**. За каждое действие он получает прибавку. Каждый день уровень автоматически снижается – "пассивное охлаждение".',
+  },
+  CLIENT_LEVEL_TOOLTIP: {
+    EN: "This is the **Client Level**. It takes into account all actions for all time.",
+    ES: "Este es el **Nivel de Cliente**. Tiene en cuenta todas las acciones de todos los tiempos.",
+    RU: "Это **Уровень клиента**. Здесь учитываются все действия за все время.",
+  },
+  CLIENT_TRAIT_BLANK_TOOLTIP: {
+    EN: "No Trait here. Wait a while, the client will probably receive it.",
+    ES: "No hay rasgo aquí. Espera un momento, probablemente el cliente lo recibirá.",
+    RU: "Нет черты. Подождите немного, клиент наверняка ее получит.",
+  },
+  CLIENT_TRAIT_ORDERLY_TOOLTIP: {
+    EN: "Client have a **Orderly Trait**. Often orders, but for small amounts.",
+    ES: "El cliente tiene un **rasgo ordenado**. A menudo pedidos, pero por pequeñas cantidades.",
+    RU: "У клиента есть черта **Упорядоченность**. Заказывает часто, но на небольшие суммы.",
+  },
+  CLIENT_TRAIT_SPONTANEOUS_TOOLTIP: {
+    EN: "Client have a **Spontaneous Trait**. Rarely orders, but for large amounts.",
+    ES: "El cliente tiene un **rasgo espontáneo**. Rara vez se realizan pedidos, pero sí por grandes cantidades.",
+    RU: "У клиента есть черта **Спонтанность**. Заказывает редко, но на большие суммы.",
+  },
+  CLIENT_TRAIT_COLD_TOOLTIP: {
+    EN: "Client have a **Cold Trait**. Hasn't ordered for a long time.",
+    ES: "El cliente tiene un **rasgo de frialdad**. Hace mucho que no ordeno.",
+    RU: "У клиента есть черта **Холод**. Давно не заказывал.",
+  },
+  CLIENT_TRAIT_WELL_FED_TOOLTIP: {
+    EN: "Client have a **Well-fed Trait**. Often orders for large amounts.",
+    ES: "El cliente tiene un **rasgo de bien alimentado**. A menudo se realizan pedidos por grandes cantidades.",
+    RU: "У клиента есть черта **Сытый**. Часто заказывает на большие суммы.",
+  },
+  CLIENT_TRAIT_SATISFIED_TOOLTIP: {
+    EN: "Client have a **Satisfied Trait**. Happy with everything and always.",
+    ES: "El cliente tiene un **rasgo de satisfacción**. Feliz con todo y siempre.",
+    RU: "У клиента есть черта **Удовлетворенность**. Доволен всем и всегда.",
+  },
+  CLIENT_TRAIT_PICKY_TOOLTIP: {
+    EN: "Client have a **Picky Trait**. Always dissatisfied.",
+    ES: "El cliente tiene un **rasgo exigente**. Siempre insatisfecho.",
+    RU: "У клиента есть черта **Придирчивость**. Всегда неудовлетворен.",
+  },
+  CLIENT_TRAIT_CAUTIOUS_TOOLTIP: {
+    EN: "Client have a **Cautious Trait**. Don't know what's on the client's mind.",
+    ES: "El cliente tiene un **rasgo cauteloso**. No sé qué pasa por la mente del cliente.",
+    RU: "У клиента есть черта **Осторожность**. Не известно, что у него на уме.",
+  },
+  CLIENT_TRAIT_NO_TOOLTIP: {
+    EN: "No hint here.",
+    ES: "No hay ninguna pista aquí.",
+    RU: "Здесь нет подсказки.",
+  },
 };
 
 const createDictionaryForLocale = (locale: Locale): Dictionary =>
@@ -200,3 +256,25 @@ export const prepareLocalizedLinks = (
   dictionary: Dictionary,
 ): BreadcrumbLink[] =>
   keys.map((key) => createLinkFromPageKey(dictionary, key));
+
+const traitToTooltipKeyMap: Record<ClientTrait["type"], TranslationKey> = {
+  BLANK: "CLIENT_TRAIT_BLANK_TOOLTIP",
+  ORDERLY: "CLIENT_TRAIT_ORDERLY_TOOLTIP",
+  SPONTANEOUS: "CLIENT_TRAIT_SPONTANEOUS_TOOLTIP",
+  COLD: "CLIENT_TRAIT_COLD_TOOLTIP",
+  WELL_FED: "CLIENT_TRAIT_WELL_FED_TOOLTIP",
+  SATISFIED: "CLIENT_TRAIT_SATISFIED_TOOLTIP",
+  PICKY: "CLIENT_TRAIT_PICKY_TOOLTIP",
+  CAUTIOUS: "CLIENT_TRAIT_CAUTIOUS_TOOLTIP",
+};
+
+export const getDropdownByTraitType = (
+  type: ClientTrait["type"],
+  locale: Locale,
+): string => {
+  const dictionary = getDictionary(locale);
+  const tooltipKey = traitToTooltipKeyMap[type];
+  return tooltipKey in dictionary
+    ? dictionary[tooltipKey]
+    : dictionary.CLIENT_TRAIT_NO_TOOLTIP;
+};

@@ -36,7 +36,8 @@ export default async function ClientAvatarBlock({
   });
   const clientLoyaltyPercent = client.loyalty;
 
-  const { IT_IS_LABEL } = getDictionary(locale);
+  const { IT_IS_LABEL, CLIENT_LOYALTY_TOOLTIP, CLIENT_LEVEL_TOOLTIP } =
+    getDictionary(locale);
 
   return (
     <div className="mb-4 mx-auto max-w-xs group">
@@ -50,27 +51,12 @@ export default async function ClientAvatarBlock({
           className="w-full aspect-square rounded-xl"
         />
         <div className="absolute top-6 left-0 right-0">
-          <HoverDropdown
-            dropdown={
-              <>
-                This is the level of <b>Client Loyalty</b>. For each action he
-                receives an increase. Every day the level decreases
-                automatically – &quot;passive cooling&quot;.
-              </>
-            }
-          >
+          <HoverDropdown dropdown={CLIENT_LOYALTY_TOOLTIP}>
             <LoyaltyProgress percent={clientLoyaltyPercent} />
           </HoverDropdown>
         </div>
         <div className="absolute top-1 right-1 md:group-hover:scale-105 duration-300">
-          <HoverDropdown
-            dropdown={
-              <>
-                This is the <b>Client Level</b>. It takes into account all
-                actions for all time.
-              </>
-            }
-          >
+          <HoverDropdown dropdown={CLIENT_LEVEL_TOOLTIP}>
             <div className="md:hover:scale-125 duration-200">
               <LevelBadge level={client.level} size="lg" />
             </div>
@@ -83,7 +69,7 @@ export default async function ClientAvatarBlock({
       </div>
 
       <div className="mt-4">
-        <TraitsBlock traits={client.traits} />
+        <TraitsBlock traits={client.traits} locale={locale} />
       </div>
     </div>
   );

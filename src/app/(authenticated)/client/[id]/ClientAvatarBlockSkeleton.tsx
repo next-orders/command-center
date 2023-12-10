@@ -14,7 +14,7 @@ export const ClientAvatarBlockSkeleton = ({ locale }: { locale: Locale }) => {
       </div>
 
       <div className="mt-4 animate-pulse">
-        <TraitsBlock traits={[]} />
+        <TraitsBlock traits={[]} locale={locale} />
       </div>
     </div>
   );
