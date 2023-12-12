@@ -12,6 +12,7 @@ type Dictionary = Record<TranslationKey, string>;
 const Translations = {
   RETURN_BUTTON: { EN: "Return", ES: "Devolver", RU: "Вернуться" },
   CHOOSE_BUTTON: { EN: "Choose", ES: "Elegir", RU: "Выбрать" },
+  OPEN_BUTTON: { EN: "Open", ES: "Abrir", RU: "Открыть" },
   SIGN_IN_BUTTON: { EN: "Sign In", ES: "Iniciar sesión", RU: "Войти" },
   DEMO_EMPLOYEE_BUTTON: {
     EN: "Demo Employee",
@@ -64,10 +65,30 @@ const Translations = {
     RU: "Страница меню",
   },
   PRODUCTS_LABEL: { EN: "Products", ES: "Productos", RU: "Продукты" },
+  PRODUCTION_LABEL: {
+    EN: "Production",
+    ES: "Producción",
+    RU: "Производство",
+  },
+  PRODUCTION_DESCRIPTION: {
+    EN: "Items that need to be prepared",
+    ES: "Artículos que deben prepararse",
+    RU: "Товары, которые необходимо приготовить",
+  },
   PRODUCT_PAGE_LABEL: {
     EN: "Product page",
     ES: "Página del producto",
     RU: "Страница продукта",
+  },
+  INGREDIENT_LABEL: {
+    EN: "Ingredient",
+    ES: "Ingrediente",
+    RU: "Ингредиент",
+  },
+  INGREDIENT_DESCRIPTION: {
+    EN: "The basic components for production",
+    ES: "Los componentes básicos para la producción",
+    RU: "Основные компоненты для производства",
   },
   INGREDIENTS_PAGE_LABEL: {
     EN: "Ingredients page",
@@ -78,6 +99,16 @@ const Translations = {
     EN: "Production page",
     ES: "Página de producción",
     RU: "Страница производства",
+  },
+  READY_LABEL: {
+    EN: "Ready",
+    ES: "Listo",
+    RU: "Готовый",
+  },
+  READY_DESCRIPTION: {
+    EN: "Prepared and packaged for sale",
+    ES: "Preparado y empaquetado para la venta",
+    RU: "Приготовлено и упаковано для продажи",
   },
   READY_PAGE_LABEL: {
     EN: "Ready page",

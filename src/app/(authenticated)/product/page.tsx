@@ -2,8 +2,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconCheese, IconChefHat, IconPaperBag } from "@tabler/icons-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { GetLocale } from "@/client/api";
+import { getDictionary } from "@/dictionaries";
 
 export default async function Page() {
+  const locale = GetLocale();
+  const {
+    OPEN_BUTTON,
+    PRODUCTION_LABEL,
+    PRODUCTION_DESCRIPTION,
+    READY_LABEL,
+    READY_DESCRIPTION,
+    INGREDIENT_LABEL,
+    INGREDIENT_DESCRIPTION,
+  } = getDictionary(locale);
+
   return (
     <>
       <Breadcrumbs keys={["PRODUCTS"]} />
@@ -21,8 +34,8 @@ export default async function Page() {
               stroke={1.5}
               className="mx-auto mb-2 w-14 h-14 text-violet-500"
             />
-            <div className="text-2xl font-semibold">Production</div>
-            <p>Items that need to be prepared</p>
+            <div className="text-2xl font-semibold">{PRODUCTION_LABEL}</div>
+            <p>{PRODUCTION_DESCRIPTION}</p>
           </div>
 
           <div>
@@ -30,7 +43,7 @@ export default async function Page() {
               35
             </div>
             <div className="px-6 py-4 font-medium bg-zinc-100 rounded-xl group-hover:bg-violet-200 duration-200">
-              Show all
+              {OPEN_BUTTON}
             </div>
           </div>
         </Link>
@@ -44,8 +57,8 @@ export default async function Page() {
               stroke={1.5}
               className="mx-auto mb-2 w-14 h-14 text-blue-500"
             />
-            <div className="text-2xl font-semibold">Ready</div>
-            <p>Prepared and packaged for sale</p>
+            <div className="text-2xl font-semibold">{READY_LABEL}</div>
+            <p>{READY_DESCRIPTION}</p>
           </div>
 
           <div>
@@ -53,7 +66,7 @@ export default async function Page() {
               24
             </div>
             <div className="px-6 py-4 font-medium bg-zinc-100 rounded-xl group-hover:bg-blue-200 duration-200">
-              Show all
+              {OPEN_BUTTON}
             </div>
           </div>
         </Link>
@@ -67,8 +80,8 @@ export default async function Page() {
               stroke={1.5}
               className="mx-auto mb-2 w-14 h-14 text-green-500"
             />
-            <div className="text-2xl font-semibold">Ingredients</div>
-            <p>The basic components</p>
+            <div className="text-2xl font-semibold">{INGREDIENT_LABEL}</div>
+            <p>{INGREDIENT_DESCRIPTION}</p>
           </div>
 
           <div>
@@ -76,7 +89,7 @@ export default async function Page() {
               46
             </div>
             <div className="px-6 py-4 font-medium bg-zinc-100 rounded-xl group-hover:bg-green-200 duration-200">
-              Show all
+              {OPEN_BUTTON}
             </div>
           </div>
         </Link>

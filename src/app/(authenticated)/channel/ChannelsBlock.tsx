@@ -3,6 +3,7 @@ import { GetChannels, GetLocale } from "@/client/api";
 import { ChannelCreateBlock } from "@/app/(authenticated)/channel/ChannelCreateBlock";
 import { Channel } from "@next-orders/api-sdk";
 import { IconBuildingStore } from "@tabler/icons-react";
+import { getDictionary, Locale } from "@/dictionaries";
 
 export default async function ChannelsBlock() {
   const channels = await GetChannels();
@@ -14,7 +15,7 @@ export default async function ChannelsBlock() {
   }
 
   const showChannels = channels?.map((channel) => (
-    <ChannelCard key={channel.id} channel={channel} />
+    <ChannelCard key={channel.id} channel={channel} locale={locale} />
   ));
 
   return (
@@ -28,10 +29,13 @@ export default async function ChannelsBlock() {
 }
 
 type ChannelCardProps = {
+  locale: Locale;
   channel: Channel;
 };
 
-const ChannelCard = ({ channel }: ChannelCardProps) => {
+const ChannelCard = ({ locale, channel }: ChannelCardProps) => {
+  const { OPEN_BUTTON } = getDictionary(locale);
+
   return (
     <Link href={`/channel/${channel.id}`}>
       <div className="bg-zinc-50 rounded-2xl h-auto w-auto px-4 py-4 cursor-pointer hover:scale-95 active:scale-90 duration-200 group">
@@ -47,10 +51,6 @@ const ChannelCard = ({ channel }: ChannelCardProps) => {
           {channel.description}
         </div>
 
-        <div className="mt-4 text-base font-normal leading-tight text-center text-zinc-500">
-          {channel.slug}
-        </div>
-
         <div className="mt-6 flex flex-row gap-2 justify-center">
           <div className="p-4 bg-white rounded-full">
             {channel.currencyCode}
@@ -61,7 +61,7 @@ const ChannelCard = ({ channel }: ChannelCardProps) => {
         </div>
 
         <div className="mt-4 px-6 py-4 font-medium text-center bg-zinc-100 rounded-xl group-hover:bg-teal-200 duration-200">
-          Show
+          {OPEN_BUTTON}
         </div>
       </div>
     </Link>
