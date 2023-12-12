@@ -1,7 +1,6 @@
 type SelectProps = {
   name: string;
   label: string;
-  placeholder?: string;
   isRequired: boolean;
   defaultValue: string;
   // eslint-disable-next-line no-unused-vars
@@ -12,7 +11,6 @@ type SelectProps = {
 export const Select = ({
   name,
   label,
-  placeholder,
   isRequired,
   defaultValue,
   onChange,
@@ -35,7 +33,6 @@ export const Select = ({
       <select
         id={name}
         name={name}
-        placeholder={placeholder}
         required={isRequired}
         defaultValue={defaultValue}
         onWheel={(event) => event.currentTarget.blur()}
