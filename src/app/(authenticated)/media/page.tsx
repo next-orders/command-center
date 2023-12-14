@@ -3,8 +3,11 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import MediaBlock from "./MediaBlock";
 import { MediaBlockSkeleton } from "./MediaBlockSkeleton";
 import { MediaCreateModal } from "@/app/(authenticated)/media/MediaCreateModal";
+import { GetLocale } from "@/client/api";
 
 export default async function Page() {
+  const locale = GetLocale();
+
   return (
     <>
       <Breadcrumbs keys={["MEDIA"]} />
@@ -16,7 +19,7 @@ export default async function Page() {
         <MediaBlock />
       </Suspense>
 
-      <MediaCreateModal />
+      <MediaCreateModal locale={locale} />
     </>
   );
 }

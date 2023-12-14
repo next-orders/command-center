@@ -25,7 +25,7 @@ export const SetLocale = (locale: Locale) => {
   cookies().set(COOKIES_LOCALE_KEY, locale);
 };
 
-export const SignInForm = async (prevState: any, formData: FormData) => {
+export const SignInForm = async (prevState: unknown, formData: FormData) => {
   const email = (formData.get("email") as string) || "";
   const password = (formData.get("password") as string) || "";
 
@@ -66,7 +66,10 @@ export const GetEmployeeAccessPayload = async () => {
   return payload;
 };
 
-export const CreateShopForm = async (prevState: any, formData: FormData) => {
+export const CreateShopForm = async (
+  prevState: unknown,
+  formData: FormData,
+) => {
   const name = (formData.get("name") as string) || "";
   const description = (formData.get("description") as string) || "";
 
@@ -81,7 +84,10 @@ export const CreateShopForm = async (prevState: any, formData: FormData) => {
   redirect("/dashboard");
 };
 
-export const CreateChannelForm = async (prevState: any, formData: FormData) => {
+export const CreateChannelForm = async (
+  prevState: unknown,
+  formData: FormData,
+) => {
   const slug = (formData.get("slug") as string) || "";
   const name = (formData.get("name") as string) || "";
   const description = (formData.get("description") as string) || "";
@@ -104,7 +110,7 @@ export const CreateChannelForm = async (prevState: any, formData: FormData) => {
 };
 
 export const CreateMenuCategoryForm = async (
-  prevState: any,
+  prevState: unknown,
   formData: FormData,
 ) => {
   const slug = (formData.get("slug") as string) || "";
@@ -126,7 +132,10 @@ export const CreateMenuCategoryForm = async (
   return { message: "OK" };
 };
 
-export const CreateMediaForm = async (prevState: any, formData: FormData) => {
+export const CreateMediaForm = async (
+  prevState: unknown,
+  formData: FormData,
+) => {
   // alt, file
   const create = await apiWithAccess().uploadMedia(formData, {
     next: { revalidate: 0 },
@@ -143,22 +152,22 @@ export const CreateMediaForm = async (prevState: any, formData: FormData) => {
 };
 
 export const CreateProductVariantForm = async (
-  prevState: any,
+  prevState: unknown,
   formData: FormData,
 ) => {
   const categoryId = (formData.get("categoryId") as string) || "";
   const productId = (formData.get("productId") as string) || "";
 
-  const slug = (formData.get("slug") as string) || "";
+  const slug = (formData.get("slug") as string) || ""; // hidden
   const name = (formData.get("name") as string) || "";
   const description = (formData.get("description") as string) || "";
   const weightUnit = (formData.get("weightUnit") as WeightUnit) || "";
   const weightValue = (formData.get("weightValue") as string) || "";
   const gross = (formData.get("gross") as string) || "";
-  const net = (formData.get("net") as string) || "";
-  const tax = (formData.get("tax") as string) || "";
 
   const sku = ""; // Don't ask on creating
+  const net = 0; // Don't ask on creating
+  const tax = 0; // Don't ask on creating
 
   const create = await apiWithAccess().createProductVariant(
     {
@@ -188,7 +197,7 @@ export const CreateProductVariantForm = async (
 };
 
 export const CreateProductionForm = async (
-  prevState: any,
+  prevState: unknown,
   formData: FormData,
 ) => {
   const type = "PRODUCTION";
@@ -211,7 +220,7 @@ export const CreateProductionForm = async (
 };
 
 export const AddProductVariantMediaForm = async (
-  prevState: any,
+  prevState: unknown,
   formData: FormData,
 ) => {
   const productVariantId = (formData.get("productVariantId") as string) || "";

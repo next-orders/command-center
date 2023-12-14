@@ -13,6 +13,7 @@ const Translations = {
   RETURN_BUTTON: { EN: "Return", ES: "Devolver", RU: "Вернуться" },
   CHOOSE_BUTTON: { EN: "Choose", ES: "Elegir", RU: "Выбрать" },
   OPEN_BUTTON: { EN: "Open", ES: "Abrir", RU: "Открыть" },
+  UPLOAD_BUTTON: { EN: "Upload", ES: "Subir", RU: "Загрузить" },
   SIGN_IN_BUTTON: { EN: "Sign In", ES: "Iniciar sesión", RU: "Войти" },
   DEMO_EMPLOYEE_BUTTON: {
     EN: "Demo Employee",

@@ -50,8 +50,6 @@ export const ProductVariantCreateModal = ({
   const [weightUnit, setWeightUnit] = React.useState("");
   const [weightValue, setWeightValue] = React.useState("");
   const [gross, setGross] = React.useState("");
-  const [net, setNet] = React.useState("");
-  const [tax, setTax] = React.useState("");
 
   // Lets generate slug on Name change
   const handleNameChange = (value: string) => {
@@ -73,6 +71,7 @@ export const ProductVariantCreateModal = ({
       <Modal title="Create new Product" toggle={toggle} isOpened={isOpened}>
         <form action={formAction}>
           <input type="hidden" name="productId" value={productId} required />
+          <input type="hidden" name="slug" value={slug} required />
 
           <div className="w-full text-center text-red-700">
             {state?.message}
@@ -117,17 +116,6 @@ export const ProductVariantCreateModal = ({
               isRequired={false}
               value={description}
               onChange={setDescription}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Input
-              name="slug"
-              label="Slug"
-              placeholder="Unique identifying part of a web address"
-              isRequired
-              value={slug}
-              onChange={setSlug}
             />
           </div>
 
@@ -182,30 +170,6 @@ export const ProductVariantCreateModal = ({
               isRequired
               value={gross}
               onChange={setGross}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Input
-              type="number"
-              name="net"
-              label="Net"
-              placeholder="Price without taxes"
-              isRequired
-              value={net}
-              onChange={setNet}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Input
-              type="number"
-              name="tax"
-              label="Tax"
-              placeholder="Amount of taxes"
-              isRequired
-              value={tax}
-              onChange={setTax}
             />
           </div>
 

@@ -1,18 +1,23 @@
 "use client";
 
 import React from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { useModalStore } from "@/store/modal";
+import { CreateMediaForm } from "@/server/actions";
+import { getDictionary, Locale } from "@/dictionaries";
 import { Modal } from "@/components/Modal";
 import { Button } from "@/components/Button";
-import { useFormState } from "react-dom";
-import { CreateMediaForm } from "@/server/actions";
-import { useModalStore } from "@/store/modal";
 import { Input } from "@/components/Input";
 
 const initialState = {
   message: "",
 };
 
-export const MediaCreateModal = () => {
+type MediaCreateModalProps = {
+  locale: Locale;
+};
+
+export const MediaCreateModal = ({ locale }: MediaCreateModalProps) => {
   const toggle = useModalStore((state) => state.toggleCreateMedia);
   const isOpened = useModalStore((state) => state.isOpenedCreateMedia);
 
@@ -41,9 +46,22 @@ export const MediaCreateModal = () => {
         </div>
 
         <div className="mt-6">
-          <Button type="submit">Upload</Button>
+          <SubmitBlock locale={locale} />
         </div>
       </form>
     </Modal>
+  );
+};
+
+const SubmitBlock = ({ locale }: { locale: Locale }) => {
+  const { UPLOAD_BUTTON } = getDictionary(locale);
+  const { pending } = useFormStatus();
+
+  return (
+    <>
+      <Button type="submit" isLoading={pending}>
+        {UPLOAD_BUTTON}
+      </Button>
+    </>
   );
 };
