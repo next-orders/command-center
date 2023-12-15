@@ -14,12 +14,24 @@ const Translations = {
   CHOOSE_BUTTON: { EN: "Choose", ES: "Elegir", RU: "Выбрать" },
   OPEN_BUTTON: { EN: "Open", ES: "Abrir", RU: "Открыть" },
   UPLOAD_BUTTON: { EN: "Upload", ES: "Subir", RU: "Загрузить" },
+  CREATE_BUTTON: { EN: "Create", ES: "Crear", RU: "Создать" },
   SIGN_IN_BUTTON: { EN: "Sign In", ES: "Iniciar sesión", RU: "Войти" },
   DEMO_EMPLOYEE_BUTTON: {
     EN: "Demo Employee",
     ES: "Empleado de demostración",
     RU: "Демо-сотрудник",
   },
+  SELECT_LABEL: {
+    EN: "Select",
+    ES: "Seleccionar",
+    RU: "Выберите",
+  },
+  GRAM_SHORT_LABEL: { EN: "g", ES: "g", RU: "г" },
+  KG_SHORT_LABEL: { EN: "kg", ES: "kg", RU: "кг" },
+  ML_SHORT_LABEL: { EN: "ml", ES: "ml", RU: "мл" },
+  L_SHORT_LABEL: { EN: "l", ES: "l", RU: "л" },
+  LB_SHORT_LABEL: { EN: "lb", ES: "lb", RU: "фунт" },
+  OZ_SHORT_LABEL: { EN: "oz", ES: "oz", RU: "унция" },
   COMMAND_CENTER_LABEL: {
     EN: "Command Center",
     ES: "Centro de comando",
@@ -58,6 +70,71 @@ const Translations = {
     RU: "Страница канала",
   },
   DOMAINS_LABEL: { EN: "Domains", ES: "Dominios", RU: "Домены" },
+  CATEGORY_LABEL: {
+    EN: "Category",
+    ES: "Categoría",
+    RU: "Категория",
+  },
+  NAME_LABEL: {
+    EN: "Name",
+    ES: "Nombre",
+    RU: "Название",
+  },
+  DESCRIPTION_LABEL: {
+    EN: "Description",
+    ES: "Descripción",
+    RU: "Описание",
+  },
+  DESCRIPTION_PRODUCT_PLACEHOLDER: {
+    EN: "Short selling description",
+    ES: "Descripción de venta corta",
+    RU: "Короткое продающее описание",
+  },
+  WEIGHT_LABEL: {
+    EN: "Weight",
+    ES: "Peso",
+    RU: "Вес",
+  },
+  WEIGHT_UNIT_LABEL: {
+    EN: "Weight Unit",
+    ES: "Unidad de peso",
+    RU: "Весовая единица",
+  },
+  GROSS_LABEL: {
+    EN: "Gross",
+    ES: "Bruto",
+    RU: "Валовая цена",
+  },
+  GROSS_PLACEHOLDER: {
+    EN: "Final price for client, including taxes",
+    ES: "Precio final para el cliente, impuestos incluidos",
+    RU: "Конечная цена для клиента, включая налоги",
+  },
+  SLUG_LABEL: {
+    EN: "Slug",
+    ES: "URL de babosa",
+    RU: "Часть URL",
+  },
+  SLUG_PLACEHOLDER: {
+    EN: "Unique identifying part of a web address",
+    ES: "Parte de identificación única de una dirección web",
+    RU: "Уникальная часть веб-адреса",
+  },
+  CURRENCY_LABEL: {
+    EN: "Currency",
+    ES: "Divisa",
+    RU: "Валюта",
+  },
+  CURRENCY_PLACEHOLDER: {
+    EN: "Currency used in sales",
+    ES: "Moneda utilizada en las ventas",
+    RU: "Валюта, используемая в продажах",
+  },
+  LANGUAGE_LABEL: {
+    EN: "Language",
+    ES: "Idioma",
+    RU: "Язык",
+  },
   MEDIA_LABEL: { EN: "Media", ES: "Medios", RU: "Медиа" },
   MENUS_LABEL: { EN: "Menus", ES: "Menús", RU: "Меню" },
   MENU_PAGE_LABEL: {
@@ -163,9 +240,9 @@ const Translations = {
     RU: "Создать продукт",
   },
   CREATE_PRODUCT_VARIANT_LABEL: {
-    EN: "Create Product",
-    ES: "Crear producto",
-    RU: "Создать продукт",
+    EN: "Create Product Variant",
+    ES: "Crear variante de producto",
+    RU: "Создать вариант продукта",
   },
   SIGNIN_PAGE_WELCOME_LABEL: {
     EN: "We've been waiting for you!",

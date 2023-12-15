@@ -166,8 +166,8 @@ export const CreateProductVariantForm = async (
   const gross = (formData.get("gross") as string) || "";
 
   const sku = ""; // Don't ask on creating
-  const net = 0; // Don't ask on creating
-  const tax = 0; // Don't ask on creating
+  // const net = 0; // Don't ask on creating
+  // const tax = 0; // Don't ask on creating
 
   const create = await apiWithAccess().createProductVariant(
     {
@@ -178,8 +178,8 @@ export const CreateProductVariantForm = async (
       weightUnit,
       weightValue: Number(weightValue),
       gross: Number(gross),
-      net: Number(net),
-      tax: Number(tax),
+      // net: Number(net),
+      // tax: Number(tax),
       categoryId,
       productId,
     },

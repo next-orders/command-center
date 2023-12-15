@@ -39,7 +39,7 @@ export const CategoryCreateBlock = ({
         </div>
       </CreateBlock>
 
-      <CategoryCreateModal menuId={menuId} />
+      <CategoryCreateModal menuId={menuId} locale={locale} />
     </>
   );
 };

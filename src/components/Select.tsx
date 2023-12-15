@@ -1,3 +1,5 @@
+import { getDictionary, Locale } from "@/dictionaries";
+
 type SelectProps = {
   name: string;
   label: string;
@@ -6,6 +8,7 @@ type SelectProps = {
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void;
   options: { value: string; label: string }[] | undefined;
+  locale: Locale;
 };
 
 export const Select = ({
@@ -15,7 +18,10 @@ export const Select = ({
   defaultValue,
   onChange,
   options,
+  locale,
 }: SelectProps) => {
+  const { SELECT_LABEL } = getDictionary(locale);
+
   const showOptions = options?.map((option) => (
     <option key={option.value} value={option.value}>
       {option.label}
@@ -37,8 +43,10 @@ export const Select = ({
         defaultValue={defaultValue}
         onWheel={(event) => event.currentTarget.blur()}
         onChange={(event) => onChange(event.currentTarget.value)}
-        className="peer block w-full rounded-2xl border border-zinc-200 py-3 px-4 text-base outline-2 outline-offset-1 outline-zinc-500 placeholder:text-zinc-400"
+        className="peer block w-full rounded-2xl border border-zinc-200 py-3 pl-4 pr-8 text-base cursor-pointer appearance-none form-select outline-2 outline-offset-1 outline-zinc-500 placeholder:text-zinc-400"
       >
+        <option hidden>{SELECT_LABEL}</option>
+        <option disabled>{SELECT_LABEL}</option>
         {showOptions}
       </select>
     </>

@@ -7,7 +7,7 @@ import { useModalStore } from "@/store/modal";
 import { CreateProductVariantForm } from "@/server/actions";
 import { ProductChooseModal } from "@/app/(authenticated)/menu/[id]/ProductChooseModal";
 import { MenuCategory, Product } from "@next-orders/api-sdk";
-import { Locale } from "@/dictionaries";
+import { getDictionary, Locale } from "@/dictionaries";
 import { Button } from "@/components/Button";
 import { Modal } from "@/components/Modal";
 import { Input } from "@/components/Input";
@@ -36,11 +36,28 @@ export const ProductVariantCreateModal = ({
     (state) => state.toggleChooseProduct,
   );
 
+  const {
+    CREATE_PRODUCT_VARIANT_LABEL,
+    CATEGORY_LABEL,
+    NAME_LABEL,
+    DESCRIPTION_LABEL,
+    DESCRIPTION_PRODUCT_PLACEHOLDER,
+    WEIGHT_LABEL,
+    WEIGHT_UNIT_LABEL,
+    GROSS_LABEL,
+    GROSS_PLACEHOLDER,
+    GRAM_SHORT_LABEL,
+    KG_SHORT_LABEL,
+    ML_SHORT_LABEL,
+    L_SHORT_LABEL,
+    LB_SHORT_LABEL,
+    OZ_SHORT_LABEL,
+  } = getDictionary(locale);
+
   const [state, formAction] = useFormState(
     CreateProductVariantForm,
     initialState,
   );
-  const { pending } = useFormStatus();
 
   const [categoryId, setCategoryId] = React.useState("");
   const [productId, setProductId] = React.useState("");
@@ -68,7 +85,11 @@ export const ProductVariantCreateModal = ({
 
   return (
     <>
-      <Modal title="Create new Product" toggle={toggle} isOpened={isOpened}>
+      <Modal
+        title={CREATE_PRODUCT_VARIANT_LABEL}
+        toggle={toggle}
+        isOpened={isOpened}
+      >
         <form action={formAction}>
           <input type="hidden" name="productId" value={productId} required />
           <input type="hidden" name="slug" value={slug} required />
@@ -89,10 +110,11 @@ export const ProductVariantCreateModal = ({
           <div className="mb-4">
             <Select
               name="categoryId"
-              label="Category"
+              label={CATEGORY_LABEL}
               isRequired
               defaultValue={categoryId}
               onChange={setCategoryId}
+              locale={locale}
               options={categoriesOptions}
             />
           </div>
@@ -100,8 +122,7 @@ export const ProductVariantCreateModal = ({
           <div className="mb-4">
             <Input
               name="name"
-              label="Name"
-              placeholder="Main heading"
+              label={NAME_LABEL}
               isRequired
               value={name}
               onChange={handleNameChange}
@@ -111,8 +132,8 @@ export const ProductVariantCreateModal = ({
           <div className="mb-4">
             <Input
               name="description"
-              label="Description"
-              placeholder="Short description"
+              label={DESCRIPTION_LABEL}
+              placeholder={DESCRIPTION_PRODUCT_PLACEHOLDER}
               isRequired={false}
               value={description}
               onChange={setDescription}
@@ -124,8 +145,7 @@ export const ProductVariantCreateModal = ({
               <Input
                 type="number"
                 name="weightValue"
-                label="Weight Value"
-                placeholder="Positive number"
+                label={WEIGHT_LABEL}
                 isRequired
                 value={weightValue}
                 onChange={setWeightValue}
@@ -135,26 +155,35 @@ export const ProductVariantCreateModal = ({
             <div>
               <Select
                 name="weightUnit"
-                label="Weight Unit"
+                label={WEIGHT_UNIT_LABEL}
                 isRequired
                 defaultValue={weightUnit}
                 onChange={setWeightUnit}
+                locale={locale}
                 options={[
                   {
                     value: "G",
-                    label: "g",
+                    label: GRAM_SHORT_LABEL,
                   },
                   {
                     value: "KG",
-                    label: "kg",
+                    label: KG_SHORT_LABEL,
+                  },
+                  {
+                    value: "ML",
+                    label: ML_SHORT_LABEL,
+                  },
+                  {
+                    value: "L",
+                    label: L_SHORT_LABEL,
                   },
                   {
                     value: "LB",
-                    label: "lb",
+                    label: LB_SHORT_LABEL,
                   },
                   {
                     value: "OZ",
-                    label: "oz",
+                    label: OZ_SHORT_LABEL,
                   },
                 ]}
               />
@@ -165,8 +194,8 @@ export const ProductVariantCreateModal = ({
             <Input
               type="number"
               name="gross"
-              label="Gross"
-              placeholder="Final price for client, including taxes"
+              label={GROSS_LABEL}
+              placeholder={GROSS_PLACEHOLDER}
               isRequired
               value={gross}
               onChange={setGross}
@@ -174,9 +203,7 @@ export const ProductVariantCreateModal = ({
           </div>
 
           <div className="mt-6">
-            <Button type="submit" isLoading={pending}>
-              Create
-            </Button>
+            <SubmitBlock locale={locale} />
           </div>
         </form>
       </Modal>
@@ -188,5 +215,16 @@ export const ProductVariantCreateModal = ({
         setSelected={setProductId}
       />
     </>
+  );
+};
+
+const SubmitBlock = ({ locale }: { locale: Locale }) => {
+  const { CREATE_BUTTON } = getDictionary(locale);
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" isLoading={pending}>
+      {CREATE_BUTTON}
+    </Button>
   );
 };

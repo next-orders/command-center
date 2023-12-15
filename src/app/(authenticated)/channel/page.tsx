@@ -4,8 +4,11 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ChannelsBlock from "@/app/(authenticated)/channel/ChannelsBlock";
 import { ChannelsBlockSkeleton } from "@/app/(authenticated)/channel/ChannelsBlockSkeleton";
 import { ChannelCreateModal } from "@/app/(authenticated)/channel/ChannelCreateModal";
+import { GetLocale } from "@/client/api";
 
 export default async function Page() {
+  const locale = GetLocale();
+
   return (
     <>
       <Breadcrumbs keys={["CHANNELS"]} />
@@ -18,7 +21,7 @@ export default async function Page() {
       </Suspense>
 
       <ChannelInfoBlock />
-      <ChannelCreateModal />
+      <ChannelCreateModal locale={locale} />
     </>
   );
 }

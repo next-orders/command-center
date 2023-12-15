@@ -4,17 +4,33 @@ import React from "react";
 import { Modal } from "@/components/Modal";
 import { useModalStore } from "@/store/modal";
 import { Button } from "@/components/Button";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { CreateChannelForm } from "@/server/actions";
 import { Input } from "@/components/Input";
+import { getDictionary, Locale } from "@/dictionaries";
+import { Select } from "@/components/Select";
 
 const initialState = {
   message: "",
 };
 
-export const ChannelCreateModal = () => {
+type ChannelCreateModalProps = {
+  locale: Locale;
+};
+
+export const ChannelCreateModal = ({ locale }: ChannelCreateModalProps) => {
   const toggle = useModalStore((state) => state.toggleCreateChannel);
   const isOpened = useModalStore((state) => state.isOpenedCreateChannel);
+
+  const {
+    CREATE_CHANNEL_LABEL,
+    SLUG_LABEL,
+    SLUG_PLACEHOLDER,
+    NAME_LABEL,
+    DESCRIPTION_LABEL,
+    CURRENCY_LABEL,
+    LANGUAGE_LABEL,
+  } = getDictionary(locale);
 
   const [state, formAction] = useFormState(CreateChannelForm, initialState);
 
@@ -25,15 +41,15 @@ export const ChannelCreateModal = () => {
   const [languageCode, setLanguageCode] = React.useState("");
 
   return (
-    <Modal title="Create new Channel" toggle={toggle} isOpened={isOpened}>
+    <Modal title={CREATE_CHANNEL_LABEL} toggle={toggle} isOpened={isOpened}>
       <form action={formAction}>
         <div className="w-full text-center text-red-700">{state?.message}</div>
 
         <div className="mb-4">
           <Input
             name="slug"
-            label="Slug"
-            placeholder="Unique identifying part of a web address"
+            label={SLUG_LABEL}
+            placeholder={SLUG_PLACEHOLDER}
             isRequired
             value={slug}
             onChange={setSlug}
@@ -43,8 +59,7 @@ export const ChannelCreateModal = () => {
         <div className="mb-4">
           <Input
             name="name"
-            label="Name"
-            placeholder="Main heading"
+            label={NAME_LABEL}
             isRequired
             value={name}
             onChange={setName}
@@ -54,40 +69,59 @@ export const ChannelCreateModal = () => {
         <div className="mb-4">
           <Input
             name="description"
-            label="Description"
-            placeholder="Short description"
+            label={DESCRIPTION_LABEL}
             isRequired={false}
             value={description}
             onChange={setDescription}
           />
         </div>
 
-        <div className="mb-4">
-          <Input
-            name="currencyCode"
-            label="Currency"
-            placeholder="Currency used in sales"
-            isRequired
-            value={currencyCode}
-            onChange={setCurrencyCode}
-          />
-        </div>
-
-        <div className="mb-4">
-          <Input
-            name="languageCode"
-            label="Language"
-            placeholder="Main language"
-            isRequired
-            value={languageCode}
-            onChange={setLanguageCode}
-          />
+        <div className="mb-4 grid grid-cols-2 gap-4">
+          <div>
+            <Select
+              name="currencyCode"
+              label={CURRENCY_LABEL}
+              isRequired
+              defaultValue={currencyCode}
+              onChange={setCurrencyCode}
+              locale={locale}
+              options={[
+                { value: "USD", label: "USD" },
+                { value: "RUB", label: "RUB" },
+              ]}
+            />
+          </div>
+          <div>
+            <Select
+              name="languageCode"
+              label={LANGUAGE_LABEL}
+              isRequired
+              defaultValue={languageCode}
+              onChange={setLanguageCode}
+              locale={locale}
+              options={[
+                { value: "EN", label: "EN" },
+                { value: "RU", label: "RU" },
+              ]}
+            />
+          </div>
         </div>
 
         <div className="mt-6">
-          <Button type="submit">Create</Button>
+          <SubmitBlock locale={locale} />
         </div>
       </form>
     </Modal>
+  );
+};
+
+const SubmitBlock = ({ locale }: { locale: Locale }) => {
+  const { CREATE_BUTTON } = getDictionary(locale);
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" isLoading={pending}>
+      {CREATE_BUTTON}
+    </Button>
   );
 };

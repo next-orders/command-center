@@ -58,10 +58,8 @@ const SubmitBlock = ({ locale }: { locale: Locale }) => {
   const { pending } = useFormStatus();
 
   return (
-    <>
-      <Button type="submit" isLoading={pending}>
-        {UPLOAD_BUTTON}
-      </Button>
-    </>
+    <Button type="submit" isLoading={pending}>
+      {UPLOAD_BUTTON}
+    </Button>
   );
 };

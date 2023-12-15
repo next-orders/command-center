@@ -30,7 +30,6 @@ export const ProductChooseModal = ({
 
   const [find, setFind] = React.useState("");
 
-  //
   const showProducts = products
     ?.filter(
       (product) => product.type === "PRODUCTION" || product.type === "READY",
@@ -49,7 +48,8 @@ export const ProductChooseModal = ({
           setSelected={setSelected}
         />
       );
-    });
+    })
+    .slice(0, 16);
 
   return (
     <EntityModal
