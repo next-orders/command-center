@@ -136,6 +136,16 @@ const Translations = {
     RU: "Язык",
   },
   MEDIA_LABEL: { EN: "Media", ES: "Medios", RU: "Медиа" },
+  UPLOAD_MEDIA_LABEL: {
+    EN: "Upload Media",
+    ES: "Subir medios",
+    RU: "Загрузить медиа",
+  },
+  MEDIA_ALT_PLACEHOLDER: {
+    EN: "Brief description of what's in the photo",
+    ES: "Breve descripción de lo que hay en la foto",
+    RU: "Короткое описание что на фотографии",
+  },
   MENUS_LABEL: { EN: "Menus", ES: "Menús", RU: "Меню" },
   MENU_PAGE_LABEL: {
     EN: "Menu Page",

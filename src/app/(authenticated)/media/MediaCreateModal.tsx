@@ -21,20 +21,23 @@ export const MediaCreateModal = ({ locale }: MediaCreateModalProps) => {
   const toggle = useModalStore((state) => state.toggleCreateMedia);
   const isOpened = useModalStore((state) => state.isOpenedCreateMedia);
 
+  const { UPLOAD_MEDIA_LABEL, NAME_LABEL, MEDIA_ALT_PLACEHOLDER } =
+    getDictionary(locale);
+
   const [state, formAction] = useFormState(CreateMediaForm, initialState);
 
   const [alt, setAlt] = React.useState("");
 
   return (
-    <Modal title="Upload new Media" toggle={toggle} isOpened={isOpened}>
+    <Modal title={UPLOAD_MEDIA_LABEL} toggle={toggle} isOpened={isOpened}>
       <form action={formAction}>
         <div className="w-full text-center text-red-700">{state?.message}</div>
 
         <div className="mb-4">
           <Input
             name="alt"
-            label="Name"
-            placeholder="Short description of the file"
+            label={NAME_LABEL}
+            placeholder={MEDIA_ALT_PLACEHOLDER}
             isRequired
             value={alt}
             onChange={setAlt}

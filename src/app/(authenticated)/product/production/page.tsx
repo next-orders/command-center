@@ -1,8 +1,11 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ProductionBlock from "@/app/(authenticated)/product/production/ProductionBlock";
 import { ProductionCreateModal } from "@/app/(authenticated)/product/production/ProductionCreateModal";
+import { GetLocale } from "@/client/api";
 
 export default async function Page() {
+  const locale = GetLocale();
+
   return (
     <>
       <Breadcrumbs keys={["PRODUCTS", "PRODUCTION_PAGE"]} />
@@ -12,7 +15,7 @@ export default async function Page() {
 
       <ProductionBlock />
 
-      <ProductionCreateModal />
+      <ProductionCreateModal locale={locale} />
     </>
   );
 }

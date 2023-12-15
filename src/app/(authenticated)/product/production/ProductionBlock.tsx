@@ -19,7 +19,7 @@ export default async function ProductionBlock() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-4">
-      <div className="col-span-2 self-center">
+      <div className="col-span-1 md:col-span-2 self-center">
         <ProductionCreateBlock locale={locale} />
       </div>
       {showProducts}
