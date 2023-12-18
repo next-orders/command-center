@@ -1,10 +1,10 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ProductionBlock from "@/app/(authenticated)/product/production/ProductionBlock";
 import { ProductionCreateModal } from "@/app/(authenticated)/product/production/ProductionCreateModal";
-import { GetLocale } from "@/client/api";
+import { getLocale } from "@/client/locale";
 
 export default async function Page() {
-  const locale = GetLocale();
+  const locale = getLocale();
 
   return (
     <>

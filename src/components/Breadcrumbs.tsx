@@ -2,14 +2,14 @@ import Link from "next/link";
 import { BackBlock } from "@/components/BackBlock";
 import { getDictionary, prepareLocalizedLinks } from "@/dictionaries";
 import { PageKey } from "@/lib/pages";
-import { GetLocale } from "@/client/api";
+import { getLocale } from "@/client/locale";
 
 type BreadcrumbsProps = {
   keys: PageKey[];
 };
 
 export const Breadcrumbs = ({ keys }: BreadcrumbsProps) => {
-  const locale = GetLocale();
+  const locale = getLocale();
   const dictionary = getDictionary(locale);
 
   // Dashboard page is always at start

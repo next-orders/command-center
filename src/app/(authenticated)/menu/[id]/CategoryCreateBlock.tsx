@@ -6,6 +6,7 @@ import { Button } from "@/components/Button";
 import { getDictionary, Locale } from "@/dictionaries";
 import { CreateBlock } from "@/components/CreateBlock";
 import { CategoryCreateModal } from "@/app/(authenticated)/menu/[id]/CategoryCreateModal";
+import { CategoryEditModal } from "@/app/(authenticated)/menu/[id]/CategoryEditModal";
 
 type CategoryCreateBlockProps = {
   menuId: string;
@@ -39,7 +40,8 @@ export const CategoryCreateBlock = ({
         </div>
       </CreateBlock>
 
-      <CategoryCreateModal menuId={menuId} locale={locale} />
+      <CategoryCreateModal locale={locale} menuId={menuId} />
+      <CategoryEditModal locale={locale} />
     </>
   );
 };

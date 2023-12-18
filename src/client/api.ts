@@ -1,12 +1,4 @@
-import { cookies, headers } from "next/headers";
 import { AvatarParams, MainAPI } from "@next-orders/api-sdk";
-import {
-  COOKIES_ACCESS_TOKEN_KEY,
-  COOKIES_LOCALE_KEY,
-  getBrowserLocale,
-} from "@/lib/helpers";
-import { MenuItem } from "@/types";
-import { getDictionary, Locale } from "@/dictionaries";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
 
@@ -19,23 +11,6 @@ const nextConfig = {
 };
 
 const apiWithPublicAccess = new MainAPI(API_URL, "");
-
-const apiWithAccess = () => {
-  const accessToken = cookies().get(COOKIES_ACCESS_TOKEN_KEY)?.value || "";
-  return new MainAPI(API_URL, accessToken);
-};
-
-export const GetLocale = (): Locale => {
-  const language = headers().get("Accept-Language");
-  const browserLocale = getBrowserLocale(language);
-
-  const localeFromCookies = cookies().get(COOKIES_LOCALE_KEY)?.value;
-  if (localeFromCookies) {
-    return localeFromCookies as Locale;
-  }
-
-  return browserLocale;
-};
 
 export const GetApiVersion = async () => {
   const apiData = await apiWithPublicAccess.getApiVersion({
@@ -94,30 +69,6 @@ export const GetAllDomains = async () => {
   return domains;
 };
 
-/** Need Permission READ_MEDIA */
-export const GetAllMedia = async () => {
-  return apiWithAccess().getAllMedia({
-    next: {
-      ...nextConfig,
-      tags: ["all", "media"],
-    },
-  });
-};
-
-/** Need Permission READ_CLIENTS */
-export const GetClients = async () => {
-  return apiWithAccess().getClients({
-    next: { ...nextConfig, tags: ["all", "clients"] },
-  });
-};
-
-/** Need Permission READ_CLIENTS */
-export const GetClientById = async (id: string) => {
-  return apiWithAccess().getClientById(id, {
-    next: { ...nextConfig, tags: ["all", `client-${id}`] },
-  });
-};
-
 export const GetChannelById = async (channelId: string) => {
   const channel = await apiWithPublicAccess.getChannel(channelId, {
     next: {
@@ -158,6 +109,20 @@ export const GetMenusInChannel = async (channelId: string) => {
   }
 
   return menus;
+};
+
+export const GetMenuCategoryById = async (id: string) => {
+  const category = await apiWithPublicAccess.getMenuCategoryById(id, {
+    next: {
+      ...nextConfig,
+      tags: ["all", "categories", `menu-category-${id}`],
+    },
+  });
+  if (!category || category instanceof Error) {
+    return null;
+  }
+
+  return category;
 };
 
 export const GetProducts = async () => {
@@ -227,62 +192,4 @@ export const GetDemoSignInData = async () => {
   }
 
   return data;
-};
-
-export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
-  const locale = GetLocale();
-  const {
-    DASHBOARD_LABEL,
-    CHANNELS_LABEL,
-    MEDIA_LABEL,
-    DOMAINS_LABEL,
-    PRODUCTS_LABEL,
-    CLIENTS_LABEL,
-    EMPLOYEES_LABEL,
-  } = getDictionary(locale);
-
-  return [
-    {
-      id: "1",
-      label: DASHBOARD_LABEL,
-      href: "/dashboard",
-      icon: "IconDashboard",
-    },
-    {
-      id: "2",
-      label: CHANNELS_LABEL,
-      href: "/channel",
-      icon: "IconBuildingStore",
-    },
-    {
-      id: "3",
-      label: MEDIA_LABEL,
-      href: "/media",
-      icon: "IconPhoto",
-    },
-    {
-      id: "4",
-      label: DOMAINS_LABEL,
-      href: "/domain",
-      icon: "IconWorldWww",
-    },
-    {
-      id: "5",
-      label: PRODUCTS_LABEL,
-      href: "/product",
-      icon: "IconCheese",
-    },
-    {
-      id: "6",
-      label: CLIENTS_LABEL,
-      href: "/client",
-      icon: "IconUsers",
-    },
-    {
-      id: "7",
-      label: EMPLOYEES_LABEL,
-      href: "/employee",
-      icon: "IconUserScan",
-    },
-  ];
 };

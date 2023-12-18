@@ -6,6 +6,7 @@ import {
   CurrencyCode,
   LanguageCode,
   MainAPI,
+  MenuCategoryIcon,
   WeightUnit,
 } from "@next-orders/api-sdk";
 import { COOKIES_ACCESS_TOKEN_KEY, COOKIES_LOCALE_KEY } from "@/lib/helpers";
@@ -124,6 +125,31 @@ export const CreateMenuCategoryForm = async (
   if (create instanceof Error) {
     return {
       message: create.message,
+    };
+  }
+
+  revalidateTag("menus");
+
+  return { message: "OK" };
+};
+
+export const UpdateMenuCategoryForm = async (
+  prevState: unknown,
+  formData: FormData,
+) => {
+  const categoryId = (formData.get("categoryId") as string) || "";
+  const slug = (formData.get("slug") as string) || "";
+  const name = (formData.get("name") as string) || "";
+  const icon = (formData.get("icon") as MenuCategoryIcon) || "DEFAULT";
+
+  const updated = await apiWithAccess().updateMenuCategory(
+    categoryId,
+    { slug, name, icon },
+    { next: { revalidate: 0 } },
+  );
+  if (updated instanceof Error) {
+    return {
+      message: updated.message,
     };
   }
 

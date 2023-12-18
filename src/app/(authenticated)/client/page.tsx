@@ -2,10 +2,10 @@ import { Suspense } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ClientsBlock from "./ClientsBlock";
 import { ClientsBlockSkeleton } from "./ClientsBlockSkeleton";
-import { GetLocale } from "@/client/api";
+import { getLocale } from "@/client/locale";
 
 export default async function Page() {
-  const locale = GetLocale();
+  const locale = getLocale();
 
   return (
     <>

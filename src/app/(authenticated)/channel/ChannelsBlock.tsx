@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { GetChannels, GetLocale } from "@/client/api";
+import { GetChannels } from "@/client/api";
 import { ChannelCreateBlock } from "@/app/(authenticated)/channel/ChannelCreateBlock";
 import { Channel } from "@next-orders/api-sdk";
 import { IconBuildingStore } from "@tabler/icons-react";
 import { getDictionary, Locale } from "@/dictionaries";
+import { getLocale } from "@/client/locale";
 
 export default async function ChannelsBlock() {
   const channels = await GetChannels();
-  const locale = GetLocale();
+  const locale = getLocale();
 
   const haveNoEntities = !channels?.length;
   if (haveNoEntities) {

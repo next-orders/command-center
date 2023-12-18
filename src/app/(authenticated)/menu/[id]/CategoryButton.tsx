@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { MenuCategory } from "@next-orders/api-sdk";
+import { useModalStore } from "@/store/modal";
+import { useMenuCategory } from "@/store/MenuCategory";
 
 type CategoryButtonProps = {
   category: MenuCategory;
@@ -9,9 +11,16 @@ type CategoryButtonProps = {
 };
 
 export const CategoryButton = ({ category, iconUrl }: CategoryButtonProps) => {
+  const toggle = useModalStore((state) => state.toggleEditMenuCategory);
+
+  const loadMenuCategory = useMenuCategory((state) => state.loadData);
+
   return (
     <button
-      onClick={() => navigator.clipboard.writeText(category.id)}
+      onClick={() => {
+        loadMenuCategory(category.id);
+        toggle();
+      }}
       className="px-5 py-3 flex flex-row gap-2 bg-zinc-100 rounded-2xl cursor-pointer hover:bg-zinc-200 hover:scale-95 active:scale-90 duration-200"
     >
       <Image src={iconUrl} alt="" width={32} height={32} className="w-8 h-8" />

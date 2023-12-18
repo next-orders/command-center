@@ -1,4 +1,5 @@
 import { Locale } from "@/dictionaries";
+import { MenuCategoryIcon } from "@next-orders/api-sdk";
 
 export const COOKIES_ACCESS_TOKEN_KEY = "next-orders.access-token";
 export const COOKIES_LOCALE_KEY = "next-orders.locale";
@@ -55,7 +56,7 @@ export const getBrowserLocale = (acceptLanguage: unknown): Locale => {
   return getSupportedLocale(primaryLanguage);
 };
 
-export const getIconUrl = (icon: string | null) => {
+export const getIconUrl = (icon: MenuCategoryIcon | null) => {
   if (!icon) {
     return "/static/food-icon/DEFAULT.png";
   }

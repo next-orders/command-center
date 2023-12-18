@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { LoginForm } from "@/components/LoginForm";
-import { GetDemoSignInData, GetLocale } from "@/client/api";
+import { GetDemoSignInData } from "@/client/api";
 import { getDictionary } from "@/dictionaries";
+import { getLocale } from "@/client/locale";
 
 export default async function Page() {
   const demoData = await GetDemoSignInData();
-  const locale = GetLocale();
+  const locale = getLocale();
 
   const { SIGNIN_PAGE_WELCOME_LABEL } = getDictionary(locale);
 

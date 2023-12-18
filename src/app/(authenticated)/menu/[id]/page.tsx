@@ -1,14 +1,15 @@
-import { GetLocale, GetMenuById, GetProducts } from "@/client/api";
+import { GetMenuById, GetProducts } from "@/client/api";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import CategoriesBlock from "@/app/(authenticated)/menu/[id]/CategoriesBlock";
 import { ProductVariantCreateModal } from "@/app/(authenticated)/menu/[id]/ProductVariantCreateModal";
+import { getLocale } from "@/client/locale";
 
 type PageProps = {
   params: { id: string };
 };
 
 export default async function Page({ params }: PageProps) {
-  const locale = GetLocale();
+  const locale = getLocale();
   const products = await GetProducts();
   const menu = await GetMenuById(params.id);
 

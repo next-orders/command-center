@@ -4,10 +4,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ChannelsBlock from "@/app/(authenticated)/channel/ChannelsBlock";
 import { ChannelsBlockSkeleton } from "@/app/(authenticated)/channel/ChannelsBlockSkeleton";
 import { ChannelCreateModal } from "@/app/(authenticated)/channel/ChannelCreateModal";
-import { GetLocale } from "@/client/api";
+import { getLocale } from "@/client/locale";
 
 export default async function Page() {
-  const locale = GetLocale();
+  const locale = getLocale();
 
   return (
     <>

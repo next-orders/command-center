@@ -1,7 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Shell } from "@/components/Shell";
-import { GetLocale, GetNavigationMenu } from "@/client/api";
+import { getLocale } from "@/client/locale";
+import { GetNavigationMenu } from "@/client/navigation";
 
 export const metadata: Metadata = {
   title: "Command Center",
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export default async function AuthenticatedLayout({ children }: Props) {
-  const [menu, locale] = await Promise.all([GetNavigationMenu(), GetLocale()]);
+  const [menu, locale] = await Promise.all([GetNavigationMenu(), getLocale()]);
 
   return (
     <Shell menu={menu} locale={locale}>

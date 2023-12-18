@@ -4,14 +4,14 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ClientTraitBadge } from "@/components/ClientTraitBadge";
 import ClientAvatarBlock from "@/app/(authenticated)/client/[id]/ClientAvatarBlock";
 import { ClientAvatarBlockSkeleton } from "@/app/(authenticated)/client/[id]/ClientAvatarBlockSkeleton";
-import { GetLocale } from "@/client/api";
+import { getLocale } from "@/client/locale";
 
 type PageProps = {
   params: { id: string };
 };
 
 export default async function Page({ params }: PageProps) {
-  const locale = GetLocale();
+  const locale = getLocale();
 
   return (
     <>

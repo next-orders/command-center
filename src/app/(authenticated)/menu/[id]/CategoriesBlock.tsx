@@ -1,14 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  GetLocale,
-  GetMenuById,
-  GetProductVariantsInCategory,
-} from "@/client/api";
+import { GetMenuById, GetProductVariantsInCategory } from "@/client/api";
 import { MenuCategory, ProductVariant } from "@next-orders/api-sdk";
 import { CategoryCreateBlock } from "@/app/(authenticated)/menu/[id]/CategoryCreateBlock";
 import { getIconUrl } from "@/lib/helpers";
 import { CategoryButton } from "@/app/(authenticated)/menu/[id]/CategoryButton";
+import { getLocale } from "@/client/locale";
 
 type CategoriesBlockProps = {
   menuId: string;
@@ -18,7 +15,7 @@ export default async function CategoriesBlock({
   menuId,
 }: CategoriesBlockProps) {
   const menu = await GetMenuById(menuId);
-  const locale = GetLocale();
+  const locale = getLocale();
 
   const haveNoEntities = !menu?.categories?.length;
   if (haveNoEntities) {

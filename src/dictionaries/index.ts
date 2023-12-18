@@ -15,6 +15,7 @@ const Translations = {
   OPEN_BUTTON: { EN: "Open", ES: "Abrir", RU: "Открыть" },
   UPLOAD_BUTTON: { EN: "Upload", ES: "Subir", RU: "Загрузить" },
   CREATE_BUTTON: { EN: "Create", ES: "Crear", RU: "Создать" },
+  SAVE_BUTTON: { EN: "Save", ES: "Ahorrar", RU: "Сохранить" },
   SIGN_IN_BUTTON: { EN: "Sign In", ES: "Iniciar sesión", RU: "Войти" },
   DEMO_EMPLOYEE_BUTTON: {
     EN: "Demo Employee",
@@ -74,6 +75,11 @@ const Translations = {
     EN: "Category",
     ES: "Categoría",
     RU: "Категория",
+  },
+  CATEGORY_ICON_LABEL: {
+    EN: "Category Icon",
+    ES: "Icono de categoría",
+    RU: "Иконка категории",
   },
   NAME_LABEL: {
     EN: "Name",
@@ -238,6 +244,11 @@ const Translations = {
     EN: "Create Category",
     ES: "Crear categoría",
     RU: "Создать категорию",
+  },
+  EDIT_MENU_CATEGORY_LABEL: {
+    EN: "Edit Category",
+    ES: "Editar categoria",
+    RU: "Редактировать категорию",
   },
   CREATE_MEDIA_LABEL: {
     EN: "Create Media",

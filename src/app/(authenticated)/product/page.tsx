@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconCheese, IconChefHat, IconPaperBag } from "@tabler/icons-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { GetLocale } from "@/client/api";
 import { getDictionary } from "@/dictionaries";
+import { getLocale } from "@/client/locale";
 
 export default async function Page() {
-  const locale = GetLocale();
+  const locale = getLocale();
   const {
     OPEN_BUTTON,
     PRODUCTION_LABEL,
