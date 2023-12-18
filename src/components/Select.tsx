@@ -46,7 +46,6 @@ export const Select = ({
         className="peer block w-full rounded-2xl border border-zinc-200 py-3 pl-4 pr-8 text-base cursor-pointer appearance-none form-select outline-2 outline-offset-1 outline-zinc-500 placeholder:text-zinc-400"
       >
         <option hidden>{SELECT_LABEL}</option>
-        <option disabled>{SELECT_LABEL}</option>
         {showOptions}
       </select>
     </>

@@ -1,12 +1,13 @@
 {
   "name": "command-center",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Control products, orders, all other entities. Full interaction with API and frontend.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:types": "tsc --noEmit"
   },
   "keywords": [
     "ecommerce",
@@ -25,23 +26,23 @@
   },
   "homepage": "https://github.com/next-orders/command-center#readme",
   "dependencies": {
-    "@next-orders/api-sdk": "^0.2.29",
+    "@next-orders/api-sdk": "^0.2.30",
     "@tabler/icons-react": "2.44.0",
     "next": "14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^9.0.1",
-    "sharp": "0.33.0",
+    "sharp": "0.33.1",
     "slug": "8.2.3",
     "zustand": "4.4.7"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
     "@types/slug": "^5.0.7",
     "autoprefixer": "10.4.16",
-    "eslint": "8.55.0",
+    "eslint": "8.56.0",
     "eslint-config-next": "14.0.4",
     "eslint-config-prettier": "9.1.0",
     "postcss": "8.4.32",
