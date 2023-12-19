@@ -8,6 +8,7 @@ interface MenuCategoryState {
   loadData: (id: string) => void;
 
   id: string;
+  // eslint-disable-next-line no-unused-vars
   setId: (id: string) => void;
 
   name: string;

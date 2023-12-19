@@ -1,17 +1,17 @@
 "use client";
 
+import React from "react";
 import slugify from "slug";
+import Image from "next/image";
 import { Modal } from "@/components/Modal";
-import { useModalStore } from "@/store/modal";
 import { Button } from "@/components/Button";
 import { useFormState, useFormStatus } from "react-dom";
 import { UpdateMenuCategoryForm } from "@/server/actions";
 import { Input } from "@/components/Input";
 import { getDictionary, Locale } from "@/dictionaries";
-import { useMenuCategory } from "@/store/MenuCategory";
 import { MenuCategory, MenuCategoryIcon } from "@next-orders/api-sdk";
-import Image from "next/image";
 import { getIconUrl } from "@/lib/helpers";
+import { useRouter } from "next/navigation";
 
 const initialState = {
   message: "",
@@ -19,19 +19,21 @@ const initialState = {
 
 type CategoryEditModalProps = {
   locale: Locale;
-  category: MenuCategory | null;
+  category?: MenuCategory | null;
+  isOpened: boolean;
 };
 
 export const CategoryEditModal = ({
   locale,
   category,
+  isOpened,
 }: CategoryEditModalProps) => {
-  const toggle = useModalStore((state) => state.toggleEditMenuCategory);
-  const isOpened = useModalStore((state) => state.isOpenedEditMenuCategory);
+  const router = useRouter();
 
-  //const category = useMenuCategory((state) => state.category);
-  const { name, setName, slug, setSlug, icon } = useMenuCategory(
-    (state) => state,
+  const [name, setName] = React.useState(category?.name || "");
+  const [slug, setSlug] = React.useState(category?.slug || "");
+  const [icon, setIcon] = React.useState<MenuCategoryIcon>(
+    category?.icon || "DEFAULT",
   );
 
   const {
@@ -53,8 +55,16 @@ export const CategoryEditModal = ({
     setSlug(slugify(value));
   };
 
+  const handleToggle = () => {
+    router.back();
+  };
+
   return (
-    <Modal title={EDIT_MENU_CATEGORY_LABEL} toggle={toggle} isOpened={isOpened}>
+    <Modal
+      title={EDIT_MENU_CATEGORY_LABEL}
+      toggle={handleToggle}
+      isOpened={isOpened}
+    >
       <form action={formAction}>
         <div className="w-full text-center text-red-700">{state?.message}</div>
 
@@ -86,7 +96,7 @@ export const CategoryEditModal = ({
           <div className="mb-1 block text-sm font-medium text-zinc-900">
             {CATEGORY_ICON_LABEL}
           </div>
-          <MenuCategoryIconChooseBlock selected={icon} />
+          <MenuCategoryIconChooseBlock selected={icon} setIcon={setIcon} />
         </div>
 
         <div className="mt-6">
@@ -110,10 +120,13 @@ const SubmitBlock = ({ locale }: { locale: Locale }) => {
 
 type MenuCategoryIconChooseBlockProps = {
   selected: MenuCategoryIcon | null;
+  // eslint-disable-next-line no-unused-vars
+  setIcon: (value: MenuCategoryIcon) => void;
 };
 
 const MenuCategoryIconChooseBlock = ({
   selected,
+  setIcon,
 }: MenuCategoryIconChooseBlockProps) => {
   const allPossible: MenuCategoryIcon[] = [
     "DEFAULT",
@@ -134,8 +147,6 @@ const MenuCategoryIconChooseBlock = ({
     icon: MenuCategoryIcon;
     isSelected: boolean;
   }) => {
-    const { setIcon } = useMenuCategory((state) => state);
-
     const iconUrl = getIconUrl(icon);
 
     return (

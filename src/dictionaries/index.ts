@@ -158,6 +158,11 @@ const Translations = {
     ES: "Página de menú",
     RU: "Страница меню",
   },
+  MENU_CATEGORY_PAGE_LABEL: {
+    EN: "Menu Category Page",
+    ES: "Página de categoría de menú",
+    RU: "Страница категории меню",
+  },
   PRODUCTS_LABEL: { EN: "Products", ES: "Productos", RU: "Продукты" },
   PRODUCTION_LABEL: {
     EN: "Production",

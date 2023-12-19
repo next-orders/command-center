@@ -3,7 +3,6 @@ import Link from "next/link";
 import { GetMenuById, GetProductVariantsInCategory } from "@/client/api";
 import { MenuCategory, ProductVariant } from "@next-orders/api-sdk";
 import { CategoryCreateBlock } from "@/app/(authenticated)/menu/[id]/CategoryCreateBlock";
-import { getIconUrl } from "@/lib/helpers";
 import { CategoryButton } from "@/app/(authenticated)/menu/[id]/CategoryButton";
 import { getLocale } from "@/client/locale";
 
@@ -47,12 +46,10 @@ const CategoryBlock = async ({ category }: CategoryBlockProps) => {
     <ProductVariantCard key={variant.id} variant={variant} />
   ));
 
-  const iconUrl = getIconUrl(category.icon);
-
   return (
     <div className="mb-12">
       <div>
-        <CategoryButton category={category} iconUrl={iconUrl} />
+        <CategoryButton category={category} />
       </div>
 
       <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2">

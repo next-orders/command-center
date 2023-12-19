@@ -38,6 +38,7 @@ export const PAGES = {
     href: "#",
   },
   MENU_PAGE: { dictionaryKey: "MENU_PAGE_LABEL", href: "#" },
+  MENU_CATEGORY_PAGE: { dictionaryKey: "MENU_CATEGORY_PAGE_LABEL", href: "#" },
   PRODUCT_VARIANT_PAGE: {
     dictionaryKey: "PRODUCT_VARIANT_PAGE_LABEL",
     href: "#",
