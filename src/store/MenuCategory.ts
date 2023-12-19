@@ -7,6 +7,9 @@ interface MenuCategoryState {
   // eslint-disable-next-line no-unused-vars
   loadData: (id: string) => void;
 
+  id: string;
+  setId: (id: string) => void;
+
   name: string;
   // eslint-disable-next-line no-unused-vars
   setName: (name: string) => void;
@@ -28,6 +31,8 @@ export const useMenuCategory = create<MenuCategoryState>((set) => ({
 
     set(() => ({ category, ...category }));
   },
+  id: "",
+  setId: (id) => set(() => ({ id })),
   name: "",
   setName: (name) => set(() => ({ name })),
   slug: "",

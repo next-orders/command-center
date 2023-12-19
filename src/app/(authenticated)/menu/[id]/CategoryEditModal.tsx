@@ -9,7 +9,7 @@ import { UpdateMenuCategoryForm } from "@/server/actions";
 import { Input } from "@/components/Input";
 import { getDictionary, Locale } from "@/dictionaries";
 import { useMenuCategory } from "@/store/MenuCategory";
-import { MenuCategoryIcon } from "@next-orders/api-sdk";
+import { MenuCategory, MenuCategoryIcon } from "@next-orders/api-sdk";
 import Image from "next/image";
 import { getIconUrl } from "@/lib/helpers";
 
@@ -19,13 +19,17 @@ const initialState = {
 
 type CategoryEditModalProps = {
   locale: Locale;
+  category: MenuCategory | null;
 };
 
-export const CategoryEditModal = ({ locale }: CategoryEditModalProps) => {
+export const CategoryEditModal = ({
+  locale,
+  category,
+}: CategoryEditModalProps) => {
   const toggle = useModalStore((state) => state.toggleEditMenuCategory);
   const isOpened = useModalStore((state) => state.isOpenedEditMenuCategory);
 
-  const category = useMenuCategory((state) => state.category);
+  //const category = useMenuCategory((state) => state.category);
   const { name, setName, slug, setSlug, icon } = useMenuCategory(
     (state) => state,
   );

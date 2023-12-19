@@ -15,9 +15,12 @@ export const CategoryButton = ({ category, iconUrl }: CategoryButtonProps) => {
 
   const loadMenuCategory = useMenuCategory((state) => state.loadData);
 
+  const { setId } = useMenuCategory((state) => state);
+
   return (
     <button
       onClick={() => {
+        setId(category.id);
         loadMenuCategory(category.id);
         toggle();
       }}

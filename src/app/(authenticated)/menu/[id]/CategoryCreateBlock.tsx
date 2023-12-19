@@ -7,6 +7,7 @@ import { getDictionary, Locale } from "@/dictionaries";
 import { CreateBlock } from "@/components/CreateBlock";
 import { CategoryCreateModal } from "@/app/(authenticated)/menu/[id]/CategoryCreateModal";
 import { CategoryEditModal } from "@/app/(authenticated)/menu/[id]/CategoryEditModal";
+import { useMenuCategory } from "@/store/MenuCategory";
 
 type CategoryCreateBlockProps = {
   menuId: string;
@@ -23,6 +24,8 @@ export const CategoryCreateBlock = ({
   const toggleCreateProductVariant = useModalStore(
     (state) => state.toggleCreateProductVariant,
   );
+
+  const category = useMenuCategory((state) => state.category);
 
   const { CREATE_MENU_CATEGORY_LABEL, CREATE_PRODUCT_VARIANT_LABEL } =
     getDictionary(locale);
@@ -41,7 +44,7 @@ export const CategoryCreateBlock = ({
       </CreateBlock>
 
       <CategoryCreateModal locale={locale} menuId={menuId} />
-      <CategoryEditModal locale={locale} />
+      <CategoryEditModal locale={locale} category={category} />
     </>
   );
 };
