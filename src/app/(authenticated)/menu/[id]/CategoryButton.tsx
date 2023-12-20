@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { MenuCategory } from "@next-orders/api-sdk";
 import Link from "next/link";
+import { MenuCategory } from "@next-orders/api-sdk";
 import { getIconUrl } from "@/lib/helpers";
 
 type CategoryButtonProps = {

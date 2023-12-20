@@ -19,7 +19,7 @@ export const apiWithAccess = () => {
 
 /** Need Permission READ_MEDIA */
 export const GetAllMedia = async () => {
-  return apiWithAccess().getAllMedia({
+  return apiWithAccess().media.list({
     next: {
       ...nextConfig,
       tags: ["all", "media"],
@@ -29,14 +29,14 @@ export const GetAllMedia = async () => {
 
 /** Need Permission READ_CLIENTS */
 export const GetClients = async () => {
-  return apiWithAccess().getClients({
+  return apiWithAccess().client.list({
     next: { ...nextConfig, tags: ["all", "clients"] },
   });
 };
 
 /** Need Permission READ_CLIENTS */
 export const GetClientById = async (id: string) => {
-  return apiWithAccess().getClientById(id, {
+  return apiWithAccess().client.getById(id, {
     next: { ...nextConfig, tags: ["all", `client-${id}`] },
   });
 };

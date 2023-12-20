@@ -74,7 +74,7 @@ export const CreateShopForm = async (
   const name = (formData.get("name") as string) || "";
   const description = (formData.get("description") as string) || "";
 
-  const create = await api.createShop(
+  const create = await api.shop.create(
     { name, description },
     { next: { revalidate: 0 } },
   );
@@ -95,7 +95,7 @@ export const CreateChannelForm = async (
   const currencyCode = (formData.get("currencyCode") as CurrencyCode) || "";
   const languageCode = (formData.get("languageCode") as LanguageCode) || "";
 
-  const create = await apiWithAccess().createChannel(
+  const create = await apiWithAccess().channel.create(
     { slug, name, description, currencyCode, languageCode },
     { next: { revalidate: 0 } },
   );
@@ -118,7 +118,7 @@ export const CreateMenuCategoryForm = async (
   const name = (formData.get("name") as string) || "";
   const menuId = (formData.get("menuId") as string) || "";
 
-  const create = await apiWithAccess().createMenuCategory(
+  const create = await apiWithAccess().menuCategory.create(
     { slug, name, menuId },
     { next: { revalidate: 0 } },
   );
@@ -142,7 +142,7 @@ export const UpdateMenuCategoryForm = async (
   const name = (formData.get("name") as string) || "";
   const icon = (formData.get("icon") as MenuCategoryIcon) || "DEFAULT";
 
-  const updated = await apiWithAccess().updateMenuCategory(
+  const updated = await apiWithAccess().menuCategory.update(
     categoryId,
     { slug, name, icon },
     { next: { revalidate: 0 } },
@@ -163,7 +163,7 @@ export const CreateMediaForm = async (
   formData: FormData,
 ) => {
   // alt, file
-  const create = await apiWithAccess().uploadMedia(formData, {
+  const create = await apiWithAccess().media.upload(formData, {
     next: { revalidate: 0 },
   });
   if (create instanceof Error) {
@@ -195,7 +195,7 @@ export const CreateProductVariantForm = async (
   // const net = 0; // Don't ask on creating
   // const tax = 0; // Don't ask on creating
 
-  const create = await apiWithAccess().createProductVariant(
+  const create = await apiWithAccess().productVariant.create(
     {
       slug,
       name,
@@ -230,7 +230,7 @@ export const CreateProductionForm = async (
   const name = (formData.get("name") as string) || "";
   const description = (formData.get("description") as string) || "";
 
-  const create = await apiWithAccess().createProduct(
+  const create = await apiWithAccess().product.create(
     { type, name, description },
     { next: { revalidate: 0 } },
   );
@@ -252,7 +252,7 @@ export const AddProductVariantMediaForm = async (
   const productVariantId = (formData.get("productVariantId") as string) || "";
   const mediaId = (formData.get("mediaId") as string) || "";
 
-  const add = await apiWithAccess().addMediaToProductVariant(
+  const add = await apiWithAccess().productVariant.addMedia(
     productVariantId,
     mediaId,
     { next: { revalidate: 0 } },

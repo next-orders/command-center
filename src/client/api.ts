@@ -27,7 +27,7 @@ export const GetApiVersion = async () => {
 };
 
 export const GetShop = async () => {
-  const shop = await apiWithPublicAccess.getShop({
+  const shop = await apiWithPublicAccess.shop.get({
     next: {
       revalidate: 60,
       tags: ["all", "shop"],
@@ -42,7 +42,7 @@ export const GetShop = async () => {
 };
 
 export const GetChannels = async () => {
-  const channels = await apiWithPublicAccess.getChannels({
+  const channels = await apiWithPublicAccess.channel.list({
     next: {
       ...nextConfig,
       tags: ["all", "channels"],
@@ -55,22 +55,8 @@ export const GetChannels = async () => {
   return channels;
 };
 
-export const GetAllDomains = async () => {
-  const domains = await apiWithPublicAccess.getAllDomains({
-    next: {
-      ...nextConfig,
-      tags: ["all", "domains"],
-    },
-  });
-  if (!domains || domains instanceof Error) {
-    return null;
-  }
-
-  return domains;
-};
-
 export const GetChannelById = async (channelId: string) => {
-  const channel = await apiWithPublicAccess.getChannel(channelId, {
+  const channel = await apiWithPublicAccess.channel.get(channelId, {
     next: {
       ...nextConfig,
       tags: ["all", `channel-${channelId}`],
@@ -84,7 +70,7 @@ export const GetChannelById = async (channelId: string) => {
 };
 
 export const GetMenuById = async (menuId: string) => {
-  const menu = await apiWithPublicAccess.getMenuById(menuId, {
+  const menu = await apiWithPublicAccess.menu.getById(menuId, {
     next: {
       ...nextConfig,
       tags: ["all", "menus", `menu-${menuId}`],
@@ -98,7 +84,7 @@ export const GetMenuById = async (menuId: string) => {
 };
 
 export const GetMenusInChannel = async (channelId: string) => {
-  const menus = await apiWithPublicAccess.getAllMenusInChannel(channelId, {
+  const menus = await apiWithPublicAccess.menu.listInChannel(channelId, {
     next: {
       ...nextConfig,
       tags: ["all", "menus", `menus-${channelId}`],
@@ -112,7 +98,7 @@ export const GetMenusInChannel = async (channelId: string) => {
 };
 
 export const GetMenuCategoryById = async (id: string) => {
-  const category = await apiWithPublicAccess.getMenuCategoryById(id, {
+  const category = await apiWithPublicAccess.menuCategory.getById(id, {
     next: {
       ...nextConfig,
       tags: ["all", "categories", `menu-category-${id}`],
@@ -126,7 +112,7 @@ export const GetMenuCategoryById = async (id: string) => {
 };
 
 export const GetProducts = async () => {
-  const products = await apiWithPublicAccess.getProducts({
+  const products = await apiWithPublicAccess.product.list({
     next: { ...nextConfig, tags: ["all", "products"] },
   });
   if (!products || products instanceof Error) {
@@ -137,7 +123,7 @@ export const GetProducts = async () => {
 };
 
 export const GetProductById = async (id: string) => {
-  const product = await apiWithPublicAccess.getProductById(id, {
+  const product = await apiWithPublicAccess.product.getById(id, {
     next: { ...nextConfig, tags: ["all", "products", `product-${id}`] },
   });
   if (!product || product instanceof Error) {
@@ -148,7 +134,7 @@ export const GetProductById = async (id: string) => {
 };
 
 export const GetProductVariantById = async (id: string) => {
-  const product = await apiWithPublicAccess.getProductVariantById(id, {
+  const product = await apiWithPublicAccess.productVariant.getById(id, {
     next: { ...nextConfig, tags: ["all", "products", `product-variant-${id}`] },
   });
   if (!product || product instanceof Error) {
@@ -159,7 +145,7 @@ export const GetProductVariantById = async (id: string) => {
 };
 
 export const GetProductVariantsInCategory = async (categoryId: string) => {
-  const products = await apiWithPublicAccess.getProductVariantsInCategory(
+  const products = await apiWithPublicAccess.productVariant.listInCategory(
     categoryId,
     {
       next: {

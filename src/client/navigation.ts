@@ -35,24 +35,18 @@ export const GetNavigationMenu = async (): Promise<MenuItem[]> => {
     },
     {
       id: "4",
-      label: DOMAINS_LABEL,
-      href: "/domain",
-      icon: "IconWorldWww",
-    },
-    {
-      id: "5",
       label: PRODUCTS_LABEL,
       href: "/product",
       icon: "IconCheese",
     },
     {
-      id: "6",
+      id: "5",
       label: CLIENTS_LABEL,
       href: "/client",
       icon: "IconUsers",
     },
     {
-      id: "7",
+      id: "6",
       label: EMPLOYEES_LABEL,
       href: "/employee",
       icon: "IconUserScan",
