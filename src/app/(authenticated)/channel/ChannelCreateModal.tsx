@@ -30,6 +30,7 @@ export const ChannelCreateModal = ({ locale }: ChannelCreateModalProps) => {
     DESCRIPTION_LABEL,
     CURRENCY_LABEL,
     LANGUAGE_LABEL,
+    COUNTRY_LABEL,
   } = getDictionary(locale);
 
   const [state, formAction] = useFormState(CreateChannelForm, initialState);
@@ -39,6 +40,7 @@ export const ChannelCreateModal = ({ locale }: ChannelCreateModalProps) => {
   const [description, setDescription] = React.useState("");
   const [currencyCode, setCurrencyCode] = React.useState("");
   const [languageCode, setLanguageCode] = React.useState("");
+  const [countryCode, setCountryCode] = React.useState("");
 
   return (
     <Modal title={CREATE_CHANNEL_LABEL} toggle={toggle} isOpened={isOpened}>
@@ -87,6 +89,7 @@ export const ChannelCreateModal = ({ locale }: ChannelCreateModalProps) => {
               locale={locale}
               options={[
                 { value: "USD", label: "USD" },
+                { value: "EUR", label: "EUR" },
                 { value: "RUB", label: "RUB" },
               ]}
             />
@@ -101,6 +104,24 @@ export const ChannelCreateModal = ({ locale }: ChannelCreateModalProps) => {
               locale={locale}
               options={[
                 { value: "EN", label: "EN" },
+                { value: "ES", label: "ES" },
+                { value: "RU", label: "RU" },
+              ]}
+            />
+          </div>
+          <div>
+            <Select
+              name="countryCode"
+              label={COUNTRY_LABEL}
+              isRequired
+              defaultValue={countryCode}
+              onChange={setCountryCode}
+              locale={locale}
+              options={[
+                { value: "US", label: "US" },
+                { value: "GB", label: "GB" },
+                { value: "ES", label: "ES" },
+                { value: "MX", label: "MX" },
                 { value: "RU", label: "RU" },
               ]}
             />

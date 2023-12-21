@@ -141,6 +141,11 @@ const Translations = {
     ES: "Idioma",
     RU: "Язык",
   },
+  COUNTRY_LABEL: {
+    EN: "Country",
+    ES: "País",
+    RU: "Страна",
+  },
   MEDIA_LABEL: { EN: "Media", ES: "Medios", RU: "Медиа" },
   UPLOAD_MEDIA_LABEL: {
     EN: "Upload Media",

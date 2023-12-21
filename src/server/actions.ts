@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import {
+  CountryCode,
   CurrencyCode,
   LanguageCode,
   MainAPI,
@@ -94,9 +95,10 @@ export const CreateChannelForm = async (
   const description = (formData.get("description") as string) || "";
   const currencyCode = (formData.get("currencyCode") as CurrencyCode) || "";
   const languageCode = (formData.get("languageCode") as LanguageCode) || "";
+  const countryCode = (formData.get("countryCode") as CountryCode) || "";
 
   const create = await apiWithAccess().channel.create(
-    { slug, name, description, currencyCode, languageCode },
+    { slug, name, description, currencyCode, languageCode, countryCode },
     { next: { revalidate: 0 } },
   );
   if (create instanceof Error) {
