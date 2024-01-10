@@ -31,7 +31,7 @@ export const SignInForm = async (prevState: unknown, formData: FormData) => {
   const email = (formData.get("email") as string) || "";
   const password = (formData.get("password") as string) || "";
 
-  const employee = await api.signInEmployeeByEmail(
+  const employee = await api.employee.signInByEmail(
     { email, password },
     { next: { revalidate: 0 } },
   );
