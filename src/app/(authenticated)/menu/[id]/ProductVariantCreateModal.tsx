@@ -6,7 +6,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useModalStore } from "@/store/modal";
 import { CreateProductVariantForm } from "@/server/actions";
 import { ProductChooseModal } from "@/app/(authenticated)/menu/[id]/ProductChooseModal";
-import { MenuCategory, Product } from "@next-orders/api-sdk";
+import { Menu, MenuCategory, Product } from "@next-orders/api-sdk";
 import { getDictionary, Locale } from "@/dictionaries";
 import { Button } from "@/components/Button";
 import { Modal } from "@/components/Modal";
@@ -22,12 +22,14 @@ type ProductVariantCreateModalProps = {
   locale: Locale;
   products: Product[] | null;
   categories: MenuCategory[] | null | undefined;
+  menu: Menu | null;
 };
 
 export const ProductVariantCreateModal = ({
   locale,
   products,
   categories,
+  menu,
 }: ProductVariantCreateModalProps) => {
   const toggle = useModalStore((state) => state.toggleCreateProductVariant);
   const isOpened = useModalStore((state) => state.isOpenedCreateProductVariant);
@@ -59,6 +61,7 @@ export const ProductVariantCreateModal = ({
     initialState,
   );
 
+  const menuId = menu?.id;
   const [categoryId, setCategoryId] = React.useState("");
   const [productId, setProductId] = React.useState("");
   const [slug, setSlug] = React.useState("");
@@ -91,6 +94,7 @@ export const ProductVariantCreateModal = ({
         isOpened={isOpened}
       >
         <form action={formAction}>
+          <input type="hidden" name="menuId" value={menuId} required />
           <input type="hidden" name="productId" value={productId} required />
           <input type="hidden" name="slug" value={slug} required />
 

@@ -23,6 +23,7 @@ export default async function Page({ params }: PageProps) {
       <CategoriesBlock menuId={params.id} />
 
       <ProductVariantCreateModal
+        menu={menu}
         products={products}
         categories={menu?.categories}
         locale={locale}

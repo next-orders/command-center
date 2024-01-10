@@ -185,6 +185,7 @@ export const CreateProductVariantForm = async (
 ) => {
   const categoryId = (formData.get("categoryId") as string) || "";
   const productId = (formData.get("productId") as string) || "";
+  const menuId = (formData.get("menuId") as string) || "";
 
   const slug = (formData.get("slug") as string) || ""; // hidden
   const name = (formData.get("name") as string) || "";
@@ -210,6 +211,7 @@ export const CreateProductVariantForm = async (
       // tax: Number(tax),
       categoryId,
       productId,
+      menuId,
     },
     { next: { revalidate: 0 } },
   );
