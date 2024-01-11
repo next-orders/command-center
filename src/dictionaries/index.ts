@@ -168,6 +168,11 @@ const Translations = {
     ES: "Página de categoría de menú",
     RU: "Страница категории меню",
   },
+  MENUS_IN_THIS_CHANNEL_LABEL: {
+    EN: "Menus in this Channel",
+    ES: "Menús en este canal",
+    RU: "Меню в этом канале",
+  },
   PRODUCTS_LABEL: { EN: "Products", ES: "Productos", RU: "Продукты" },
   PRODUCTION_LABEL: {
     EN: "Production",

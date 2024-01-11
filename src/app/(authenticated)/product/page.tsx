@@ -15,16 +15,16 @@ export default async function Page() {
     READY_DESCRIPTION,
     INGREDIENT_LABEL,
     INGREDIENT_DESCRIPTION,
+    PRODUCTS_LABEL,
   } = getDictionary(locale);
 
   return (
     <>
       <Breadcrumbs keys={["PRODUCTS"]} />
 
-      <h1 className="mb-2 text-3xl font-semibold">Products</h1>
-      <div className="mb-8">Can be a Production, Ready or Ingredient</div>
+      <h1 className="mb-2 text-3xl font-semibold">{PRODUCTS_LABEL}</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <Link
           href={"/product/production"}
           className="px-4 py-4 flex flex-col justify-between bg-zinc-50 rounded-2xl text-center cursor-pointer hover:scale-95 duration-200 group"

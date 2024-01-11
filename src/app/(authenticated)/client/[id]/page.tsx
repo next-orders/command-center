@@ -5,6 +5,7 @@ import { ClientTraitBadge } from "@/components/ClientTraitBadge";
 import ClientAvatarBlock from "@/app/(authenticated)/client/[id]/ClientAvatarBlock";
 import { ClientAvatarBlockSkeleton } from "@/app/(authenticated)/client/[id]/ClientAvatarBlockSkeleton";
 import { getLocale } from "@/client/locale";
+import { getDictionary } from "@/dictionaries";
 
 type PageProps = {
   params: { id: string };
@@ -13,12 +14,13 @@ type PageProps = {
 export default async function Page({ params }: PageProps) {
   const locale = getLocale();
 
+  const { CLIENT_PAGE_LABEL } = getDictionary(locale);
+
   return (
     <>
       <Breadcrumbs keys={["CLIENT_BASE", "CLIENT_PAGE"]} />
 
-      <h1 className="mb-2 text-3xl font-semibold">Client page</h1>
-      <div className="mb-8">Get all data about this client</div>
+      <h1 className="mb-2 text-3xl font-semibold">{CLIENT_PAGE_LABEL}</h1>
 
       <Suspense fallback={<ClientAvatarBlockSkeleton locale={locale} />}>
         <ClientAvatarBlock id={params.id} locale={locale} />

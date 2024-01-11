@@ -5,18 +5,20 @@ import ChannelsBlock from "@/app/(authenticated)/channel/ChannelsBlock";
 import { ChannelsBlockSkeleton } from "@/app/(authenticated)/channel/ChannelsBlockSkeleton";
 import { ChannelCreateModal } from "@/app/(authenticated)/channel/ChannelCreateModal";
 import { getLocale } from "@/client/locale";
+import { getDictionary } from "@/dictionaries";
 
 export default async function Page() {
   const locale = getLocale();
+
+  const { CHANNELS_LABEL } = getDictionary(locale);
 
   return (
     <>
       <Breadcrumbs keys={["CHANNELS"]} />
 
-      <h1 className="mb-2 text-3xl font-semibold">Channels</h1>
-      <div>You can see the loaded data</div>
+      <h1 className="mb-2 text-3xl font-semibold">{CHANNELS_LABEL}</h1>
 
-      <Suspense fallback={<ChannelsBlockSkeleton />}>
+      <Suspense fallback={<ChannelsBlockSkeleton locale={locale} />}>
         <ChannelsBlock />
       </Suspense>
 

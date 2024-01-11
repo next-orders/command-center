@@ -4,18 +4,19 @@ import MediaBlock from "./MediaBlock";
 import { MediaBlockSkeleton } from "./MediaBlockSkeleton";
 import { MediaCreateModal } from "@/app/(authenticated)/media/MediaCreateModal";
 import { getLocale } from "@/client/locale";
+import { getDictionary } from "@/dictionaries";
 
 export default async function Page() {
   const locale = getLocale();
+  const { MEDIA_LABEL } = getDictionary(locale);
 
   return (
     <>
       <Breadcrumbs keys={["MEDIA"]} />
 
-      <h1 className="mb-2 text-3xl font-semibold">Media</h1>
-      <div>You can see the loaded files</div>
+      <h1 className="mb-2 text-3xl font-semibold">{MEDIA_LABEL}</h1>
 
-      <Suspense fallback={<MediaBlockSkeleton />}>
+      <Suspense fallback={<MediaBlockSkeleton locale={locale} />}>
         <MediaBlock />
       </Suspense>
 

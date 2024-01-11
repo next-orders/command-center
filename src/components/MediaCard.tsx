@@ -4,6 +4,7 @@ import Image from "next/image";
 import { IconEyeOff, IconFileArrowRight } from "@tabler/icons-react";
 import { Media } from "@next-orders/api-sdk";
 import { MenuAction } from "@/types";
+import { getDictionary, Locale } from "@/dictionaries";
 
 type MediaCardProps = {
   media: Media;
@@ -47,12 +48,14 @@ export const MediaCard = ({ media }: MediaCardProps) => {
   );
 };
 
-export const MediaCardSkeleton = () => {
+export const MediaCardSkeleton = ({ locale }: { locale: Locale }) => {
+  const { LOADING_LABEL } = getDictionary(locale);
+
   return (
     <div className="bg-zinc-50 rounded-2xl h-auto w-auto p-3 animate-pulse">
       <div className="w-full aspect-square rounded-xl bg-zinc-200" />
       <div className="mt-2 text-base font-medium leading-tight text-center text-zinc-400">
-        Loading
+        {LOADING_LABEL}
       </div>
     </div>
   );
