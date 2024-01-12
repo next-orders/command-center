@@ -169,6 +169,17 @@ export const GetAvatarURL = (
   return apiWithPublicAccess.getAvatarURL(avatarId, size, params);
 };
 
+export const GetEmployeeById = async (id: string) => {
+  const employee = await apiWithPublicAccess.employee.get(id, {
+    next: { ...nextConfig, tags: ["all", "employee", `employee-${id}`] },
+  });
+  if (!employee || employee instanceof Error) {
+    return null;
+  }
+
+  return employee;
+};
+
 export const GetDemoSignInData = async () => {
   const data = await apiWithPublicAccess.signInDemoData({
     next: { ...nextConfig, tags: ["all", "demo"] },

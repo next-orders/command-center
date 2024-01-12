@@ -72,7 +72,7 @@ const MenuCard = ({ menu, locale }: MenuCardProps) => {
         />
 
         <div className="text-2xl font-semibold leading-tight text-center">
-          1
+          {menu.name}
         </div>
 
         <div className="mt-6 text-center">{showCategories}</div>

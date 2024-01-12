@@ -33,6 +33,7 @@ const Translations = {
   L_SHORT_LABEL: { EN: "l", ES: "l", RU: "л" },
   LB_SHORT_LABEL: { EN: "lb", ES: "lb", RU: "фунт" },
   OZ_SHORT_LABEL: { EN: "oz", ES: "oz", RU: "унция" },
+  HI_LABEL: { EN: "Hi", ES: "Hola", RU: "Привет" },
   COMMAND_CENTER_LABEL: {
     EN: "Command Center",
     ES: "Centro de comando",
