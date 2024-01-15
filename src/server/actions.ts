@@ -2,17 +2,11 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import {
-  CountryCode,
-  CurrencyCode,
-  LanguageCode,
-  MainAPI,
-  MenuCategoryIcon,
-  WeightUnit,
-} from "@next-orders/api-sdk";
+import { revalidateTag } from "next/cache";
+import { z } from "zod";
+import { MainAPI, WeightUnit } from "@next-orders/api-sdk";
 import { COOKIES_ACCESS_TOKEN_KEY, COOKIES_LOCALE_KEY } from "@/lib/helpers";
 import { Locale } from "@/dictionaries";
-import { revalidateTag } from "next/cache";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "no-api-url-env";
 
@@ -28,8 +22,15 @@ export const SetLocale = (locale: Locale) => {
 };
 
 export const SignInForm = async (prevState: unknown, formData: FormData) => {
-  const email = (formData.get("email") as string) || "";
-  const password = (formData.get("password") as string) || "";
+  const schema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6),
+  });
+
+  const { email, password } = schema.parse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
 
   const employee = await api.employee.signInByEmail(
     { email, password },
@@ -72,8 +73,15 @@ export const CreateShopForm = async (
   prevState: unknown,
   formData: FormData,
 ) => {
-  const name = (formData.get("name") as string) || "";
-  const description = (formData.get("description") as string) || "";
+  const schema = z.object({
+    name: z.string(),
+    description: z.string().optional(),
+  });
+
+  const { name, description } = schema.parse({
+    name: formData.get("name"),
+    description: formData.get("description"),
+  });
 
   const create = await api.shop.create(
     { name, description },
@@ -90,12 +98,24 @@ export const CreateChannelForm = async (
   prevState: unknown,
   formData: FormData,
 ) => {
-  const slug = (formData.get("slug") as string) || "";
-  const name = (formData.get("name") as string) || "";
-  const description = (formData.get("description") as string) || "";
-  const currencyCode = (formData.get("currencyCode") as CurrencyCode) || "";
-  const languageCode = (formData.get("languageCode") as LanguageCode) || "";
-  const countryCode = (formData.get("countryCode") as CountryCode) || "";
+  const schema = z.object({
+    slug: z.string(),
+    name: z.string(),
+    description: z.string().optional(),
+    currencyCode: z.string(),
+    languageCode: z.string(),
+    countryCode: z.string(),
+  });
+
+  const { slug, name, description, currencyCode, languageCode, countryCode } =
+    schema.parse({
+      slug: formData.get("slug"),
+      name: formData.get("name"),
+      description: formData.get("description"),
+      currencyCode: formData.get("currencyCode"),
+      languageCode: formData.get("languageCode"),
+      countryCode: formData.get("countryCode"),
+    });
 
   const create = await apiWithAccess().channel.create(
     { slug, name, description, currencyCode, languageCode, countryCode },
@@ -116,9 +136,17 @@ export const CreateMenuCategoryForm = async (
   prevState: unknown,
   formData: FormData,
 ) => {
-  const slug = (formData.get("slug") as string) || "";
-  const name = (formData.get("name") as string) || "";
-  const menuId = (formData.get("menuId") as string) || "";
+  const schema = z.object({
+    slug: z.string(),
+    name: z.string(),
+    menuId: z.string(),
+  });
+
+  const { slug, name, menuId } = schema.parse({
+    slug: formData.get("slug"),
+    name: formData.get("name"),
+    menuId: formData.get("menuId"),
+  });
 
   const create = await apiWithAccess().menuCategory.create(
     { slug, name, menuId },
@@ -139,10 +167,19 @@ export const UpdateMenuCategoryForm = async (
   prevState: unknown,
   formData: FormData,
 ) => {
-  const categoryId = (formData.get("categoryId") as string) || "";
-  const slug = (formData.get("slug") as string) || "";
-  const name = (formData.get("name") as string) || "";
-  const icon = (formData.get("icon") as MenuCategoryIcon) || "DEFAULT";
+  const schema = z.object({
+    categoryId: z.string(),
+    icon: z.string(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  });
+
+  const { categoryId, icon, name, slug } = schema.parse({
+    categoryId: formData.get("categoryId"),
+    icon: formData.get("icon"),
+    name: formData.get("name"),
+    slug: formData.get("slug"),
+  });
 
   const updated = await apiWithAccess().menuCategory.update(
     categoryId,
