@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ProductVariant } from "@next-orders/api-sdk";
 import { useModalStore } from "@/store/modal";
+import NoImage from "@/../public/static/no-image-zinc.png";
 
 type ProductVariantBlockProps = {
   product: ProductVariant;
@@ -18,11 +19,11 @@ export const ProductVariantBlock = ({ product }: ProductVariantBlockProps) => {
       <div className="max-w-sm">
         <div className="relative w-full aspect-square">
           <Image
-            src={photo?.url ?? "/static/no-image-zinc.png"}
+            src={photo?.url ?? NoImage}
             alt={photo?.alt ?? ""}
             priority
             fill
-            sizes="(max-width: 768px) 100vw, 768px"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33.3vw"
             className="rounded-xl object-cover object-center"
             onClick={toggle}
           />

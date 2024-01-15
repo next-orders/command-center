@@ -6,6 +6,8 @@ import ClientAvatarBlock from "@/app/(authenticated)/client/[id]/ClientAvatarBlo
 import { ClientAvatarBlockSkeleton } from "@/app/(authenticated)/client/[id]/ClientAvatarBlockSkeleton";
 import { getLocale } from "@/client/locale";
 import { getDictionary } from "@/dictionaries";
+import StaticEggs from "@/../public/static/eggs.png";
+import StaticRecipeBook from "@/../public/static/recipe-book.png";
 
 type PageProps = {
   params: { id: string };
@@ -36,12 +38,11 @@ const ClientInfoBlock = () => {
     <>
       <div className="mt-24 text-center max-w-xl mx-auto">
         <Image
-          src="/static/eggs.png"
+          src={StaticEggs}
+          width={StaticEggs.width}
+          height={StaticEggs.height}
           alt=""
-          unoptimized
-          width={64}
-          height={64}
-          className="mx-auto mb-4"
+          className="mx-auto mb-4 w-16 h-16"
         />
         <h2 className="mb-4 text-lg font-semibold">
           The client constantly gains experience and new levels
@@ -56,12 +57,11 @@ const ClientInfoBlock = () => {
 
       <div className="mt-24 text-center max-w-xl mx-auto">
         <Image
-          src="/static/recipe-book.png"
+          src={StaticRecipeBook}
+          width={StaticRecipeBook.width}
+          height={StaticRecipeBook.height}
           alt=""
-          unoptimized
-          width={64}
-          height={64}
-          className="mx-auto mb-4"
+          className="mx-auto mb-4 w-16 h-16"
         />
         <h2 className="mb-4 text-lg font-semibold">
           The client may gain and lose Traits!

@@ -4,6 +4,8 @@ import { IconCheese, IconChefHat, IconPaperBag } from "@tabler/icons-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getDictionary } from "@/dictionaries";
 import { getLocale } from "@/client/locale";
+import StaticRecipeBook from "@/../public/static/recipe-book.png";
+import StaticRecipeList from "@/../public/static/recipe-list.png";
 
 export default async function Page() {
   const locale = getLocale();
@@ -97,12 +99,11 @@ export default async function Page() {
 
       <div className="mt-24 text-center max-w-xl mx-auto">
         <Image
-          src="/static/recipe-book.png"
+          src={StaticRecipeBook}
+          width={StaticRecipeBook.width}
+          height={StaticRecipeBook.height}
           alt=""
-          unoptimized
-          width={64}
-          height={64}
-          className="mx-auto mb-4"
+          className="mx-auto mb-4 w-16 h-16"
         />
         <h2 className="mb-4 text-lg font-semibold">
           Ok, let&apos;s understand a little theory
@@ -114,12 +115,11 @@ export default async function Page() {
         </p>
 
         <Image
-          src="/static/recipe-list.png"
+          src={StaticRecipeList}
+          width={StaticRecipeList.width}
+          height={StaticRecipeList.height}
           alt=""
-          unoptimized
-          width={64}
-          height={64}
-          className="mx-auto mt-14 mb-4"
+          className="mx-auto mt-14 mb-4 w-16 h-16"
         />
         <h2 className="mb-4 text-lg font-semibold">
           Some questions you can have

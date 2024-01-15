@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TextInput } from "@/components/TextInput";
 import { ProductVariant } from "@next-orders/api-sdk";
 import { GetProductById } from "@/client/api";
+import NoImage from "@/../public/static/no-image-zinc.png";
 
 type PageProps = {
   params: { id: string };
@@ -64,10 +65,11 @@ const ProductVariantBlock = ({ variant }: ProductVariantBlockProps) => {
       <div className="mb-2 flex flex-row justify-between gap-2">
         <div className="flex flex-row gap-2 items-center">
           <Image
-            src={media?.url || "/static/no-image-zinc.png"}
+            src={media?.url || NoImage}
             alt={media?.alt || "Photo"}
             width={60}
             height={60}
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33.3vw"
             unoptimized
             className="rounded-xl"
           />

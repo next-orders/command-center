@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useFormState, useFormStatus } from "react-dom";
 import { CreateShopForm } from "@/server/actions";
 import { IconArrowRight } from "@tabler/icons-react";
+import StaticEggs from "@/../public/static/eggs.png";
 
 const initialState = {
   message: "",
@@ -19,12 +20,11 @@ export default function InstallPage() {
     <div className="w-full h-screen mx-auto flex flex-row justify-center items-center">
       <div>
         <Image
-          src="/static/eggs.png"
+          src={StaticEggs}
+          width={StaticEggs.width}
+          height={StaticEggs.height}
           alt=""
-          unoptimized
-          width={64}
-          height={64}
-          className="mx-auto mb-2"
+          className="mx-auto mb-2 w-16 h-16"
         />
 
         <h1 className="mb-10 text-2xl text-center">

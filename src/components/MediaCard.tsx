@@ -32,11 +32,11 @@ export const MediaCard = ({ media }: MediaCardProps) => {
     >
       <div className="relative w-full aspect-square">
         <Image
-          src={media.url ?? ""}
+          src={media.url}
           alt={media.alt ?? ""}
           priority
           fill
-          sizes="(max-width: 768px) 100vw, 768px"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33.3vw"
           className="rounded-xl object-cover object-center"
         />
       </div>

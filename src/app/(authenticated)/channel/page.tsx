@@ -6,6 +6,7 @@ import { ChannelsBlockSkeleton } from "@/app/(authenticated)/channel/ChannelsBlo
 import { ChannelCreateModal } from "@/app/(authenticated)/channel/ChannelCreateModal";
 import { getLocale } from "@/client/locale";
 import { getDictionary } from "@/dictionaries";
+import StaticEggs from "@/../public/static/eggs.png";
 
 export default async function Page() {
   const locale = getLocale();
@@ -32,12 +33,11 @@ const ChannelInfoBlock = () => {
   return (
     <div className="mt-24 text-center max-w-xl mx-auto">
       <Image
-        src="/static/eggs.png"
+        src={StaticEggs}
+        width={StaticEggs.width}
+        height={StaticEggs.height}
         alt=""
-        unoptimized
-        width={64}
-        height={64}
-        className="mx-auto mb-4"
+        className="mx-auto mb-4 w-16 h-16"
       />
       <h2 className="mb-4 text-lg font-semibold">
         Sales channels are one of the main business entities
